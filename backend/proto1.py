@@ -8,15 +8,16 @@ logger = logging.getLogger()
 
 logger.addHandler(logging.StreamHandler(sys.stdout))
 
-response = handle_request(DummyAction, {})
+dummy_action_response = handle_request(DummyAction, {})
 
 print(f'Action response:')
-pprint(response)
+pprint(dummy_action_response)
 
 dummy_action_output_schema = DummyAction.handler.__annotations__.get('return')
 
 
 selector = Selector()
-selector_options = selector.options(dummy_action_output_schema)
+SelectorOptions = selector.options(dummy_action_output_schema)
+options = SelectorOptions(selected='c')
 
-a=1
+selector_response = handle_request(Selector, dummy_action_response, options)
