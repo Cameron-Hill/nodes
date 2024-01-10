@@ -1,0 +1,11 @@
+[project]
+name = "nodes"
+version = "0.0.1"
+description = "A place to test out node execution ideas"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
