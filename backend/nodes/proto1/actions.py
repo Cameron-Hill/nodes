@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from nodes.base import Action, Data
+from nodes.base import Action, Data, Options
 
 class CSchema(BaseModel):
     x: str
@@ -11,7 +11,7 @@ class DummyActionOutput(BaseModel):
     c: CSchema
 
 class DummyAction(Action):
-    def handler(self, data: Data) -> DummyActionOutput:
+    def handler(self, data: Data, options:Options) -> DummyActionOutput:
         return {
             'a': 1,
             'b': '2',
