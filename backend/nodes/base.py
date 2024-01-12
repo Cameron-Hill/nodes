@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import Union
 
 
-__all__ = ["Data", "Node", "Node"]
+__all__ = ["Data", "Node", "Action", "Task"]
 
 class Data(BaseModel):
     def _inspect():
