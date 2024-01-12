@@ -18,3 +18,10 @@ class Selector(Task):
             selected: Selected
 
         return SelectorOptions
+
+
+class Join(Task):
+    
+    def handler(self, data1: Data, data2:Data, options: Options):
+        return data2.update(data1)
+        
