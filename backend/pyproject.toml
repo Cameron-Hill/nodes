@@ -2,7 +2,7 @@
 name = "nodes"
 version = "0.0.1"
 description = "A place to test out node execution ideas"
-dependencies = ["pydantic"]
+dependencies = ["pydantic", "fastapi", "sqlalchemy", "uvicorn"]
 
 [build-system]
 requires = ["setuptools"]

@@ -21,6 +21,8 @@ class Node(ABC):
     def __init__(self):
         self.children: Set[Node] = set()
         self.parents: Set[Node] = set()
+        self._Options: type[Options] = Options
+        self.options: Options = Options()
 
     def add_child(self, child: NodeType):
         self.children.add(child)
@@ -39,11 +41,11 @@ class Node(ABC):
         parent.children.remove(self)
 
     @abstractmethod
-    def handler(self, data: Data, options: Options):
+    def handler(self, data: Data):
         pass
 
-    def options(self, data_class: type[Data]) -> Options:
-        return Options()
+    def apply(self, *data_classes: type[Data]):
+        self._Options = Options
 
 
 class Action(Node):
