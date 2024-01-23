@@ -207,11 +207,9 @@ class Workflows(Table):
         SortKey: str = _NodeID
         Name: str
         Children: List[_NodeID] = []
-        
 
 
-workflows = Workflows()
-
-workflows.Node(PartitionKey="Workflow-1", SortKey="Node-20", Name="BigNode").put()
-
-pprint(workflows.scan())
+if __name__ == "__main__":
+    workflows = Workflows()
+    workflows.Node(PartitionKey="Workflow-1", SortKey="Node-20", Name="BigNode").put()
+    pprint(workflows.scan())
