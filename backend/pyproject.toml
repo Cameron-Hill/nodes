@@ -3,6 +3,7 @@ name = "nodes"
 version = "0.0.1"
 description = "A place to test out node execution ideas"
 dependencies = [
+  "requests",
   "pydantic",
   "fastapi",
   "sqlalchemy",
@@ -10,6 +11,10 @@ dependencies = [
   "boto3",
   "shortuuid",
 ]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
 
 [build-system]
 requires = ["setuptools"]
