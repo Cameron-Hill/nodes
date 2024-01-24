@@ -9,6 +9,7 @@ from logging import getLogger, StreamHandler
 from shortuuid import uuid
 from inspect import isclass
 from typing import (
+    Annotated,
     Union,
     ParamSpec,
     TypeVar,
@@ -206,7 +207,7 @@ class Workflows(Table):
         PartitionKey: str = _WorkflowID
         SortKey: str = _NodeID
         Name: str
-        Children: List[_NodeID] = []
+        Children: List[Annotated[str, _NodeID]] = []
 
 
 if __name__ == "__main__":

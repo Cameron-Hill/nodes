@@ -7,7 +7,7 @@ from contextlib import contextmanager
 
 logger = getLogger(__name__)
 
-__all__ = ["NodeEngine"]
+__all__ = ["NodeManager"]
 
 
 @contextmanager
@@ -29,7 +29,7 @@ def _is_node_class(member):
 
 
 class Module(NodeSource):
-    def resolve_nodes(self) -> set[Node]:
+    def resolve_nodes(self) -> None:
         logger.debug(f"Resolving nodes from module {self.source}")
         module = import_module(self.source)
         members = getmembers(module, _is_node_class)
@@ -39,7 +39,7 @@ class Module(NodeSource):
 
 
 class File(NodeSource):
-    def resolve_nodes(self) -> set[Node]:
+    def resolve_nodes(self) -> None:
         if self.source.endswith(".py"):
             logger.debug(f"Resolving nodes from file {self.source}")
             dirname = os.path.dirname(self.source)
@@ -60,7 +60,7 @@ def source_factory(source: str) -> NodeSource:
         return Module(source)
 
 
-class NodeEngine:
+class NodeManager:
     DEFAULT_SOURCES = ["nodes.builtins"]
 
     def __init__(self) -> None:
@@ -76,6 +76,12 @@ class NodeEngine:
     @property
     def nodes(self) -> set[Node]:
         return {node for source in self._sources for node in source.nodes}
+
+    def get_node_by_id(self, id: str) -> Node:
+        for node in self.nodes:
+            if node.id() == id:
+                return node
+        raise ValueError(f"Node with id {id} not found")
 
     def add_source(self, source: str) -> None:
         self._sources.add(source_factory(source))

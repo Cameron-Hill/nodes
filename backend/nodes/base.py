@@ -9,6 +9,19 @@ from typing import Generic, TypeVar, Any
 T = TypeVar("T")
 
 
+class NodeSchema(BaseModel):
+    """This class represents the schema for a node."""
+
+    id: str
+    label: str
+    group: str | None
+    sub_group: str | None
+    version: int
+    input: dict | None
+    output: dict | None
+    options: dict | None
+
+
 class Node(ABC):
     """"""
 
@@ -16,6 +29,13 @@ class Node(ABC):
     __sub_group__: str = None
     __label__: str = None
     __version__: int = 0
+
+    def __repr__(self) -> str:
+        return self.id()
+
+    @classmethod
+    def id(cls):
+        return f"{cls.__module__}.{cls.__name__}"
 
     @classmethod
     def label(cls):
@@ -34,6 +54,24 @@ class Node(ABC):
         raise UnhandledNodeError(
             f"Unhandled exception in node {self._label}: {exception}"
         ) from exception
+
+    @classmethod
+    def node_json_schema(cls) -> NodeSchema:
+        """Return the schema for the node."""
+        input_schema = cls.run.__annotations__.get("input")
+        output_schema = cls.run.__annotations__.get("return")
+        options_schema = cls.Options if hasattr(cls, "Options") else None
+
+        return NodeSchema(
+            id=cls.id(),
+            label=cls.label(),
+            group=cls.__group__,
+            sub_group=cls.__sub_group__,
+            version=cls.__version__,
+            input=input_schema.model_json_schema() if input_schema else None,
+            output=output_schema.model_json_schema() if output_schema else None,
+            options=options_schema.model_json_schema() if options_schema else None,
+        )
 
 
 class Option(Generic[T]):
