@@ -1,7 +1,10 @@
 from pydantic import BaseModel
 
 
-class UndefinedObject(BaseModel):
+PrimitiveType = str | int | float | bool
+
+
+class UndefinedMap(BaseModel):
     """
     An object type with an undefined schema
     """

@@ -2,9 +2,10 @@ from nodes.errors import UnhandledNodeError
 from abc import ABC, abstractmethod
 from pydantic_core import ValidationError, core_schema
 from typing_extensions import get_args
-from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo
+from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo, TypeAdapter
 from pydantic.fields import FieldInfo
 from typing import Generic, TypeVar, Any
+from inspect import signature
 
 T = TypeVar("T")
 
@@ -36,6 +37,26 @@ class Node(ABC):
     def __repr__(self) -> str:
         return self.id()
 
+    def __init__(
+        self,
+        input: BaseModel | dict | None = None,
+        options: BaseModel | dict | None = None,
+    ) -> None:
+        # Check TypeAdapter(None).core_schema['type'] == 'none' to handle None case
+        self._InputType = TypeAdapter(self.run.__annotations__.get("input"))
+        self._OptionsType = TypeAdapter(self._get_options_model())
+        input = self._coerce_defaults(input, self._InputType)
+        options = self._coerce_defaults(options, self._OptionsType)
+        self._input = self._InputType.validate_python(input)
+        self._options = self._OptionsType.validate_python(options)
+        self._run_params = {"input": self._input, "options": self._options}
+
+    @classmethod
+    def _get_options_model(cls) -> BaseModel | None:
+        if hasattr(cls, "Options"):
+            return cls.Options
+        return None
+
     @classmethod
     def id(cls):
         return f"{cls.__module__}.{cls.__name__}"
@@ -49,6 +70,21 @@ class Node(ABC):
         """This method is called when the node is run. It is passed the input
         data and should return a dict that will be passed to the next node."""
         raise NotImplementedError
+
+    def call(self) -> run.__annotations__.get("return"):
+        """This method is called by the system and should not be overridden.
+        It inspects the signature of the run method and passes the correct
+        arguments to it."""
+        sig = signature(self.run)
+        params = {k: v for k, v in self._run_params.items() if k in sig.parameters}
+        OutputType = TypeAdapter(self.run.__annotations__.get("return"))
+
+        try:
+            ret = self.run(**params)
+        except Exception as e:
+            return self.error_handler(e)
+
+        return OutputType.validate_python(ret)
 
     def error_handler(self, exception: Exception):
         """This method is called when an exception is raised in a node. It is
@@ -71,10 +107,19 @@ class Node(ABC):
             group=cls.__group__,
             sub_group=cls.__sub_group__,
             version=cls.__version__,
-            input=input_schema.model_json_schema() if input_schema else None,
-            output=output_schema.model_json_schema() if output_schema else None,
-            options=options_schema.model_json_schema() if options_schema else None,
+            input=TypeAdapter(input_schema).json_schema(),
+            output=TypeAdapter(output_schema).json_schema(),
+            options=TypeAdapter(options_schema).json_schema(),
         )
+
+    @staticmethod
+    def _coerce_defaults(val: T, adapter: TypeAdapter) -> dict | None | T:
+        if not val:
+            if adapter.core_schema["type"] in ["none", "null"]:
+                return None
+            else:
+                return {}
+        return val
 
 
 class Option(Generic[T]):

@@ -1,6 +1,6 @@
 import requests
 from nodes.base import Node, Option
-from nodes.datatypes import UndefinedObject
+from nodes.datatypes import UndefinedMap
 from pydantic import BaseModel, Field
 from pydantic.networks import AnyHttpUrl
 
@@ -15,10 +15,10 @@ class InputHTTPGetRequest(BaseModel):
     )
 
 
-class OutputHTTPGetRequest(UndefinedObject):
+class OutputHTTPGetRequest(UndefinedMap):
     status_code: int = Field(..., description="The status code of the response")
     reason: str = Field(..., description="The reason for the status code")
-    content: UndefinedObject = Field(
+    content: UndefinedMap = Field(
         ...,
         description="The json content of the response. This has an undefined schema.",
     )

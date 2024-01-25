@@ -19,5 +19,20 @@ class UserNode(Node):
     class Options(BaseModel):
         test_option: Option[bool] = Field(False, description="Test option")
 
-    def run(self, input: Input, options: BaseModel | None) -> Output:
+    def run(self, input: Input, options: Options) -> Output:
+        return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
+
+
+class UserNodeNoOptions(Node):
+    def run(self, input: Input) -> Output:
+        return Output(x=input.a, y=input.b, z=input.c, option=False)
+
+
+
+class UserNodeWithOptionAnnotationMismatch(Node):
+    """Need to figure out how to handle this case"""
+    class Options(BaseModel):
+        test_option: Option[bool] = Field(False, description="Test option")
+
+    def run(self, input: Input, options: BaseModel) -> Output:
         return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
