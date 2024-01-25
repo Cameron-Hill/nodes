@@ -10,7 +10,7 @@ class StringProducer(Node):
     __label__ = "String Producer"
     __group__ = "Producers"
 
-    class Options:
+    class Options(BaseModel):
         value: Option[str] = Field(..., description="The value to produce")
 
     def run(self, input: None, options: Options):
@@ -25,7 +25,7 @@ class IntProducer(Node):
     __label__ = "Integer Producer"
     __group__ = "Producers"
 
-    class Options:
+    class Options(BaseModel):
         value: Option[int] = Field(..., description="The value to produce")
 
     def run(self, input: None, options: Options):
@@ -40,7 +40,7 @@ class FloatProducer(Node):
     __label__ = "Float Producer"
     __group__ = "Producers"
 
-    class Options:
+    class Options(BaseModel):
         value: Option[float] = Field(..., description="The value to produce")
 
     def run(self, input: None, options: Options):
@@ -55,7 +55,7 @@ class BoolProducer(Node):
     __label__ = "Boolean Producer"
     __group__ = "Producers"
 
-    class Options:
+    class Options(BaseModel):
         value: Option[bool] = Field(..., description="The value to produce")
 
     def run(self, input: None, options: Options):

@@ -1,0 +1,298 @@
+{
+  "ModelName": "Workflows",
+  "ModelMetadata": {
+    "Author": "Cameron",
+    "DateCreated": "Jan 25, 2024, 08:41 AM",
+    "DateLastModified": "Jan 25, 2024, 09:05 AM",
+    "Description": "",
+    "AWSService": "Amazon DynamoDB",
+    "Version": "3.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "Workflows",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "PartitionKey",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "SortKey",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "Name",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "ID",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Version",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Owner",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Manifest",
+          "AttributeType": "M"
+        },
+        {
+          "AttributeName": "From",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "To",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Node",
+          "AttributeType": "S"
+        }
+      ],
+      "TableFacets": [
+        {
+          "FacetName": "Workflow",
+          "KeyAttributeAlias": {
+            "PartitionKeyAlias": "Workflow",
+            "SortKeyAlias": "Workflow"
+          },
+          "TableData": [
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "Name": {
+                "S": "Workflow 1"
+              },
+              "ID": {
+                "S": "103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "Owner": {
+                "S": "Mabel Williamson"
+              }
+            },
+            {
+              "PartitionKey": {
+                "S": "Workflow-e5afbe33-485a-4d35-ab33-9d36d2f5d7ba"
+              },
+              "SortKey": {
+                "S": "Workflow-e5afbe33-485a-4d35-ab33-9d36d2f5d7ba"
+              },
+              "Name": {
+                "S": "Workflow 2"
+              },
+              "ID": {
+                "S": "e5afbe33-485a-4d35-ab33-9d36d2f5d7ba"
+              },
+              "Owner": {
+                "S": "Beth Gerhold"
+              }
+            }
+          ],
+          "NonKeyAttributes": [
+            "Name",
+            "ID",
+            "Owner"
+          ],
+          "DataAccess": {
+            "MySql": {}
+          }
+        },
+        {
+          "FacetName": "Node",
+          "KeyAttributeAlias": {
+            "PartitionKeyAlias": "Workflow",
+            "SortKeyAlias": "Node"
+          },
+          "TableData": [
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Node-013e55a5-fb9c-46a9-82ce-c7f429428ff8"
+              },
+              "ID": {
+                "S": "013e55a5-fb9c-46a9-82ce-c7f429428ff8"
+              },
+              "Version": {
+                "S": "6835976676573184"
+              },
+              "Manifest": {
+                "M": {
+                  "Name": {
+                    "S": "Joe"
+                  },
+                  "Age": {
+                    "N": "35"
+                  }
+                }
+              },
+              "Node": {
+                "S": "Node 1"
+              }
+            },
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Node-c552e884-d2d4-47b7-92ca-0b8a7fef813c"
+              },
+              "ID": {
+                "S": "c552e884-d2d4-47b7-92ca-0b8a7fef813c"
+              },
+              "Version": {
+                "S": "7103158471884800"
+              },
+              "Manifest": {
+                "M": {
+                  "Name": {
+                    "S": "Joe"
+                  },
+                  "Age": {
+                    "N": "35"
+                  }
+                }
+              },
+              "Node": {
+                "S": "Node 2"
+              }
+            },
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Node-e3a1049b-74af-428e-9a9a-84d0a2ddff71"
+              },
+              "ID": {
+                "S": "e3a1049b-74af-428e-9a9a-84d0a2ddff71"
+              },
+              "Version": {
+                "S": "1893143070900224"
+              },
+              "Manifest": {
+                "M": {
+                  "Name": {
+                    "S": "Joe"
+                  },
+                  "Age": {
+                    "N": "35"
+                  }
+                }
+              },
+              "Node": {
+                "S": "Node 3"
+              }
+            }
+          ],
+          "NonKeyAttributes": [
+            "ID",
+            "Version",
+            "Manifest",
+            "Node"
+          ],
+          "DataAccess": {
+            "MySql": {}
+          }
+        },
+        {
+          "FacetName": "Edge",
+          "KeyAttributeAlias": {
+            "PartitionKeyAlias": "Workflow",
+            "SortKeyAlias": "Edge"
+          },
+          "TableData": [
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Edge-1"
+              },
+              "From": {
+                "S": "013e55a5-fb9c-46a9-82ce-c7f429428ff8"
+              },
+              "To": {
+                "S": "c552e884-d2d4-47b7-92ca-0b8a7fef813c"
+              }
+            },
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Edge-2"
+              },
+              "From": {
+                "S": "c552e884-d2d4-47b7-92ca-0b8a7fef813c"
+              },
+              "To": {
+                "S": "e3a1049b-74af-428e-9a9a-84d0a2ddff71"
+              }
+            }
+          ],
+          "NonKeyAttributes": [
+            "From",
+            "To"
+          ],
+          "DataAccess": {
+            "MySql": {}
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      },
+      "SampleDataFormats": {
+        "PartitionKey": [
+          "dataTypes",
+          "String"
+        ],
+        "SortKey": [
+          "dataTypes",
+          "String"
+        ],
+        "Name": [
+          "dataTypes",
+          "String"
+        ],
+        "ID": [
+          "identifiers",
+          "UUID"
+        ],
+        "Version": [
+          "dataTypes",
+          "Int"
+        ],
+        "Owner": [
+          "identifiers",
+          "Full name"
+        ],
+        "Node": [
+          "dataTypes",
+          "String"
+        ],
+        "From": [
+          "identifiers",
+          "UUID"
+        ],
+        "To": [
+          "identifiers",
+          "UUID"
+        ]
+      },
+      "BillingMode": "PAY_PER_REQUEST"
+    }
+  ]
+}

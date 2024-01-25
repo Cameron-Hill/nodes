@@ -23,7 +23,10 @@ class NodeSchema(BaseModel):
 
 
 class Node(ABC):
-    """"""
+    """
+    todo:
+      - validate options class
+    """
 
     __group__: str = None
     __sub_group__: str = None
@@ -56,7 +59,7 @@ class Node(ABC):
         ) from exception
 
     @classmethod
-    def node_json_schema(cls) -> NodeSchema:
+    def schema(cls) -> NodeSchema:
         """Return the schema for the node."""
         input_schema = cls.run.__annotations__.get("input")
         output_schema = cls.run.__annotations__.get("return")

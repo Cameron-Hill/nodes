@@ -7,10 +7,12 @@ from pydantic.networks import AnyHttpUrl
 
 class InputHTTPGetRequest(BaseModel):
     url: AnyHttpUrl = Field(..., description="The URL to send the request to")
-    query_params: dict = Field(
+    query_params: dict[str, str] = Field(
         {}, description="The query parameters to send with the request"
     )
-    headers: dict = Field({}, description="The headers to send with the request")
+    headers: dict[str, str] = Field(
+        {}, description="The headers to send with the request"
+    )
 
 
 class OutputHTTPGetRequest(UndefinedObject):
@@ -44,4 +46,3 @@ class HTTPGetRequest(Node):
                 "reason": exception.response.reason,
                 "content": exception.response.content,
             }
-
