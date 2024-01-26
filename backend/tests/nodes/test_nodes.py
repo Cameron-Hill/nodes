@@ -46,3 +46,15 @@ def test_call_node(UserNode):
     assert output.y == 1
     assert output.z == 1.0
     assert output.option is False
+
+
+def test_call_node_with_no_options(manager):
+    manager.add_source(USER_NODES)
+    node = manager.get_node_by_id("user_nodes.UserNodeNoOptions")
+    node = node(input={"a": "test", "b": 1, "c": 1.0})
+    output = node.call()
+    assert isinstance(output, BaseModel)
+    assert output.x == "test"
+    assert output.y == 1
+    assert output.z == 1.0
+    assert output.option is None

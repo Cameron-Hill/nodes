@@ -1,3 +1,13 @@
+## Get Started
+
+### Environment
+
+Formatter: [Black]
+
+### Install
+
+    pip install -r requirements.txt
+
 ### Start dynamoDB LOCAL
 
 Set DynamoDB local path

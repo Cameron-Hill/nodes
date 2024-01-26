@@ -1,4 +1,4 @@
-from nodes.base import Node, Option
+from nodes.base import Node
 from pydantic import Field, BaseModel
 
 
@@ -12,12 +12,12 @@ class Output(BaseModel):
     x: str = Field(..., description="Test Output value: x")
     y: int = Field(..., description="Test Output value: y")
     z: float = Field(..., description="Test Output value: z")
-    option: bool = Field(..., description="Test Output value: option")
+    option: bool | None = Field(None, description="Test Output value: option")
 
 
 class UserNode(Node):
     class Options(BaseModel):
-        test_option: Option[bool] = Field(False, description="Test option")
+        test_option: bool = Field(False, description="Test option")
 
     def run(self, input: Input, options: Options) -> Output:
         return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
@@ -25,14 +25,14 @@ class UserNode(Node):
 
 class UserNodeNoOptions(Node):
     def run(self, input: Input) -> Output:
-        return Output(x=input.a, y=input.b, z=input.c, option=False)
-
+        return Output(x=input.a, y=input.b, z=input.c)
 
 
 class UserNodeWithOptionAnnotationMismatch(Node):
     """Need to figure out how to handle this case"""
+
     class Options(BaseModel):
-        test_option: Option[bool] = Field(False, description="Test option")
+        test_option: bool = Field(False, description="Test option")
 
     def run(self, input: Input, options: BaseModel) -> Output:
         return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)

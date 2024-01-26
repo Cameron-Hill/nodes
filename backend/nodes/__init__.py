@@ -1,1 +1,1 @@
-from .base import Node, Option
+from .base import Node

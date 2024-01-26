@@ -122,42 +122,6 @@ class Node(ABC):
         return val
 
 
-class Option(Generic[T]):
-    """This class represents an option that can be passed to a node."""
-
-    def __init__(
-        self, value: T, name: str | None = None, field_info: FieldInfo | None = None
-    ):
-        self.value = value
-        self.name = name
-        self.field_info = field_info
-
-    @classmethod
-    def __get_pydantic_core_schema__(
-        cls, source: Any, handler: GetCoreSchemaHandler
-    ) -> core_schema.CoreSchema:
-        instance_schema = core_schema.is_instance_schema(cls)
-
-        args = get_args(source)
-        try:
-            generic_t_schema = handler.generate_schema(args[0])
-        except IndexError:
-            raise ValidationError(
-                [
-                    ValidationInfo(
-                        cls,
-                        source,
-                        "Option annotation must have a type argument e.g. Option[int]",
-                    )
-                ]
-            )
-
-        non_instance_schema = core_schema.no_info_after_validator_function(
-            Option, generic_t_schema
-        )
-        return core_schema.union_schema([instance_schema, non_instance_schema])
-
-
 class NodeSource(ABC):
     """"""
 

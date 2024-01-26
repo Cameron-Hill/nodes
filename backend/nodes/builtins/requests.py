@@ -1,5 +1,5 @@
 import requests
-from nodes.base import Node, Option
+from nodes.base import Node
 from nodes.datatypes import UndefinedMap
 from pydantic import BaseModel, Field
 from pydantic.networks import AnyHttpUrl
