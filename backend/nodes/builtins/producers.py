@@ -1,4 +1,4 @@
-from nodes.base import Node, Option
+from nodes.base import Node
 from pydantic import Field, BaseModel
 from nodes.datatypes import UndefinedMap, PrimitiveType
 

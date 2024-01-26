@@ -34,8 +34,8 @@ def test_schema_generation_for_builtin_node_classes(manager):
 
 
 def test_initialize_user_node_with_input_data(UserNode):
-    node = UserNode(inputs={"a": "test", "b": 1, "c": 1.0})
-    assert node._inputs.input == "test"
+    node = UserNode(input={"a": "test", "b": 1, "c": 1.0})
+    assert node._input.a == "test"
 
 
 def test_call_node(UserNode):

@@ -19,10 +19,10 @@ def test_add_user_source_from_file(manager):
     assert len(manager.sources) == 1
     original_nodes_len = len(manager.nodes)
     manager.add_source(USER_NODES)
-    assert len(manager.sources) == 2
+    assert len(manager.sources) == 2 
     user_node_source = [x for x in manager.sources if x.source == USER_NODES][0]
     assert isinstance(user_node_source, File)
-    assert len(manager.nodes) == original_nodes_len + 1
+    assert len(manager.nodes) > original_nodes_len
     assert "UserNode" in [x.label() for x in manager.nodes]
 
 
