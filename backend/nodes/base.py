@@ -4,7 +4,7 @@ from pydantic_core import ValidationError, core_schema
 from typing_extensions import get_args
 from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo, TypeAdapter
 from pydantic.fields import FieldInfo
-from typing import Generic, TypeVar, Any
+from typing import Generic, TypeVar, Any, Literal
 from inspect import signature
 
 T = TypeVar("T")
@@ -120,6 +120,12 @@ class Node(ABC):
             else:
                 return {}
         return val
+
+
+class NodeData:
+    def __init__(self, model: BaseModel, type: Literal["input", "output"]) -> None:
+        self.model = model
+        self.type = type
 
 
 class NodeSource(ABC):
