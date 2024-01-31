@@ -12,7 +12,7 @@ def expect_exception(exception_or_any):
         issubclass(exception_or_any, Exception) or exception_or_any == Exception
     )
     if exception_class or isinstance(exception_or_any, Exception):
-        with pytest.raises(exception_or_any) as e:
+        with pytest.raises(exception_or_any) as e:  # type: ignore
             yield e
     else:
         yield None
