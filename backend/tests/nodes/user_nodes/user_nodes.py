@@ -23,6 +23,11 @@ class UserNode(Node):
         return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
 
 
+class UserNodeWithMultipleInputs(Node):
+    def run(self, a: str, b: int, c: float = 20) -> Output:
+        return Output(x=a, y=b, z=c)
+
+
 class UserNodeNoOptions(Node):
     def run(self, input: Input) -> Output:
         return Output(x=input.a, y=input.b, z=input.c)
@@ -36,3 +41,8 @@ class UserNodeWithOptionAnnotationMismatch(Node):
 
     def run(self, input: Input, options: BaseModel) -> Output:
         return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
+
+
+class UserNodeWithNoInputsOrOptions(Node):
+    def run(self):
+        return None

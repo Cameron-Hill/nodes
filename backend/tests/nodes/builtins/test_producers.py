@@ -18,7 +18,7 @@ def manager():
         ("nodes.builtins.producers.BoolProducer", None, {"value": True}, True),
     ],
 )
-def test_producers(self, manager, node_id, input, options, expected_output):
+def test_producers(manager, node_id, input, options, expected_output):
     """Test the Producer nodes."""
     node = manager.get_node_by_id(node_id)
     node = node(input=input, options=options)

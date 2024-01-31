@@ -14,7 +14,7 @@ class StringProducer(Node):
     class Options(BaseModel):
         value: str = Field(..., description="The value to produce")
 
-    def run(self, input: None, options: Options) -> str:
+    def run(self, options: Options) -> str:
         return options.value
 
 
@@ -29,7 +29,7 @@ class IntProducer(Node):
     class Options(BaseModel):
         value: int = Field(..., description="The value to produce")
 
-    def run(self, input: None, options: Options) -> int:
+    def run(self, options: Options) -> int:
         return options.value
 
 
@@ -44,7 +44,7 @@ class FloatProducer(Node):
     class Options(BaseModel):
         value: float = Field(..., description="The value to produce")
 
-    def run(self, input: None, options: Options) -> float:
+    def run(self, options: Options) -> float:
         return options.value
 
 
@@ -59,7 +59,7 @@ class BoolProducer(Node):
     class Options(BaseModel):
         value: bool = Field(..., description="The value to produce")
 
-    def run(self, input: None, options: Options) -> bool:
+    def run(self, options: Options) -> bool:
         return options.value
 
 
@@ -75,5 +75,5 @@ class MapProducer(Node):
     class Options(BaseModel):
         value: dict[str, PrimitiveType] = Field(..., description="The value to produce")
 
-    def run(self, input: None, options: Options) -> dict[str, PrimitiveType]:
+    def run(self, options: Options) -> dict[str, PrimitiveType]:
         return options.value

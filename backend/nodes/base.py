@@ -5,7 +5,7 @@ from typing_extensions import get_args
 from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo, TypeAdapter
 from pydantic.fields import FieldInfo
 from typing import Generic, TypeVar, Any, Literal
-from inspect import signature
+from inspect import signature, _empty
 
 T = TypeVar("T")
 
@@ -23,6 +23,42 @@ class NodeSchema(BaseModel):
     options: dict | None
 
 
+class NodeData:
+    def __init__(
+        self, key: str, model: BaseModel, type: Literal["input", "output", "options"]
+    ) -> None:
+        self.key = key
+        self.model = None if model is _empty else model
+        self.type = type
+        self.adapter: TypeAdapter = TypeAdapter(self.model)
+        self._value = None
+        self._set: bool = False
+
+    def set(self, value):
+        self._value = self.adapter.validate_python(
+            self._coerce_defaults(value, self.adapter)
+        )
+        self._set = True
+
+    @property
+    def value(self):
+        assert self.is_set, "Value not set"
+        return self._value
+
+    @property
+    def is_set(self) -> bool:
+        return self._set
+
+    @staticmethod
+    def _coerce_defaults(val: T, adapter: TypeAdapter) -> dict | None | T:
+        if not val:
+            if adapter.core_schema["type"] in ["none", "null"]:
+                return None
+            else:
+                return {}
+        return val
+
+
 class Node(ABC):
     """
     todo:
@@ -37,25 +73,41 @@ class Node(ABC):
     def __repr__(self) -> str:
         return self.id()
 
-    def __init__(
-        self,
-        input: BaseModel | dict | None = None,
-        options: BaseModel | dict | None = None,
-    ) -> None:
+    def __init__(self, **inputs: BaseModel | dict) -> None:
         # Check TypeAdapter(None).core_schema['type'] == 'none' to handle None case
-        self._InputType = TypeAdapter(self.run.__annotations__.get("input"))
-        self._OptionsType = TypeAdapter(self._get_options_model())
-        input = self._coerce_defaults(input, self._InputType)
-        options = self._coerce_defaults(options, self._OptionsType)
-        self._input = self._InputType.validate_python(input)
-        self._options = self._OptionsType.validate_python(options)
-        self._run_params = {"input": self._input, "options": self._options}
+        # The state management here is kind of weird.
+        self.data: dict[str, NodeData] = self.inputs()
+        self.data.update(self.options())
+        for key, data_node in self.data.items():
+            data_node.set(inputs.get(key))
 
     @classmethod
-    def _get_options_model(cls) -> BaseModel | None:
-        if hasattr(cls, "Options"):
-            return cls.Options
-        return None
+    def options(cls) -> dict[str, NodeData]:
+        if not hasattr(cls, "Options"):
+            return {}
+        sig = signature(cls.run)
+        options = {}
+        for i, (key, param) in enumerate(sig.parameters.items()):
+            if i and param.annotation == cls.Options:
+                options[key] = NodeData(key, cls.Options, type="options")
+        return options
+
+    @classmethod
+    def inputs(cls) -> dict[str, NodeData]:
+        sig = signature(cls.run)
+        options = cls.options()
+        inputs = {}
+        for i, (key, param) in enumerate(sig.parameters.items()):
+            if (
+                i and key not in options
+            ):  # always ignore for param because it is an instance method
+                inputs[key] = NodeData(key, param.annotation, type="input")
+        return inputs
+
+    @classmethod
+    def output(cls) -> NodeData:
+        sig = signature(cls.run)
+        return NodeData("output", sig.return_annotation, type="output")
 
     @classmethod
     def id(cls):
@@ -75,23 +127,21 @@ class Node(ABC):
         """This method is called by the system and should not be overridden.
         It inspects the signature of the run method and passes the correct
         arguments to it."""
-        sig = signature(self.run)
-        params = {k: v for k, v in self._run_params.items() if k in sig.parameters}
-        OutputType = TypeAdapter(self.run.__annotations__.get("return"))
+        params = {k: v.value for k, v in self.data.items()}
 
         try:
             ret = self.run(**params)
         except Exception as e:
             return self.error_handler(e)
 
-        return OutputType.validate_python(ret)
+        return self.output().adapter.validate_python(ret)
 
     def error_handler(self, exception: Exception):
         """This method is called when an exception is raised in a node. It is
         passed the exception that was raised and should return a dict that
         will be returned to the user as the result of the node."""
         raise UnhandledNodeError(
-            f"Unhandled exception in node {self._label}: {exception}"
+            f"Unhandled exception in node {self.label()}: {exception}"
         ) from exception
 
     @classmethod
@@ -111,21 +161,6 @@ class Node(ABC):
             output=TypeAdapter(output_schema).json_schema(),
             options=TypeAdapter(options_schema).json_schema(),
         )
-
-    @staticmethod
-    def _coerce_defaults(val: T, adapter: TypeAdapter) -> dict | None | T:
-        if not val:
-            if adapter.core_schema["type"] in ["none", "null"]:
-                return None
-            else:
-                return {}
-        return val
-
-
-class NodeData:
-    def __init__(self, model: BaseModel, type: Literal["input", "output"]) -> None:
-        self.model = model
-        self.type = type
 
 
 class NodeSource(ABC):

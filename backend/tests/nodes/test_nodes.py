@@ -35,7 +35,7 @@ def test_schema_generation_for_builtin_node_classes(manager):
 
 def test_initialize_user_node_with_input_data(UserNode):
     node = UserNode(input={"a": "test", "b": 1, "c": 1.0})
-    assert node._input.a == "test"
+    assert node.data["input"].value.a == "test"
 
 
 def test_call_node(UserNode):
@@ -58,3 +58,23 @@ def test_call_node_with_no_options(manager):
     assert output.y == 1
     assert output.z == 1.0
     assert output.option is None
+
+
+def test_call_user_node_with_multiple_inputs(manager):
+    manager.add_source(USER_NODES)
+    node = manager.get_node_by_id("user_nodes.UserNodeWithMultipleInputs")
+    node = node(**{"a": "test", "b": 1, "c": 1.0})
+    output = node.call()
+    assert isinstance(output, BaseModel)
+    assert output.x == "test"
+    assert output.y == 1
+    assert output.z == 1.0
+    assert output.option is None
+
+
+def test_node_with_no_type_def(manager):
+    manager.add_source(USER_NODES)
+    node = manager.get_node_by_id("user_nodes.UserNodeWithNoInputsOrOptions")
+    node = node()
+    output = node.call()
+    assert output is None
