@@ -43,6 +43,11 @@ class UserNodeWithOptionAnnotationMismatch(Node):
         return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
 
 
+class UserNodeWithMissingAnnotation(Node):
+    def run(self, a, b, c) -> Output:
+        return Output(x=a, y=b, z=c)
+
+
 class UserNodeWithNoInputsOrOptions(Node):
     def run(self):
         return None
