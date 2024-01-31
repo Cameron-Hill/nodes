@@ -4,7 +4,7 @@ from pydantic_core import ValidationError, core_schema
 from typing_extensions import get_args
 from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo, TypeAdapter
 from pydantic.fields import FieldInfo
-from typing import Generic, TypeVar, Any, Literal
+from typing import Generic, Type, TypeVar, Any, Literal
 from inspect import signature, _empty
 
 T = TypeVar("T")
@@ -25,7 +25,11 @@ class NodeSchema(BaseModel):
 
 class NodeData:
     def __init__(
-        self, key: str, model: BaseModel, type: Literal["input", "output", "options"]
+        self,
+        parent: "Node",
+        key: str,
+        model: BaseModel,
+        type: Literal["input", "output", "options"],
     ) -> None:
         self.key = key
         self.model = None if model is _empty else model
@@ -33,6 +37,7 @@ class NodeData:
         self.adapter: TypeAdapter = TypeAdapter(self.model)
         self._value = None
         self._set: bool = False
+        self.parent = parent
 
     def set(self, value):
         self._value = self.adapter.validate_python(
@@ -45,7 +50,7 @@ class NodeData:
         assert self.is_set, "Value not set"
         return self._value
 
-    @property
+    @property  # type: ignore   I don't know why type checker was complaining
     def is_set(self) -> bool:
         return self._set
 
@@ -65,49 +70,44 @@ class Node(ABC):
       - validate options class
     """
 
-    __group__: str = None
-    __sub_group__: str = None
-    __label__: str = None
+    __group__: str | None = None
+    __sub_group__: str | None = None
+    __label__: str | None = None
     __version__: int = 0
 
     def __repr__(self) -> str:
         return self.id()
 
-    def __init__(self, **inputs: BaseModel | dict) -> None:
-        # Check TypeAdapter(None).core_schema['type'] == 'none' to handle None case
-        # The state management here is kind of weird.
-        self.data: dict[str, NodeData] = self.inputs()
-        self.data.update(self.options())
-        for key, data_node in self.data.items():
-            data_node.set(inputs.get(key))
+    def __init__(self) -> None:
+        self.options: dict[str, NodeData] = self._get_options()
+        self.inputs: dict[str, NodeData] = self._get_inputs(self.options)
+        self.data: dict[str, NodeData] = {**self.inputs, **self.options}
+        self.output: NodeData = self._get_output()
 
-    @classmethod
-    def options(cls) -> dict[str, NodeData]:
-        if not hasattr(cls, "Options"):
+    def _get_options(self) -> dict[str, NodeData]:
+        if not hasattr(self, "Options"):
             return {}
-        sig = signature(cls.run)
+        sig = signature(self.run)
         options = {}
+        Options = getattr(self, "Options")
         for i, (key, param) in enumerate(sig.parameters.items()):
-            if i and param.annotation == cls.Options:
-                options[key] = NodeData(key, cls.Options, type="options")
+            if i and param.annotation == Options:
+                options[key] = NodeData(self, key, Options, type="options")
         return options
 
-    @classmethod
-    def inputs(cls) -> dict[str, NodeData]:
-        sig = signature(cls.run)
-        options = cls.options()
+    def _get_inputs(self, options: dict[str, NodeData]) -> dict[str, NodeData]:
+        sig = signature(self.run)
         inputs = {}
-        for i, (key, param) in enumerate(sig.parameters.items()):
+        for key, param in sig.parameters.items():
             if (
-                i and key not in options
+                param is not self and key not in options
             ):  # always ignore for param because it is an instance method
-                inputs[key] = NodeData(key, param.annotation, type="input")
+                inputs[key] = NodeData(self, key, param.annotation, type="input")
         return inputs
 
-    @classmethod
-    def output(cls) -> NodeData:
-        sig = signature(cls.run)
-        return NodeData("output", sig.return_annotation, type="output")
+    def _get_output(self) -> NodeData:
+        sig = signature(self.run)
+        return NodeData(self, "output", sig.return_annotation, type="output")
 
     @classmethod
     def id(cls):
@@ -123,10 +123,12 @@ class Node(ABC):
         data and should return a dict that will be passed to the next node."""
         raise NotImplementedError
 
-    def call(self) -> run.__annotations__.get("return"):
+    def call(self, **inputs) -> run.__annotations__.get("return"):
         """This method is called by the system and should not be overridden.
         It inspects the signature of the run method and passes the correct
         arguments to it."""
+        for key, data_node in self.data.items():
+            data_node.set(inputs.get(key))
         params = {k: v.value for k, v in self.data.items()}
 
         try:
@@ -134,7 +136,7 @@ class Node(ABC):
         except Exception as e:
             return self.error_handler(e)
 
-        return self.output().adapter.validate_python(ret)
+        return self.output.adapter.validate_python(ret)
 
     def error_handler(self, exception: Exception):
         """This method is called when an exception is raised in a node. It is
@@ -149,7 +151,7 @@ class Node(ABC):
         """Return the schema for the node."""
         input_schema = cls.run.__annotations__.get("input")
         output_schema = cls.run.__annotations__.get("return")
-        options_schema = cls.Options if hasattr(cls, "Options") else None
+        options_schema = getattr(cls, "Options") if hasattr(cls, "Options") else None
 
         return NodeSchema(
             id=cls.id(),

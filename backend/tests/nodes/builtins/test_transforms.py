@@ -46,5 +46,5 @@ def expect_exception(exception_or_any):
 )
 def test_string_concat_transform(kwargs: dict, expected_output: str | Exception):
     with expect_exception(expected_output):
-        string_concat = transforms.StringConcat(**kwargs)
-        assert string_concat.call() == expected_output
+        string_concat = transforms.StringConcat()
+        assert string_concat.call(**kwargs) == expected_output

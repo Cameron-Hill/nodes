@@ -3,7 +3,8 @@ from nodes.base import Node
 from nodes.datatypes import Undefined
 from pydantic import BaseModel, Field
 from pydantic.networks import AnyHttpUrl
-from typing import Annotated
+from typing import Annotated, Optional
+
 
 class InputHTTPGetRequest(BaseModel):
     url: AnyHttpUrl = Field(..., description="The URL to send the request to")
@@ -13,6 +14,10 @@ class InputHTTPGetRequest(BaseModel):
     headers: dict[str, str] = Field(
         {}, description="The headers to send with the request"
     )
+
+
+RequestQueryParams = Optional[dict[str, str]]
+RequestHeaders = Optional[dict[str, str]]
 
 
 class OutputHTTPGetRequest(BaseModel):
@@ -28,21 +33,25 @@ class HTTPGetRequest(Node):
     __label__ = "HTTP Get Request"
     __group__ = "Connectivity"
 
-    def run(self, input: InputHTTPGetRequest) -> OutputHTTPGetRequest:
-        response = requests.get(
-            input.url, params=input.query_params, headers=input.headers
-        )
+    def run(
+        self, url: str, params: RequestQueryParams, headers: RequestHeaders
+    ) -> OutputHTTPGetRequest:
+        response = requests.get(url, params=params, headers=headers)
         response.raise_for_status()
-        return {
-            "status_code": response.status_code,
-            "reason": response.reason,
-            "content": response.json(),
-        }
+        return OutputHTTPGetRequest(
+            status_code=response.status_code,
+            reason=response.reason,
+            content=response.json(),
+        )
 
-    def error_handler(self, exception: Exception):
-        if isinstance(exception, requests.exceptions.HTTPError):
-            return {
-                "status_code": exception.response.status_code,
-                "reason": exception.response.reason,
-                "content": exception.response.content,
-            }
+    def error_handler(self, exception: Exception) -> OutputHTTPGetRequest:
+        if isinstance(exception, requests.exceptions.HTTPError) and exception.response:
+            content = exception.response.json()
+            if not content:
+                content = {"body": exception.response.content.decode()}
+            return OutputHTTPGetRequest(
+                status_code=exception.response.status_code,
+                reason=exception.response.reason,
+                content=content,
+            )
+        raise exception

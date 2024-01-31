@@ -6,6 +6,7 @@ from nodes.manager import NodeManager
 def manager():
     return NodeManager()
 
+
 """A collection of tests for the Producer nodes."""
 
 # fmt: off
@@ -21,6 +22,6 @@ def manager():
 def test_producers(manager, node_id, input, options, expected_output):
     """Test the Producer nodes."""
     node = manager.get_node_by_id(node_id)
-    node = node(input=input, options=options)
-    output = node.call()
+    node = node()
+    output = node.call(input=input, options=options)
     assert output == expected_output
