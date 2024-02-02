@@ -64,7 +64,7 @@
       "containerId": null,
       "originalText": "Principles",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -400,7 +400,7 @@
       "containerId": null,
       "originalText": "schema",
       "lineHeight": 1.2,
-      "baseline": 10
+      "baseline": 9
     },
     {
       "type": "text",
@@ -438,7 +438,7 @@
       "containerId": null,
       "originalText": "values",
       "lineHeight": 1.2,
-      "baseline": 10
+      "baseline": 9
     },
     {
       "type": "text",
@@ -476,7 +476,7 @@
       "containerId": null,
       "originalText": "{\n a:1\n b:true\n}",
       "lineHeight": 1.2,
-      "baseline": 48
+      "baseline": 47
     },
     {
       "type": "text",
@@ -514,7 +514,7 @@
       "containerId": null,
       "originalText": "{\n a:int\n b:bool\n}",
       "lineHeight": 1.2,
-      "baseline": 48
+      "baseline": 47
     },
     {
       "type": "rectangle",
@@ -780,7 +780,7 @@
       "containerId": null,
       "originalText": "{\n  \"a\": int,\n  \"b\": bool,\n}",
       "lineHeight": 1.2,
-      "baseline": 73
+      "baseline": 72
     },
     {
       "type": "text",
@@ -1092,7 +1092,7 @@
       "containerId": null,
       "originalText": "Functionality",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -1442,7 +1442,7 @@
       "containerId": null,
       "originalText": "> requests\n  - GET\n  - POST\n  - PATCH",
       "lineHeight": 1.2,
-      "baseline": 73
+      "baseline": 72
     },
     {
       "type": "text",
@@ -2071,7 +2071,7 @@
       "containerId": null,
       "originalText": "Prototype",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -2258,7 +2258,7 @@
       "containerId": null,
       "originalText": "x:obj -",
       "lineHeight": 1.2,
-      "baseline": 13
+      "baseline": 12
     },
     {
       "type": "line",
@@ -2344,7 +2344,7 @@
       "containerId": null,
       "originalText": "Example",
       "lineHeight": 1.2,
-      "baseline": 13
+      "baseline": 12
     },
     {
       "type": "line",
@@ -3166,7 +3166,7 @@
       "containerId": null,
       "originalText": "Example",
       "lineHeight": 1.2,
-      "baseline": 13
+      "baseline": 12
     },
     {
       "type": "line",
@@ -3933,7 +3933,7 @@
       "containerId": null,
       "originalText": "{\n  a: int,\n  b: str,\n  c: {\n   x: str\n   y: str \n  }\n}",
       "lineHeight": 1.2,
-      "baseline": 109
+      "baseline": 108
     },
     {
       "type": "text",
@@ -4108,7 +4108,7 @@
       "containerId": null,
       "originalText": "attr:obj -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "line",
@@ -4196,7 +4196,7 @@
       "containerId": null,
       "originalText": "Action",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -4592,7 +4592,7 @@
       "containerId": null,
       "originalText": "Selector",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -4634,7 +4634,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -4964,7 +4964,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -5714,7 +5714,7 @@
       "containerId": null,
       "originalText": "Join",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -5756,7 +5756,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -6086,7 +6086,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -6411,7 +6411,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -6887,7 +6887,7 @@
       "containerId": null,
       "originalText": "Filter",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -6929,7 +6929,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -7259,7 +7259,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -8113,7 +8113,7 @@
       "containerId": null,
       "originalText": "Rename",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -8154,7 +8154,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -8471,7 +8471,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -9026,7 +9026,7 @@
       "containerId": null,
       "originalText": "Will need to come up with definitions of \ntransform tasks, and how they apply to \ncomplex (Objects and Arrays) and primitive\ntypes.",
       "lineHeight": 1.2,
-      "baseline": 73
+      "baseline": 72
     },
     {
       "type": "text",
@@ -9180,7 +9180,7 @@
       "containerId": null,
       "originalText": "We want to be able to support an action\nthat fires off a simple get request and \nand produces an object type created\nfrom the JSON response of the API.\nThis brings up the question of how to\ndeal with potentially unknown schemas.\nAn action may produce an unknown complex\nobject or an object that is composed of\nunknown complex objects. For example,\nthe get request action may produce an \noutput:\n\n\n\n\n\nHere, the body of the request is an\nunknown object because the output\ndepends on the URL that was provided as \nan input to the action. However, at\nruntime, we still need to know what the\noutput schema for this instance of the \naction is so we can manipulate the data.\nSimilarly, are there occasions where \nthere are unknown elements within a \ncomplex that we don't care about, and\ndon't need to define a schema for?\nFor this exploration, we'll break \nthese 2 questions down into sections.\n\n# How can we apply schemas \n# to unknown objects?\nLet's consider a few options:\n1. Do not allow unknown objects:\n   You cannot have a generic GET\n   request action. You must define an\n   explicit action with an explicit schema\n   for each endpoint you want to use.\n   e.g. the 'GetUsers Action' would have\n   an explicit schema based on the response\n   from the getUsers endpoint.\n2. Action Template:\n   An action template allows you to \n   create a new action from a template\n   by defining custom schemas for inputs,\n   options  and outputs over a constant\n   backend implementation.\n   This would allow a more \n   explicit definition of actions,\n   similar to approach 1, while allowing\n   users to get started without adding\n   custom extensions.\n3. Some sort of behaviour pattern for\n   unknown objects.\n\n",
       "lineHeight": 1.2,
-      "baseline": 1070
+      "baseline": 1071
     },
     {
       "type": "text",
@@ -9485,7 +9485,7 @@
       "containerId": null,
       "originalText": "attr:obj -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "line",
@@ -9571,7 +9571,7 @@
       "containerId": null,
       "originalText": "Action",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -9957,7 +9957,7 @@
       "containerId": null,
       "originalText": "Selector",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -9998,7 +9998,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -10315,7 +10315,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -10918,7 +10918,7 @@
       "containerId": null,
       "originalText": "{\n  a: int,\n  b: str,\n  c: {\n   x: str\n   y: str \n  }\n}",
       "lineHeight": 1.2,
-      "baseline": 109
+      "baseline": 108
     },
     {
       "type": "ellipse",
@@ -11658,7 +11658,7 @@
       "containerId": null,
       "originalText": "Data Access",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -11770,7 +11770,7 @@
       "containerId": null,
       "originalText": "Actions should have a versioning\nsystem. Some attribute on the class\nthat allows you to specify a version\nso we can have several actions with\nthe same name. Actions should also be\nallowed to be deprecated. A deprecated\naction will display a warning and some \nmessage to the user, and optionally\nemail the author of a workflow\nthat contains a deprecated action.",
       "lineHeight": 1.2,
-      "baseline": 188
+      "baseline": 187
     },
     {
       "type": "text",
@@ -11806,7 +11806,7 @@
       "containerId": null,
       "originalText": "Create a new workflow\nDelete a workflow\nGet me all available nodes.\nCreate a new node as part of a workflow\nRemove a node from a workflow\nupdate a node within a workflow\nGet all nodes that belong to a workflow.\n\nCreate a new user\nCreate a new team\nAdd a user to a team\nRemove a user from a team\ndelete a team\nGet me all users in a Team\nGet me all teams that a user is a member of\nGet all workflows visible to a team\nGet me all workflows that belong to a user\n\n\n",
       "lineHeight": 1.2,
-      "baseline": 474
+      "baseline": 475
     },
     {
       "type": "ellipse",
@@ -14529,7 +14529,7 @@
       "containerId": null,
       "originalText": "1. How to handle uniqueness\n   in Nodes.\n2. How to handle Node versions\n3. What is a node id? and how is\n   it calculated",
       "lineHeight": 1.2,
-      "baseline": 92
+      "baseline": 91
     },
     {
       "type": "text",
@@ -14609,8 +14609,8 @@
     },
     {
       "type": "text",
-      "version": 208,
-      "versionNonce": 528969679,
+      "version": 225,
+      "versionNonce": 886756570,
       "isDeleted": false,
       "id": "Wtq7p9bhc9srU5x6qjtup",
       "fillStyle": "cross-hatch",
@@ -14632,16 +14632,16 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706292910339,
+      "updated": 1706902809994,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 3,
-      "text": "Map\nProducer",
+      "text": "String\nProducer",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "uo6BAnb5mOq-foVYm-L_-",
-      "originalText": "Map\nProducer",
+      "originalText": "String\nProducer",
       "lineHeight": 1.2,
       "baseline": 43
     },
@@ -14727,8 +14727,8 @@
     },
     {
       "type": "arrow",
-      "version": 156,
-      "versionNonce": 871218305,
+      "version": 162,
+      "versionNonce": 62084954,
       "isDeleted": false,
       "id": "xs-A4NmldZAt6TvHlZKfk",
       "fillStyle": "cross-hatch",
@@ -14750,7 +14750,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706292910339,
+      "updated": 1706902806423,
       "link": null,
       "locked": false,
       "startBinding": {
@@ -14779,8 +14779,8 @@
     },
     {
       "type": "arrow",
-      "version": 81,
-      "versionNonce": 406521871,
+      "version": 83,
+      "versionNonce": 1944959258,
       "isDeleted": false,
       "id": "IGHMtHxlyQ9QjnUwhmFzW",
       "fillStyle": "cross-hatch",
@@ -14802,7 +14802,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706292910339,
+      "updated": 1706902805588,
       "link": null,
       "locked": false,
       "startBinding": {
@@ -15560,7 +15560,7 @@
       "containerId": null,
       "originalText": "How do we construct and execute a worklow?\nWhat is a workflow?\n\nI need to know, right away, that nodes are not\ncompatible.\nDoes this calculation happen on the server side?\nOr the client side?\nOr Both?\n\nClient Side:\n - We should have all the json schema objects we\n   need to work this out.\n - It would create a snappier experience for the\n   user\n - It would be difficult to debug.\n\nServer Side:\n - If the server side also does the validation,\n   It could be used without the front end.\n - It needs to do some sort of construction for\n   the api.\n - If server side needs to do it anyway, should\n   we do it all on the server side?\n\nok we absolutly need to do it on the server side, \nwe maybe need to do it on the client side also.\nSo how do we do it on the server side?\n\nServer side requirements:\n  - Build the workflow, step by step.\n    \n    So I make a PUT call, add node to workflow,\n    as a child of this Node.\n    I basically say, Take this node, add it to my\n    workflow after that node. connect A to B.\n    The back end will validate that this is a\n    valid edge. If yay - perform db insert to \n    describe node / workflow. If Nay - kick back\n    big stinky error message.  \n\n    This is a very server-cetric way of thinking.\n    Can we come up with a local scripting solution\n    that could be compatable with with the server\n    approach? Could have a system that writes to \n    a json file each add request? Or memory?\n    Workflow.put(Node, parent=<what?>)\n    A node has to have an ID within the workflow\n    that can be reffered to. So...\n    Workflow.put(Node) -> WorkflowNode?\n    WorkflowNode is some subclass of node that has\n    a Node id?, when in stateless mode, this is just\n    some Id that is saved in the DB. In stateful mode\n    we return a WorkflowNode and you can use that \n    in the Workflow.\n    Workflow.put(Node, parent=WorkflowNode | NodeID)\n    In Stateless mode, you can hook up the workflow\n    class to data layer. You can then rebuild the\n    workflow object from the data layer whenever\n    a request is made.\n        \n## ASIDE ## Do all nodes have 1 input, 1 output?\n   Or do I need to figure out how to map specific\n   I/O to kids. Can I move forward with 1-1 and give\n   myself room to change it later?\n   Actualy, a node will need to have more than 1 inupt\n   no? because how do we do operations like joining\n   two object together or concatanating strings?\n   \n ",
       "lineHeight": 1.2,
-      "baseline": 1650
+      "baseline": 1651
     },
     {
       "type": "text",
@@ -15596,7 +15596,7 @@
       "containerId": null,
       "originalText": "Workflows",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -17852,7 +17852,7 @@
       "containerId": null,
       "originalText": "\n[\n  {\"key\": \"\", \"value\": \"\",\n]\n\nIf we want to create maps from the UI,\nwe can do it like above.\nI don't know if we should support it\nby way of open-ended map type defs.\ne.g. dict ",
       "lineHeight": 1.2,
-      "baseline": 188
+      "baseline": 187
     },
     {
       "type": "rectangle",
@@ -18330,300 +18330,502 @@
       "baseline": 43
     },
     {
-      "id": "GR4jOJVuXhp3OiN7AaG8W",
       "type": "text",
-      "x": -104.01674893015337,
-      "y": 2354.5897437152857,
+      "version": 330,
+      "versionNonce": 1747344602,
+      "isDeleted": false,
+      "id": "GR4jOJVuXhp3OiN7AaG8W",
+      "fillStyle": "cross-hatch",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -217.63172603167726,
+      "y": 2280.8891667388375,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
       "width": 180.88804472477065,
       "height": 24.69724770642202,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 4,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
+      "seed": 299958106,
       "groupIds": [
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 299958106,
-      "version": 247,
-      "versionNonce": 1245604678,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1706861136321,
+      "boundElements": [],
+      "updated": 1706877538808,
       "link": null,
       "locked": false,
-      "text": "Recursion Depth",
       "fontSize": 20.581039755351682,
       "fontFamily": 3,
+      "text": "Recursion Depth",
       "textAlign": "left",
       "verticalAlign": "top",
-      "baseline": 19,
       "containerId": null,
       "originalText": "Recursion Depth",
-      "lineHeight": 1.2
+      "lineHeight": 1.2,
+      "baseline": 20
     },
     {
-      "id": "nByFJOk7v8VBJZve7QL9P",
       "type": "text",
-      "x": -400.7053957191438,
-      "y": 2180.3937957030535,
+      "version": 390,
+      "versionNonce": 263827866,
+      "isDeleted": false,
+      "id": "nByFJOk7v8VBJZve7QL9P",
+      "fillStyle": "cross-hatch",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -514.3203728206677,
+      "y": 2106.693218726605,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
       "width": 168.80859375,
       "height": 34.576146788990826,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 4,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
+      "seed": 667820742,
       "groupIds": [
         "dHUbp76IJGR0V92-lsQxd",
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 667820742,
-      "version": 307,
-      "versionNonce": 1729958534,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1706861136321,
+      "boundElements": [],
+      "updated": 1706877538808,
       "link": null,
       "locked": false,
-      "text": "Word Cloud",
       "fontSize": 28.813455657492355,
       "fontFamily": 3,
+      "text": "Word Cloud",
       "textAlign": "left",
       "verticalAlign": "top",
-      "baseline": 28,
       "containerId": null,
       "originalText": "Word Cloud",
-      "lineHeight": 1.2
+      "lineHeight": 1.2,
+      "baseline": 27
     },
     {
-      "id": "VeQJ_iQdSVhCBS1SFUnbP",
       "type": "text",
-      "x": -420.0001204897859,
-      "y": 2207.843757476754,
-      "width": 202.59461009174314,
-      "height": 19.757798165137615,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 421,
+      "versionNonce": 998534746,
+      "isDeleted": false,
+      "id": "VeQJ_iQdSVhCBS1SFUnbP",
       "fillStyle": "cross-hatch",
       "strokeWidth": 4,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": -533.6150975913098,
+      "y": 2134.143180500306,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 202.59461009174314,
+      "height": 19.757798165137615,
+      "seed": 635580122,
       "groupIds": [
         "dHUbp76IJGR0V92-lsQxd",
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 635580122,
-      "version": 338,
-      "versionNonce": 405066182,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1706861136321,
+      "boundElements": [],
+      "updated": 1706877538808,
       "link": null,
       "locked": false,
-      "text": "Things to think about",
       "fontSize": 16.464831804281346,
       "fontFamily": 3,
+      "text": "Things to think about",
       "textAlign": "left",
       "verticalAlign": "top",
-      "baseline": 15,
       "containerId": null,
       "originalText": "Things to think about",
-      "lineHeight": 1.2
+      "lineHeight": 1.2,
+      "baseline": 15
     },
     {
-      "id": "nfFyqnXnMbED0NjL4z0j-",
       "type": "ellipse",
-      "x": -983.3649905203665,
-      "y": 1735.3571366816473,
-      "width": 1323.4374999999995,
-      "height": 931.0015290519871,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 681,
+      "versionNonce": 1079612186,
+      "isDeleted": false,
+      "id": "nfFyqnXnMbED0NjL4z0j-",
       "fillStyle": "cross-hatch",
       "strokeWidth": 1,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": -1096.9799676218904,
+      "y": 1661.656559705199,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 1323.4374999999995,
+      "height": 931.0015290519871,
+      "seed": 1724433050,
       "groupIds": [
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 1724433050,
-      "version": 598,
-      "versionNonce": 678603014,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1706861136321,
+      "boundElements": [],
+      "updated": 1706877538808,
       "link": null,
       "locked": false
     },
     {
-      "id": "pVReAcaRXtlmq1dX8oB7U",
       "type": "text",
-      "x": -618.5427428139445,
-      "y": 2348.1581687917387,
+      "version": 360,
+      "versionNonce": 1621893082,
+      "isDeleted": false,
+      "id": "pVReAcaRXtlmq1dX8oB7U",
+      "fillStyle": "cross-hatch",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -732.1577199154684,
+      "y": 2274.4575918152905,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
       "width": 168.82884174311926,
       "height": 49.39449541284404,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 1,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
+      "seed": 241945030,
       "groupIds": [
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 241945030,
-      "version": 277,
-      "versionNonce": 2005112902,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1706861136321,
+      "boundElements": [],
+      "updated": 1706877538808,
       "link": null,
       "locked": false,
-      "text": "Schema Subtype\nReport",
       "fontSize": 20.581039755351682,
       "fontFamily": 3,
+      "text": "Schema Subtype\nReport",
       "textAlign": "center",
       "verticalAlign": "top",
-      "baseline": 43,
       "containerId": null,
       "originalText": "Schema Subtype\nReport",
-      "lineHeight": 1.2
+      "lineHeight": 1.2,
+      "baseline": 45
     },
     {
-      "id": "DcpXjr-xbTPS3zNRFHcuC",
       "type": "text",
-      "x": -780.6158403729216,
-      "y": 1908.8061728328048,
-      "width": 156.7696387614679,
-      "height": 49.39449541284404,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 459,
+      "versionNonce": 412030106,
+      "isDeleted": false,
+      "id": "DcpXjr-xbTPS3zNRFHcuC",
       "fillStyle": "cross-hatch",
       "strokeWidth": 1,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": -894.2308174744455,
+      "y": 1835.1055958563566,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 156.7696387614679,
+      "height": 49.39449541284404,
+      "seed": 1014207258,
       "groupIds": [
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 1014207258,
-      "version": 376,
-      "versionNonce": 1832165254,
-      "isDeleted": false,
-      "boundElements": null,
-      "updated": 1706861136321,
+      "boundElements": [],
+      "updated": 1706877538808,
       "link": null,
       "locked": false,
-      "text": "Option Values\nare persisted",
       "fontSize": 20.581039755351682,
       "fontFamily": 3,
+      "text": "Option Values\nare persisted",
       "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Option Values\nare persisted",
+      "lineHeight": 1.2,
+      "baseline": 45
+    },
+    {
+      "type": "text",
+      "version": 364,
+      "versionNonce": 1773498714,
+      "isDeleted": false,
+      "id": "Abm1eU4NZFtj4lXvoGnLL",
+      "fillStyle": "cross-hatch",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -736.6711665283447,
+      "y": 1736.2218038074268,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 204.99609375,
+      "height": 74.09174311926606,
+      "seed": 660989402,
+      "groupIds": [
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1706877538808,
+      "link": null,
+      "locked": false,
+      "fontSize": 20.581039755351682,
+      "fontFamily": 3,
+      "text": "All Options must\nbe set to execute\na flow.",
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "All Options must\nbe set to execute\na flow.",
+      "lineHeight": 1.2,
+      "baseline": 69
+    },
+    {
+      "type": "text",
+      "version": 297,
+      "versionNonce": 661796378,
+      "isDeleted": false,
+      "id": "ElB82yQOTKywDSZAubecZ",
+      "fillStyle": "cross-hatch",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -676.2973347822987,
+      "y": 1854.7283876715985,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 289.42087155963304,
+      "height": 24.69724770642202,
+      "seed": 1535885722,
+      "groupIds": [
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1706877538808,
+      "link": null,
+      "locked": false,
+      "fontSize": 20.581039755351682,
+      "fontFamily": 3,
+      "text": "Options are set up front",
+      "textAlign": "center",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Options are set up front",
+      "lineHeight": 1.2,
+      "baseline": 20
+    },
+    {
+      "id": "biPltqBVCMUiwEeJsUxjC",
+      "type": "text",
+      "x": -1040.3197279709639,
+      "y": 2012.709440631933,
+      "width": 234.375,
+      "height": 48,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 697163654,
+      "version": 154,
+      "versionNonce": 1119380186,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1706877538808,
+      "link": null,
+      "locked": false,
+      "text": "Nodes need some kind\nof 'Node in Flow' ID",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "textAlign": "left",
       "verticalAlign": "top",
       "baseline": 43,
       "containerId": null,
-      "originalText": "Option Values\nare persisted",
+      "originalText": "Nodes need some kind\nof 'Node in Flow' ID",
       "lineHeight": 1.2
     },
     {
-      "id": "Abm1eU4NZFtj4lXvoGnLL",
-      "type": "text",
-      "x": -623.0561894268208,
-      "y": 1809.922380783875,
-      "width": 204.99609375,
-      "height": 74.09174311926606,
+      "id": "1UdX1rUYTesCFfejgZrCq",
+      "type": "line",
+      "x": -804.2569195571687,
+      "y": 1909.1949210632595,
+      "width": 82.6666259765625,
+      "height": 93.33337402343727,
       "angle": 0,
       "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 1,
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
       "groupIds": [
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 660989402,
-      "version": 281,
-      "versionNonce": 1841479366,
+      "seed": 976681370,
+      "version": 118,
+      "versionNonce": 370866074,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1706861136321,
+      "updated": 1706877538808,
       "link": null,
       "locked": false,
-      "text": "All Options must\nbe set to execute\na flow.",
-      "fontSize": 20.581039755351682,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -82.6666259765625,
+          93.33337402343727
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null
+    },
+    {
+      "id": "r4TOTFMn_GD-tDV5MBE5s",
+      "type": "text",
+      "x": -1892.6456419568449,
+      "y": 2822.1180227227765,
+      "width": 843.75,
+      "height": 240,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1969270278,
+      "version": 613,
+      "versionNonce": 1844242266,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1706877470343,
+      "link": null,
+      "locked": false,
+      "text": "Access Pattern: Set an option value\n\n - Update Value on Node Data element: \n - Fetch NodeData from ddb\n - Initialize NodeData object \n - Query Node manager with parent address/id to load Node Implementation\n - Access NodeData model from implementation\n - Validate input\n - Set on object\n - write to ddb.",
+      "fontSize": 20,
       "fontFamily": 3,
-      "textAlign": "center",
+      "textAlign": "left",
       "verticalAlign": "top",
-      "baseline": 68,
+      "baseline": 235,
       "containerId": null,
-      "originalText": "All Options must\nbe set to execute\na flow.",
+      "originalText": "Access Pattern: Set an option value\n\n - Update Value on Node Data element: \n - Fetch NodeData from ddb\n - Initialize NodeData object \n - Query Node manager with parent address/id to load Node Implementation\n - Access NodeData model from implementation\n - Validate input\n - Set on object\n - write to ddb.",
       "lineHeight": 1.2
     },
     {
-      "id": "ElB82yQOTKywDSZAubecZ",
+      "id": "56ijjCN_PiphzNPAmUFCm",
       "type": "text",
-      "x": -567.3490446924935,
-      "y": 1919.7623081539061,
-      "width": 289.42087155963304,
-      "height": 24.69724770642202,
+      "x": -1918.645657215634,
+      "y": 3248.784679216917,
+      "width": 1019.53125,
+      "height": 168,
       "angle": 0,
       "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "fillStyle": "cross-hatch",
-      "strokeWidth": 1,
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 181229594,
+      "version": 314,
+      "versionNonce": 1632300058,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1706877470343,
+      "link": null,
+      "locked": false,
+      "text": "When does the workflow object get initialized?\n - During execution\n - Validation?\n - No, Nodes should be be able to validate themselves.\n\nSo for workflow execution, assume that options are set via some put command previously.\nWhen we initi",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 163,
+      "containerId": null,
+      "originalText": "When does the workflow object get initialized?\n - During execution\n - Validation?\n - No, Nodes should be be able to validate themselves.\n\nSo for workflow execution, assume that options are set via some put command previously.\nWhen we initi",
+      "lineHeight": 1.2
+    },
+    {
+      "id": "G8HD4xRqEDFBWEsohG7uE",
+      "type": "text",
+      "x": -207.12361820771616,
+      "y": 1803.9037659605383,
+      "width": 281.25,
+      "height": 96,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
       "groupIds": [
-        "-T6XSV0G0yJ8BTXYFf3Vp"
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
       ],
       "frameId": null,
       "roundness": null,
-      "seed": 1535885722,
-      "version": 206,
-      "versionNonce": 1305146886,
+      "seed": 1058472730,
+      "version": 137,
+      "versionNonce": 293690438,
       "isDeleted": false,
       "boundElements": null,
-      "updated": 1706861136321,
+      "updated": 1706877563190,
       "link": null,
       "locked": false,
-      "text": "Options are set up front",
-      "fontSize": 20.581039755351682,
+      "text": "You do not 'pass'\ndata into a workflow\nYou set the nodeData and\nexecute when ready",
+      "fontSize": 20,
       "fontFamily": 3,
-      "textAlign": "center",
+      "textAlign": "left",
       "verticalAlign": "top",
-      "baseline": 19,
+      "baseline": 91,
       "containerId": null,
-      "originalText": "Options are set up front",
+      "originalText": "You do not 'pass'\ndata into a workflow\nYou set the nodeData and\nexecute when ready",
       "lineHeight": 1.2
     }
   ],

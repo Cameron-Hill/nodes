@@ -7,15 +7,26 @@ from pydantic.fields import FieldInfo
 from typing import Generic, Type, TypeVar, Any, Literal
 from inspect import signature, _empty
 from dataclasses import dataclass
+from shortuuid import uuid
+from logging import getLogger
+
+logger = getLogger(__name__)
 
 T = TypeVar("T")
+UNSET = object()
+
+
+class Option(BaseModel):
+    """Options are like inputs that are provided to the node ahead of execution.
+    Options must be object-type base models that are a subclass of this option class.
+    """
 
 
 class NodeSchema(BaseModel):
     """This class represents the schema for a node."""
 
-    id: str
     label: str
+    address: str
     group: str | None
     sub_group: str | None
     version: int
@@ -31,14 +42,24 @@ class NodeData:
         key: str,
         model: BaseModel,
         type: Literal["input", "output", "options"],
+        value=UNSET,
     ) -> None:
         self.key = key
         self.model = None if model is _empty else model
         self.type = type
         self.adapter: TypeAdapter = TypeAdapter(self.model)
-        self._value = None
+        self._value = value
         self._set: bool = False
         self.node = node
+        if value is not UNSET:
+            self._set = True
+        self.set_default()
+
+    def set_default(self):
+        try:
+            self.set(None)
+        except ValidationError:
+            logger.debug(f"Cannot set default for {self.type} Node Data {self.key}")
 
     def set(self, value):
         self._value = self.adapter.validate_python(
@@ -47,13 +68,17 @@ class NodeData:
         self._set = True
 
     @property
-    def value(self):
+    def value(self) -> Any:
         assert self.is_set, "Value not set"
         return self._value
 
     @property  # type: ignore   I don't know why type checker was complaining
     def is_set(self) -> bool:
-        return self._set
+        return not self._value is UNSET
+
+    @property
+    def unset(self) -> bool:
+        return self._value is UNSET
 
     @staticmethod
     def _coerce_defaults(val: T, adapter: TypeAdapter) -> dict | None | T:
@@ -77,13 +102,26 @@ class Node(ABC):
     __version__: int = 0
 
     def __repr__(self) -> str:
-        return self.id()
+        return self.address()
 
-    def __init__(self) -> None:
+    def __init__(self, id: str | None = None) -> None:
+        self.id: str = id or uuid()
         self.options: dict[str, NodeData] = self._get_options()
         self.inputs: dict[str, NodeData] = self._get_inputs(self.options)
         self.data: dict[str, NodeData] = {**self.inputs, **self.options}
         self.output: NodeData = self._get_output()
+
+    @property
+    def options_set(self) -> bool:
+        return all([data.is_set for data in self.options.values()])
+
+    @property
+    def ready(self) -> bool:
+        """
+        A node is ready if:
+         - All data is set.
+        """
+        return all(data.is_set for data in self.data.values())
 
     def _get_options(self) -> dict[str, NodeData]:
         if not hasattr(self, "Options"):
@@ -91,8 +129,8 @@ class Node(ABC):
         sig = signature(self.run)
         options = {}
         Options = getattr(self, "Options")
-        for i, (key, param) in enumerate(sig.parameters.items()):
-            if i and param.annotation == Options:
+        for key, param in sig.parameters.items():
+            if param is not self and param.annotation == Options:
                 options[key] = NodeData(self, key, Options, type="options")
         return options
 
@@ -111,7 +149,7 @@ class Node(ABC):
         return NodeData(self, "output", sig.return_annotation, type="output")
 
     @classmethod
-    def id(cls):
+    def address(cls):
         return f"{cls.__module__}.{cls.__name__}"
 
     @classmethod
@@ -128,8 +166,15 @@ class Node(ABC):
         """This method is called by the system and should not be overridden.
         It inspects the signature of the run method and passes the correct
         arguments to it."""
-        for key, data_node in self.data.items():
-            data_node.set(inputs.get(key))
+        for key, value in inputs.items():
+            if key in self.data:
+                self.data[key].set(value)
+
+        if unset := [k for k, v in self.data.items() if not v.is_set]:
+            raise ValueError(
+                f"Cannot Call Node: {self.label()} due to unset Inputs: {unset}"
+            )
+
         params = {k: v.value for k, v in self.data.items()}
 
         try:
@@ -137,7 +182,9 @@ class Node(ABC):
         except Exception as e:
             return self.error_handler(e)
 
-        return self.output.adapter.validate_python(ret)
+        self.output.set(ret)
+
+        return self.output.value
 
     def error_handler(self, exception: Exception):
         """This method is called when an exception is raised in a node. It is
@@ -155,7 +202,7 @@ class Node(ABC):
         options_schema = getattr(cls, "Options") if hasattr(cls, "Options") else None
 
         return NodeSchema(
-            id=cls.id(),
+            address=cls.address(),
             label=cls.label(),
             group=cls.__group__,
             sub_group=cls.__sub_group__,

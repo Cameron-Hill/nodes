@@ -10,3 +10,19 @@ class UnhandledNodeError(NodeError):
     node's error handler."""
 
     pass
+
+
+class NodeDataException(Exception):
+    """"""
+
+
+class NodeDataSchemaValidationException(NodeDataException):
+    """
+    Raised when a node data is not valid.
+    """
+
+
+class NodeDataNotSetException(NodeDataException):
+    """
+    Raised when a node data is not set.
+    """

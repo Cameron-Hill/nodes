@@ -7,6 +7,19 @@ from pydantic import create_model, Field, BaseModel, conlist
 from annotated_types import Len
 from nodes.base import NodeData
 from typing import Annotated
+from nodes.errors import NodeDataSchemaValidationException, NodeDataNotSetException
+from unittest import mock
+
+
+@pytest.fixture
+def mocked_request():
+    with mock.patch("requests.get") as mocked_get:
+        mocked_response = mock.MagicMock()
+        mocked_response.json.return_value = {"some": "content"}
+        mocked_response.reason = "OK"
+        mocked_response.status_code = 200
+        mocked_get.return_value = mocked_response
+        yield mocked_get
 
 
 class ModelComponent(BaseModel):
@@ -20,7 +33,7 @@ class ComplexModel(BaseModel):
     object: dict[str, str]
 
 
-def test_map_producer_to_http_request_workflow():
+def test_map_producer_to_http_request_workflow(mocked_request):
     """"""
     workflow = Workflow()
     producer = StringProducer()
@@ -28,6 +41,21 @@ def test_map_producer_to_http_request_workflow():
     workflow.add_node(producer)
     workflow.add_node(request)
     workflow.add_edge(producer.output, request.inputs["url"])
+    producer.options["options"].set({"value": "http://example.com"})
+    workflow.run()
+    mocked_request.assert_called_once_with("http://example.com", params={}, headers={})
+
+
+def test_running_a_workflow_with_unset_options_raises_validation_error():
+    """"""
+    workflow = Workflow()
+    producer = StringProducer()
+    request = HTTPGetRequest()
+    workflow.add_node(producer)
+    workflow.add_node(request)
+    workflow.add_edge(producer.output, request.inputs["url"])
+    with pytest.raises(NodeDataNotSetException):
+        workflow.run()
 
 
 def test_get_roots():
@@ -64,7 +92,6 @@ def test_get_roots_many_producers():
     for producer, request in zip(producers, requests):
         workflow.add_edge(producer.output, request.inputs["url"])
     assert workflow.roots == set(producers)
-
 
 
 @pytest.mark.parametrize(

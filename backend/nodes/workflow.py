@@ -1,21 +1,14 @@
+import dis
+from typing import Generator
 from nodes.base import Node, NodeData, Edge
 from nodes.patches import jsonsubschema
+from nodes.errors import NodeDataSchemaValidationException, NodeDataNotSetException
 
-
-class NodeDataException(Exception):
-    """"""
-
-
-class NodeDataSchemaValidationException(NodeDataException):
-    """
-    Raised when a node data is not valid.
-    """
-
-
-class NodeDataNotSetException(NodeDataException):
-    """
-    Raised when a node data is not set.
-    """
+"""
+Rethink how we're doing validations. We should run all validations that we can
+and return an exception with a json body that can be passed to downstream systems.
+To be honest, we really want a good exception system that can bubble up to the end user.
+"""
 
 
 class Workflow:
@@ -23,8 +16,9 @@ class Workflow:
     There can only be once instance of a node within a workflow.
     Many edges can be created from an output.
     An input may only have one edge.
+    All options in a workflow must be set before it can be run.
 
-    We traverse the graph, breadth first, to determine the order of execution.
+    We traverse the graph, breadth first, executing nodes and validating the Node data along the edges.
     """
 
     def __init__(self) -> None:
@@ -37,6 +31,9 @@ class Workflow:
         for edge in self.edges:
             roots.discard(edge.target.node)
         return roots
+
+    def reset(self):
+        self.seen = set()
 
     def add_node(self, node: Node) -> None:
         self.nodes.add(node)
@@ -61,7 +58,28 @@ class Workflow:
                 raise NodeDataSchemaValidationException(
                     f"Source {edge.source.node} and target {edge.target.node} are not compatible"
                 )
+        for node in self.nodes:
+            if not node.options_set:
+                raise NodeDataNotSetException(f"Node {node} has unset options.")
+
+    def traverse(self) -> Generator[Node, None, None]:
+        """Breadth first traversal,"""
+        nodes = self.nodes.copy()
+        discard = []
+        while len(nodes) > 0:
+            for node in nodes:
+                if node.ready:
+                    yield node
+                    discard.append(node)
+            if not discard:
+                raise Exception("No nodes are ready to run.")
+            for node in discard:
+                nodes.discard(node)
 
     def run(self):
         self.validate()
-        nodes = self.roots
+        for node in self.traverse():
+            node.call()
+            for edge in self.edges:
+                if edge.source == node.output:
+                    edge.target.set(node.output.value)

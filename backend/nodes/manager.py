@@ -65,7 +65,7 @@ class NodeManager:
 
     def __init__(self) -> None:
         self._sources: set[NodeSource] = set()
-        self._nodes:  set[Node] = set()
+        self._nodes: set[Node] = set()
 
         for source in self.DEFAULT_SOURCES:
             self.add_source(source)
@@ -76,11 +76,13 @@ class NodeManager:
 
     @property
     def nodes(self) -> set[Node]:
-        return {node for source in self._sources for node in source.nodes}.union(self._nodes)
+        return {node for source in self._sources for node in source.nodes}.union(
+            self._nodes
+        )
 
     def get_node_by_id(self, id: str) -> Node:
         for node in self.nodes:
-            if node.id() == id:
+            if node.address() == id:
                 return node
         raise ValueError(f"Node with id {id} not found")
 
