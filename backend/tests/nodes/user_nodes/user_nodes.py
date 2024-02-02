@@ -12,7 +12,7 @@ class Output(BaseModel):
     x: str = Field(..., description="Test Output value: x")
     y: int = Field(..., description="Test Output value: y")
     z: float = Field(..., description="Test Output value: z")
-    option: bool | None = Field(None, description="Test Output value: option")
+    option: bool | None = Field(default=None, description="Test Output value: option")
 
 
 class UserNode(Node):
@@ -40,7 +40,7 @@ class UserNodeWithOptionAnnotationMismatch(Node):
         test_option: bool = Field(False, description="Test option")
 
     def run(self, input: Input, options: BaseModel) -> Output:
-        return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
+        return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)  # type: ignore # Intentional bad typing
 
 
 class UserNodeWithMissingAnnotation(Node):

@@ -6,6 +6,7 @@ from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo, TypeAdapte
 from pydantic.fields import FieldInfo
 from typing import Generic, Type, TypeVar, Any, Literal
 from inspect import signature, _empty
+from dataclasses import dataclass
 
 T = TypeVar("T")
 
@@ -26,7 +27,7 @@ class NodeSchema(BaseModel):
 class NodeData:
     def __init__(
         self,
-        parent: "Node",
+        node: "Node",
         key: str,
         model: BaseModel,
         type: Literal["input", "output", "options"],
@@ -37,7 +38,7 @@ class NodeData:
         self.adapter: TypeAdapter = TypeAdapter(self.model)
         self._value = None
         self._set: bool = False
-        self.parent = parent
+        self.node = node
 
     def set(self, value):
         self._value = self.adapter.validate_python(
@@ -123,7 +124,7 @@ class Node(ABC):
         data and should return a dict that will be passed to the next node."""
         raise NotImplementedError
 
-    def call(self, **inputs) -> run.__annotations__.get("return"):
+    def call(self, **inputs) -> Any:  # run.__annotations__.get("return"):
         """This method is called by the system and should not be overridden.
         It inspects the signature of the run method and passes the correct
         arguments to it."""
@@ -181,3 +182,9 @@ class NodeSource(ABC):
         if node in self.nodes:
             raise ValueError(f"Node {node} already exists in source {self.source}")
         self.nodes.add(node)
+
+
+@dataclass(eq=True, frozen=True)
+class Edge:
+    source: NodeData
+    target: NodeData
