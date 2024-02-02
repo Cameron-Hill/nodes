@@ -10,6 +10,7 @@ dependencies = [
   "uvicorn",
   "boto3",
   "shortuuid",
+  "jsonsubschema==0.0.7",
 ]
 
 [project.optional-dependencies]
