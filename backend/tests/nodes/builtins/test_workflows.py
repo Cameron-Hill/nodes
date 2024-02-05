@@ -1,8 +1,10 @@
 from __future__ import annotations
+from audioop import tostereo
 import pytest
 from nodes.workflow import Workflow
 from nodes.builtins.requests import HTTPGetRequest
-from nodes.builtins.producers import MapProducer, StringProducer
+from nodes.builtins.producers import MapProducer, StringProducer, IntProducer
+from nodes.builtins.transforms import StringConcat, ToString
 from pydantic import create_model, Field, BaseModel, conlist
 from annotated_types import Len
 from nodes.base import NodeData
@@ -56,6 +58,29 @@ def test_running_a_workflow_with_unset_options_raises_validation_error():
     workflow.add_edge(producer.output, request.inputs["url"])
     with pytest.raises(NodeDataNotSetException):
         workflow.run()
+
+
+def test_running_a_multi_node_workflow_using_string_transform(mocked_request):
+    int_producer = IntProducer()
+    string_producer = StringProducer()
+    string_concat = StringConcat()
+    to_string = ToString()
+    request = HTTPGetRequest()
+    workflow = Workflow()
+    workflow.add_node(int_producer)
+    workflow.add_node(string_producer)
+    workflow.add_node(string_concat)
+    workflow.add_node(request)
+    workflow.add_node(to_string)
+    workflow.add_edge(int_producer.output, to_string.inputs["value"])
+    workflow.add_edge(to_string.output, string_concat.inputs["a"])
+    workflow.add_edge(string_producer.output, string_concat.inputs["b"])
+    workflow.add_edge(string_concat.output, request.inputs["url"])
+    int_producer.options["options"].set({"value": 1})
+    string_producer.options["options"].set({"value": "http://example.com"})
+    workflow.run()
+    mocked_request.assert_called_once_with("1http://example.com", params={}, headers={})
+
 
 
 def test_get_roots():
