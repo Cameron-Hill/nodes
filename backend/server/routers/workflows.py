@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from server.objects import get_workflow_table, WorkflowTable  # type: ignore
+from server.database.tables import get_workflow_table, WorkflowTable  # type: ignore
 from server.utils import omit
 from contextlib import contextmanager
 from pydantic import BaseModel
@@ -7,11 +7,13 @@ from typing import Optional
 
 
 @omit("PartitionKey", "SortKey", "WorkflowID", "ID")
-class WorkflowPostRequest(WorkflowTable.Workflow): ...
+class WorkflowPostRequest(WorkflowTable.Workflow):
+    ...
 
 
 @omit("PartitionKey", "SortKey", "WorkflowID", "NodeID", "ID")
-class WorkflowNodePostRequest(WorkflowTable.Node): ...
+class WorkflowNodePostRequest(WorkflowTable.Node):
+    ...
 
 
 class WorkflowPatchRequest(BaseModel):

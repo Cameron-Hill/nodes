@@ -1,7 +1,6 @@
 import sys
 from boto3 import resource
 from boto3.dynamodb.conditions import Key, Attr, And, Or, Equals, NotEquals
-from pprint import pprint
 from dataclasses import dataclass
 from server.database import DYNAMODB_DATABASE_URL
 from pydantic import BaseModel, TypeAdapter, ConfigDict
@@ -140,9 +139,10 @@ class Item(BaseModel):
     @classmethod
     def get(cls, key: str | int, sort_key: str | int | None = None) -> Self | None:
         assert cls.__table__ is not None, "You must define a table for this item"
-        projection_expression, projection_attribute_names = (
-            cls._get_projection_expression()
-        )
+        (
+            projection_expression,
+            projection_attribute_names,
+        ) = cls._get_projection_expression()
         pk = cls.__table__._get_partition_key()
         sk = cls.__table__._get_sort_key()
         cls._validate_field_value(pk.name, key)
@@ -174,9 +174,10 @@ class Item(BaseModel):
         key_operator: OperatorClasses = And,
     ) -> "QueryResponse[Self]":
         assert cls.__table__ is not None, "You must define a table for this item"
-        projection_expression, projection_attribute_names = (
-            cls._get_projection_expression()
-        )
+        (
+            projection_expression,
+            projection_attribute_names,
+        ) = cls._get_projection_expression()
         pk = cls.__table__._get_partition_key()
         sk = cls.__table__._get_sort_key()
         cls._validate_field_value(pk.name, key)
@@ -209,11 +210,11 @@ class Item(BaseModel):
         index_name: str | None = None,
         start_key: str | None = None,
     ) -> "QueryResponse[Self]":
-
         assert cls.__table__ is not None, "You must define a table for this item"
-        projection_expression, projection_attribute_names = (
-            cls._get_projection_expression()
-        )
+        (
+            projection_expression,
+            projection_attribute_names,
+        ) = cls._get_projection_expression()
         pk = cls.__table__._get_partition_key()
         sk = cls.__table__._get_sort_key()
         conditions = cls._get_key_constraints(pk.name, cls.model_fields[pk.name])
@@ -336,7 +337,6 @@ class Table:
         index_name: str | None = None,
         exclusive_start_key: dict[str, Any] | None = None,
     ) -> Boto3QueryResponseType:
-
         params = dict(
             ProjectionExpression=projection_expression,
             ExpressionAttributeNames=expression_attribute_names,
@@ -406,79 +406,3 @@ class Table:
         assert not self._deleted, "This table has been deleted"
         assert self._table, "Table does not exist"
         return self._table
-
-
-UUID_PATTERN = r"([a-zA-Z0-9]{22}|[a-zA-Z0-9-]{36})"  # Change this to shortuuid's only
-
-_WorkflowID = Field(
-    pattern=rf"Workflow\-{UUID_PATTERN}",
-    default_factory=lambda: f"Workflow-{uuid()}",
-    validate_default=True,
-    alias="WorkflowID",
-)
-_NodeID = Field(
-    pattern=rf"Node\-{UUID_PATTERN}",
-    default_factory=lambda: f"Node-{uuid()}",
-    validate_default=True,
-    alias="NodeID",
-)
-
-_NodeDataID = Field(
-    pattern=rf"Node\-{UUID_PATTERN}#Data\-{UUID_PATTERN}",
-    alias="NodeDataID",
-)
-
-_EdgeID = Field(
-    # pattern=rf"Edge\-{UUID_PATTERN}",   # Need to update the db to use this pattern
-    default_factory=lambda: f"Edge-{uuid()}",
-    validate_default=True,
-    alias="EdgeID",
-)
-
-
-class WorkflowTable(Table):
-    __tablename__ = "Workflows"
-    __billing_mode__ = "PAY_PER_REQUEST"
-    partition_key = PartitionKey("PartitionKey", "S")
-    sort_key = SortKey("SortKey", "S")
-
-    class Workflow(Item):
-        PartitionKey: str = _WorkflowID
-        SortKey: str = _WorkflowID
-        Name: str
-        Owner: str
-
-        @computed_field
-        def ID(self) -> str:
-            return self.PartitionKey.replace("Workflow-", "")
-
-    class Node(Item):
-        PartitionKey: str = _WorkflowID
-        SortKey: str = _NodeID
-        Version: int
-        Manifest: dict[str, Any] = {}
-        Node: str
-
-        def ID(self) -> str:
-            return self.PartitionKey.replace("Node-", "")
-
-    class Edge(Item):
-        PartitionKey: str = _WorkflowID
-        SortKey: str = _EdgeID
-        From: str
-        To: str
-
-    class NodeData(Item):
-        PartitionKey: str = _WorkflowID
-        ID: str = Field(pattern=UUID_PATTERN, default_factory=lambda: uuid())
-        NodeID: str = Field(pattern=UUID_PATTERN)
-        Data: dict[str, Any] = Field(
-            default_factory=lambda: {}, description="Persisted Node Data"
-        )
-
-        def SortKey(self) -> Annotated[str, _NodeDataID]:
-            return f"Node-{self.NodeID}#Data-{self.ID}"
-
-
-def get_workflow_table() -> WorkflowTable:
-    return WorkflowTable()

@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from server.database._nosql import Table, Item, SortKey, PartitionKey
 
 DYNAMODB_DATABASE_URL = "http://localhost:8000"
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"

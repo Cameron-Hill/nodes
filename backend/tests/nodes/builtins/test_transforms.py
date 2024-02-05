@@ -22,26 +22,26 @@ def expect_exception(exception_or_any):
     "kwargs, expected_output",
     [
         [
-            {"string_a": "abc", "string_b": "xyz", "options": {"delimiter": ""}},
+            {"a": "abc", "b": "xyz", "options": {"delimiter": ""}},
             "abcxyz",
         ],
         [
-            {"string_a": "abc", "string_b": "xyz", "options": {"delimiter": "-"}},
+            {"a": "abc", "b": "xyz", "options": {"delimiter": "-"}},
             "abc-xyz",
         ],
         [
-            {"string_a": "abc", "string_b": "xyz"},
+            {"a": "abc", "b": "xyz"},
             "abcxyz",
         ],
         [
-            {"string_a": "abc", "string_b": "xyz", "options": {}},
+            {"a": "abc", "b": "xyz", "options": {}},
             "abcxyz",
         ],
         [
-            {"string_a": "abc", "string_b": "xyz", "options": None},
+            {"a": "abc", "b": "xyz", "options": None},
             "abcxyz",
         ],
-        [{"string_a": None, "string_b": "xyz", "options": None}, ValidationError],
+        [{"a": None, "b": "xyz", "options": None}, ValidationError],
     ],
 )
 def test_string_concat_transform(kwargs: dict, expected_output: str | Exception):
