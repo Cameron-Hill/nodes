@@ -3,7 +3,7 @@
   "ModelMetadata": {
     "Author": "Cameron",
     "DateCreated": "Jan 25, 2024, 08:41 AM",
-    "DateLastModified": "Jan 25, 2024, 09:05 AM",
+    "DateLastModified": "Feb 04, 2024, 09:13 AM",
     "Description": "",
     "AWSService": "Amazon DynamoDB",
     "Version": "3.0"
@@ -52,6 +52,14 @@
         },
         {
           "AttributeName": "Node",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Data",
+          "AttributeType": "M"
+        },
+        {
+          "AttributeName": "NodeID",
           "AttributeType": "S"
         }
       ],
@@ -249,6 +257,89 @@
           "DataAccess": {
             "MySql": {}
           }
+        },
+        {
+          "FacetName": "NodeData",
+          "KeyAttributeAlias": {
+            "PartitionKeyAlias": "WorkflowID",
+            "SortKeyAlias": "NodeDataID"
+          },
+          "TableData": [
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Node-013e55a5-fb9c-46a9-82ce-c7f429428ff8#Data-4855760e-a49e-4f3a-bb7c-10772b299d68"
+              },
+              "ID": {
+                "S": "4855760e-a49e-4f3a-bb7c-10772b299d68"
+              },
+              "Data": {
+                "M": {
+                  "Name": {
+                    "S": "Joe"
+                  },
+                  "Age": {
+                    "N": "35"
+                  }
+                }
+              },
+              "NodeID": {
+                "S": "013e55a5-fb9c-46a9-82ce-c7f429428ff8"
+              }
+            },
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Node-c552e884-d2d4-47b7-92ca-0b8a7fef813c#Data-dd3d72ab-a495-4341-a444-4df443dbedae"
+              },
+              "ID": {
+                "S": "dd3d72ab-a495-4341-a444-4df443dbedae"
+              },
+              "NodeID": {
+                "S": "c552e884-d2d4-47b7-92ca-0b8a7fef813c"
+              }
+            },
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Node-c552e884-d2d4-47b7-92ca-0b8a7fef813c#Data-3b55fb38-58b3-4895-b6ce-64b2efb549b2"
+              },
+              "ID": {
+                "S": "3b55fb38-58b3-4895-b6ce-64b2efb549b2"
+              },
+              "NodeID": {
+                "S": "c552e884-d2d4-47b7-92ca-0b8a7fef813c"
+              }
+            },
+            {
+              "PartitionKey": {
+                "S": "Workflow-103497d4-c2fa-4759-a595-ced445cb98c9"
+              },
+              "SortKey": {
+                "S": "Node-e3a1049b-74af-428e-9a9a-84d0a2ddff71#Data-32b5093e-0c39-46bf-9fe0-100ba02cbac8"
+              },
+              "ID": {
+                "S": "32b5093e-0c39-46bf-9fe0-100ba02cbac8"
+              },
+              "NodeID": {
+                "S": "e3a1049b-74af-428e-9a9a-84d0a2ddff71"
+              }
+            }
+          ],
+          "NonKeyAttributes": [
+            "ID",
+            "NodeID",
+            "Data"
+          ],
+          "DataAccess": {
+            "MySql": {}
+          }
         }
       ],
       "DataAccess": {
@@ -288,6 +379,10 @@
           "UUID"
         ],
         "To": [
+          "identifiers",
+          "UUID"
+        ],
+        "NodeID": [
           "identifiers",
           "UUID"
         ]
