@@ -1,6 +1,6 @@
 import sys
 from boto3 import resource
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Key, Attr, And, Or, Equals, NotEquals
 from pprint import pprint
 from dataclasses import dataclass
 from server.database import DYNAMODB_DATABASE_URL
@@ -25,10 +25,18 @@ from typing import (
     Literal,
     TypedDict,
     List,
+    Type,
 )
 
 
 # TYPES #
+OperatorClasses = Union[Type[And], Type[Or], Type[Equals], Type[NotEquals]]
+Operators = Union[And, Or, Equals, NotEquals]
+Selections = Literal[
+    "ALL_ATTRIBUTES", "ALL_PROJECTED_ATTRIBUTES", "COUNT", "SPECIFIC_ATTRIBUTES"
+]
+
+
 class Boto3ResponseMetadata(TypedDict):
     RequestID: str
     HTTPStatusCode: int
@@ -41,7 +49,7 @@ T = TypeVar("T")
 
 class Boto3QueryResponseType(TypedDict):
     Count: int
-    ScannedCount: str
+    ScannedCount: int
     Items: list[dict[str, Any]]
     ResponseMetadata: Boto3ResponseMetadata
 
@@ -79,9 +87,14 @@ def get_service_resource():
 def _table_exists(table_name: str) -> bool:
     resource = get_service_resource()
     for table in resource.tables.all():
-        if table.name == table:
+        if table.name == table_name:
             return True
     return False
+
+
+def _cache_clear():
+    _table_exists.cache_clear()
+    get_service_resource.cache_clear()
 
 
 @dataclass
@@ -154,12 +167,48 @@ class Item(BaseModel):
             return cls(**response["Items"][0])
 
     @classmethod
+    def query(
+        cls,
+        key: str | int,
+        key_expression: Key | Operators | None = None,
+        key_operator: OperatorClasses = And,
+    ) -> "QueryResponse[Self]":
+        assert cls.__table__ is not None, "You must define a table for this item"
+        projection_expression, projection_attribute_names = (
+            cls._get_projection_expression()
+        )
+        pk = cls.__table__._get_partition_key()
+        sk = cls.__table__._get_sort_key()
+        cls._validate_field_value(pk.name, key)
+        conditions: List[Key | Operators] = [Key(pk.name).eq(key)]
+        if sk:
+            conditions.extend(
+                cls._get_key_constraints(sk.name, cls.model_fields[sk.name])
+            )
+        exp = cls._get_expression(conditions)
+        if key_expression:
+            exp = key_operator(exp, key_expression)
+
+        response = cls.__table__.query(
+            key_condition_expression=exp,
+            select="SPECIFIC_ATTRIBUTES",
+            projection_expression=projection_expression,
+            expression_attribute_names=projection_attribute_names,
+        )
+        return QueryResponse(
+            Count=response.get("Count"),
+            ScannedCount=response.get("ScannedCount"),
+            Items=[cls(**item) for item in response["Items"]],
+            ResponseMetadata=response.get("ResponseMetadata"),
+        )
+
+    @classmethod
     def scan(
         cls,
         limit: int | None = None,
         index_name: str | None = None,
         start_key: str | None = None,
-    ) -> "ScannedItems[Self]":
+    ) -> "QueryResponse[Self]":
 
         assert cls.__table__ is not None, "You must define a table for this item"
         projection_expression, projection_attribute_names = (
@@ -191,10 +240,10 @@ class Item(BaseModel):
             **params,
         )
         items["Items"] = [cls(**item) for item in items["Items"]]
-        return ScannedItems(**items)
+        return QueryResponse(**items)
 
     @staticmethod
-    def _get_expression(conditions: list[Key]) -> None | Key:
+    def _get_expression(conditions: list[Key | Operators]) -> None | Key | Operators:
         if conditions:
             expression = conditions[0]
             for condition in conditions[1:]:
@@ -204,7 +253,7 @@ class Item(BaseModel):
             return None
 
     @staticmethod
-    def _get_key_constraints(key, info: FieldInfo) -> list[Key]:
+    def _get_key_constraints(key, info: FieldInfo) -> list[Key | Operators]:
         conditions = []
         for metadata in info.metadata:
             if hasattr(metadata, "pattern"):
@@ -214,7 +263,7 @@ class Item(BaseModel):
         return conditions
 
 
-class ScannedItems(Generic[T]):
+class QueryResponse(Generic[T]):
     def __init__(
         self,
         Items: List[T],
@@ -238,14 +287,14 @@ class Table:
     def __init__(self) -> None:
         self.resource = get_service_resource()
         self._deleted = False
-        if not _table_exists(self.__tablename__) and (
-            _table_exists.cache_clear() or _table_exists(self.__tablename__)
+        if not _table_exists(self.__tablename__) and not (
+            _cache_clear() or _table_exists(self.__tablename__)
         ):
             try:
                 logger.info(f"Creating new table: {self.__tablename__}")
                 self._table = self.create_table()
             finally:
-                _table_exists.cache_clear()
+                _cache_clear()
         else:
             logger.info(f"Using existing table: {self.__tablename__}")
             self._table = self.resource.Table(self.__tablename__)
@@ -275,6 +324,33 @@ class Table:
             if v
         }
         return self.table.scan(**params)
+
+    def query(
+        self,
+        key_condition_expression: Key | Operators | None,
+        select: Selections = "ALL_ATTRIBUTES",
+        projection_expression: str | None = None,
+        expression_attribute_names: dict[str, str] | None = None,
+        scan_index_forward: bool = True,
+        limit: int | None = None,
+        index_name: str | None = None,
+        exclusive_start_key: dict[str, Any] | None = None,
+    ) -> Boto3QueryResponseType:
+
+        params = dict(
+            ProjectionExpression=projection_expression,
+            ExpressionAttributeNames=expression_attribute_names,
+            ScanIndexForward=scan_index_forward,
+            Limit=limit,
+            IndexName=index_name,
+            ExclusiveStartKey=exclusive_start_key,
+        )
+        params = {k: v for k, v in params.items() if v is not None}
+        return self.table.query(
+            KeyConditionExpression=key_condition_expression,
+            Select=select,
+            **params,
+        )
 
     def delete(self):
         logger.info(f"Deleting table: {self.__tablename__}")
@@ -379,8 +455,8 @@ class WorkflowTable(Table):
     class Node(Item):
         PartitionKey: str = _WorkflowID
         SortKey: str = _NodeID
-        Version: str
-        Manifest: List[Annotated[str, _NodeID]] = []
+        Version: int
+        Manifest: dict[str, Any] = {}
         Node: str
 
         def ID(self) -> str:
