@@ -1,5 +1,6 @@
 import sys
 from boto3 import resource
+from boto3.dynamodb.conditions import Key, Attr
 from pprint import pprint
 from dataclasses import dataclass
 from server.database import DYNAMODB_DATABASE_URL
@@ -8,7 +9,10 @@ from pydantic.fields import FieldInfo, Field
 from logging import getLogger, StreamHandler
 from shortuuid import uuid
 from inspect import isclass
+from server.utils import get_literals_from_regex
 from typing import (
+    Any,
+    Type,
     Annotated,
     Union,
     ParamSpec,
@@ -22,7 +26,6 @@ from typing import (
 # TYPES #
 Param = ParamSpec("Param")
 RetType = TypeVar("RetType")
-TableType = TypeVar("TableType", bound="Table")
 KeySortType = Literal["HASH", "RANGE"]
 KeyAttributeType = Literal["B", "S", "N"]
 BillingModeType = Literal["PROVISIONED", "PAY_PER_REQUEST"]
@@ -66,10 +69,67 @@ class SortKey(Attribute):
 
 
 class Item(BaseModel):
-    __table__: ClassVar[TableType] = None
+    __table__: "Table | None" = None
 
     def put(self):
+        assert self.__table__ is not None, "You must define a table for this item"
         assert self.__table__.put_item(self.model_dump())
+
+    @classmethod
+    def scan(
+        cls,
+        limit: int | None = None,
+        index_name: str | None = None,
+        start_key: str | None = None,
+    ):
+        assert cls.__table__ is not None, "You must define a table for this item"
+        projection = cls.model_fields.keys()
+        projection_attribute_names = {f"#x{i}": x for i, x in enumerate(projection)}
+        projection_expression = ", ".join(projection_attribute_names.keys())
+        pk = cls.__table__._get_partition_key()
+        sk = cls.__table__._get_sort_key()
+        conditions = cls._get_key_constraints(pk.name, cls.model_fields[pk.name])
+        if sk:
+            conditions.extend(
+                cls._get_key_constraints(sk.name, cls.model_fields[sk.name])
+            )
+        expression = cls._get_expression(conditions)
+
+        # fmt: off
+        params: dict[str, Any] = {k: v for k, v in {
+            "Limit": limit,
+            "IndexName": index_name,
+            "FilterExpression": expression,
+            "ExclusiveStartKey" : start_key
+            }.items() if v is not None
+        }
+
+        return cls.__table__.table.scan(
+            Select="SPECIFIC_ATTRIBUTES", 
+            ProjectionExpression=projection_expression,
+            ExpressionAttributeNames=projection_attribute_names,
+            **params,
+        )
+
+    @staticmethod
+    def _get_expression(conditions: list[Key]) -> None | Key:
+        if conditions:
+            expression = conditions[0]
+            for condition in conditions[1:]:
+                expression = expression & condition
+            return expression
+        else:
+            return None
+
+    @staticmethod
+    def _get_key_constraints(key, info: FieldInfo) -> list[Key]:
+        conditions = []
+        for metadata in info.metadata:
+            if hasattr(metadata, "pattern"):
+                literals = get_literals_from_regex(metadata.pattern)
+                if literals.startswith:
+                    conditions.append(Key(key).begins_with(literals.startswith))
+        return conditions
 
 
 class Table:
@@ -101,8 +161,8 @@ class Table:
     def scan(
         self,
         select: SelectType = "ALL_ATTRIBUTES",
-        limit: int = None,
-        index_name: str = None,
+        limit: int | None = None,
+        index_name: str | None = None,
     ):
         params = {
             k: v
@@ -130,7 +190,7 @@ class Table:
         assert len(keys) == 1, "You must define exactly one PartitionKey"
         return keys[0]
 
-    def _get_sort_key(self) -> Union[PartitionKey, None]:
+    def _get_sort_key(self) -> Union[SortKey, None]:
         keys = [x for x in self.__class__.__dict__.values() if isinstance(x, SortKey)]
         assert len(keys) <= 1, "You cannot define more than one SortKey"
         return keys[0] if keys else None
@@ -150,13 +210,12 @@ class Table:
     def key_schema(self) -> List[KeySchemaElementType]:
         partition_key = self._get_partition_key()
         sort_key = self._get_sort_key()
-        return [
-            {
-                "AttributeName": partition_key.name,
-                "KeyType": partition_key.sort,
-            },
-            {"AttributeName": sort_key.name, "KeyType": sort_key.sort},
+        schema: List[KeySchemaElementType] = [
+            {"AttributeName": partition_key.name, "KeyType": partition_key.sort},
         ]
+        if sort_key:
+            schema.append({"AttributeName": sort_key.name, "KeyType": sort_key.sort})
+        return schema
 
     @property
     def attribute_definitions(self) -> List[AttributeDefinitionsElementType]:
@@ -180,14 +239,23 @@ class Table:
 
 
 _WorkflowID = Field(
-    pattern="Workflow\-[a-zA-Z0-9]*",
+    pattern=r"Workflow\-[a-zA-Z0-9]*",
     default_factory=lambda: f"Workflow-{uuid()}",
     validate_default=True,
+    alias="WorkflowID",
 )
 _NodeID = Field(
-    pattern="Node\-[a-zA-Z0-9]*",
-    default_factory=lambda: f"Workflow-{uuid()}",
+    pattern=r"Node\-[a-zA-Z0-9]*",
+    default_factory=lambda: f"Node-{uuid()}",
     validate_default=True,
+    alias="NodeID",
+)
+
+_EdgeID = Field(
+    pattern=r"Edge\-[a-zA-Z0-9]*",
+    default_factory=lambda: f"Edge-{uuid()}",
+    validate_default=True,
+    alias="EdgeID",
 )
 
 
@@ -201,16 +269,34 @@ class Workflows(Table):
         PartitionKey: str = _WorkflowID
         SortKey: str = _WorkflowID
         Name: str
+        ID: str
         Owner: str
 
     class Node(Item):
         PartitionKey: str = _WorkflowID
         SortKey: str = _NodeID
-        Name: str
-        Children: List[Annotated[str, _NodeID]] = []
+        ID: str
+        Version: str
+        Manifest: List[Annotated[str, _NodeID]] = []
+        Node: str
+
+    class Edge(Item):
+        PartitionKey: str = _WorkflowID
+        SortKey: str = _EdgeID
+        From: str
+        To: str
 
 
 if __name__ == "__main__":
+    from pprint import pprint
+
     workflows = Workflows()
-    workflows.Node(PartitionKey="Workflow-1", SortKey="Node-20", Name="BigNode").put()
-    pprint(workflows.scan())
+    print('Get All Workflows')
+    pprint(workflows.Workflow.scan())
+
+    print('Get All Nodes')
+    pprint(workflows.Node.scan())
+
+    print('Get All Edges')
+    pprint(workflows.Edge.scan())
+    
