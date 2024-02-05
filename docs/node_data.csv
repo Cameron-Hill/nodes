@@ -1,0 +1,6 @@
+﻿PartitionKey,SortKey,ID,NodeID,Data,Type
+Workflow-103497d4-c2fa-4759-a595-ced445cb98c9,Node-013e55a5-fb9c-46a9-82ce-c7f429428ff8#Data-f1bd9eea-f9b5-469d-95fe-fc3b8dcbdf1a,f1bd9eea-f9b5-469d-95fe-fc3b8dcbdf1a,013e55a5-fb9c-46a9-82ce-c7f429428ff8,"{""Name"":{""S"":""Joe""},""Age"":{""N"":""35""}}",options
+Workflow-103497d4-c2fa-4759-a595-ced445cb98c9,Node-013e55a5-fb9c-46a9-82ce-c7f429428ff8#Data-4855760e-a49e-4f3a-bb7c-10772b299d68,4855760e-a49e-4f3a-bb7c-10772b299d68,013e55a5-fb9c-46a9-82ce-c7f429428ff8,,output
+Workflow-103497d4-c2fa-4759-a595-ced445cb98c9,Node-c552e884-d2d4-47b7-92ca-0b8a7fef813c#Data-dd3d72ab-a495-4341-a444-4df443dbedae,dd3d72ab-a495-4341-a444-4df443dbedae,c552e884-d2d4-47b7-92ca-0b8a7fef813c,,input
+Workflow-103497d4-c2fa-4759-a595-ced445cb98c9,Node-c552e884-d2d4-47b7-92ca-0b8a7fef813c#Data-3b55fb38-58b3-4895-b6ce-64b2efb549b2,3b55fb38-58b3-4895-b6ce-64b2efb549b2,c552e884-d2d4-47b7-92ca-0b8a7fef813c,,output
+Workflow-103497d4-c2fa-4759-a595-ced445cb98c9,Node-e3a1049b-74af-428e-9a9a-84d0a2ddff71#Data-32b5093e-0c39-46bf-9fe0-100ba02cbac8,32b5093e-0c39-46bf-9fe0-100ba02cbac8,e3a1049b-74af-428e-9a9a-84d0a2ddff71,,input

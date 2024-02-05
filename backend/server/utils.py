@@ -1,6 +1,8 @@
 import re
-from typing import TypedDict
+from typing import TypedDict, Type
 from dataclasses import dataclass
+from pydantic import BaseModel, create_model
+from pydantic_core import SchemaSerializer, SchemaValidator
 
 REGEX_OPERATORS = ["^", "$", "*", "+", "?", "{", "}", "[", "]", "(", ")", "|", "."]
 SINGE_CHAR_REGEX_OPERATORS = ["*", "+", "?", "."]
@@ -90,3 +92,21 @@ def get_literals_from_regex(regex: str) -> RegexLiterals:
         endswith=endswith,
         contains=contains,
     )
+
+
+def omit(*fields):
+    """Omit pydantic fields from model"""
+
+    def dec(_class: Type[BaseModel]):
+        for field in fields:
+            _class.model_fields.pop(field, None)
+        _clone = create_model(  # type: ignore
+            _class.__name__,
+            __config__=_class.model_config,
+            **{k: (v.annotation, v) for k, v in _class.model_fields.items()},  # type: ignore
+        )
+        setattr(_clone, "__pydantic_parent_namespace__", {})
+        return _clone
+
+    return dec
+
