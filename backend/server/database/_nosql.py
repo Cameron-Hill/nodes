@@ -2,7 +2,6 @@ import sys
 from boto3 import resource
 from boto3.dynamodb.conditions import Key, Attr, And, Or, Equals, NotEquals
 from dataclasses import dataclass
-from server.database import DYNAMODB_DATABASE_URL
 from pydantic import BaseModel, TypeAdapter, ConfigDict
 from pydantic.fields import FieldInfo, Field, computed_field
 from logging import getLogger, StreamHandler
@@ -27,6 +26,7 @@ from typing import (
     Type,
 )
 
+DYNAMODB_DATABASE_URL = "http://localhost:8000"
 
 # TYPES #
 OperatorClasses = Union[Type[And], Type[Or], Type[Equals], Type[NotEquals]]

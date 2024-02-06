@@ -71,7 +71,7 @@ class NodeManager:
             self.add_source(source)
 
     @property
-    def sources(self) -> set[str]:
+    def sources(self) -> set[NodeSource]:
         return self._sources
 
     @property
