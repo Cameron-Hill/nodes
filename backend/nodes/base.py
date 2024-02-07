@@ -5,7 +5,7 @@ from typing_extensions import get_args
 from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo, TypeAdapter
 from pydantic.fields import FieldInfo
 from typing import Generic, Type, TypeVar, Any, Literal
-from inspect import signature, _empty
+from inspect import signature, _empty, Parameter
 from dataclasses import dataclass
 from shortuuid import uuid
 from logging import getLogger
@@ -30,9 +30,12 @@ class NodeSchema(BaseModel):
     group: str | None
     sub_group: str | None
     version: int
-    input: dict | None
+    inputs: dict | None
     output: dict | None
     options: dict | None
+
+
+NodeDataTypes = Literal["input", "output", "options"]
 
 
 class NodeData:
@@ -41,12 +44,12 @@ class NodeData:
         node: "Node",
         key: str,
         model: BaseModel,
-        type: Literal["input", "output", "options"],
+        type: NodeDataTypes,
         value=UNSET,
     ) -> None:
         self.key = key
         self.model = None if model is _empty else model
-        self.type = type
+        self.type: NodeDataTypes = type
         self.adapter: TypeAdapter = TypeAdapter(self.model)
         self._value = value
         self._set: bool = False
@@ -123,26 +126,45 @@ class Node(ABC):
         """
         return all(data.is_set for data in self.data.values())
 
-    def _get_options(self) -> dict[str, NodeData]:
-        if not hasattr(self, "Options"):
+    @classmethod
+    def _get_option_params(cls) -> dict[str, Parameter]:
+        sig = signature(cls.run)
+        OptionClass = getattr(cls, "Options", None)
+        if not OptionClass:
             return {}
-        sig = signature(self.run)
-        options = {}
-        Options = getattr(self, "Options")
-        for key, param in sig.parameters.items():
-            if param is not self and param.annotation == Options:
-                options[key] = NodeData(self, key, Options, type="options")
-        return options
+        params = {}
+        for i, (key, param) in enumerate(sig.parameters.items()):
+            if (
+                not (i == 0 and param.name == "self")
+                and param.annotation == OptionClass
+            ):
+                params[key] = param
+        return params
+
+    @classmethod
+    def _get_input_params(cls) -> dict[str, Parameter]:
+        sig = signature(cls.run)
+        options = cls._get_option_params()
+        inputs = {}
+        for i, (key, param) in enumerate(sig.parameters.items()):
+            if not (i == 0 and param.name == "self") and key not in options:
+                inputs[key] = param
+        return inputs
+
+    def _get_options(self) -> dict[str, NodeData]:
+        params = self._get_option_params()
+        return {
+            k: NodeData(self, k, v.annotation, type="options")
+            for k, v in params.items()
+        }
 
     def _get_inputs(self, options: dict[str, NodeData]) -> dict[str, NodeData]:
-        sig = signature(self.run)
-        inputs = {}
-        for key, param in sig.parameters.items():
-            if (
-                param is not self and key not in options
-            ):  # always ignore for param because it is an instance method
-                inputs[key] = NodeData(self, key, param.annotation, type="input")
-        return inputs
+        params = self._get_input_params()
+        return {
+            k: NodeData(self, k, v.annotation, type="input")
+            for k, v in params.items()
+            if k not in options
+        }
 
     def _get_output(self) -> NodeData:
         sig = signature(self.run)
@@ -197,9 +219,15 @@ class Node(ABC):
     @classmethod
     def schema(cls) -> NodeSchema:
         """Return the schema for the node."""
-        input_schema = cls.run.__annotations__.get("input")
         output_schema = cls.run.__annotations__.get("return")
-        options_schema = getattr(cls, "Options") if hasattr(cls, "Options") else None
+        input_params = cls._get_input_params()
+        option_params = cls._get_option_params()
+        input_schema = {
+            k: TypeAdapter(v.annotation).json_schema() for k, v in input_params.items()
+        }
+        options_schema = {
+            k: TypeAdapter(v.annotation).json_schema() for k, v in option_params.items()
+        }
 
         return NodeSchema(
             address=cls.address(),
@@ -207,9 +235,9 @@ class Node(ABC):
             group=cls.__group__,
             sub_group=cls.__sub_group__,
             version=cls.__version__,
-            input=TypeAdapter(input_schema).json_schema(),
+            inputs=input_schema,
             output=TypeAdapter(output_schema).json_schema(),
-            options=TypeAdapter(options_schema).json_schema(),
+            options=options_schema,
         )
 
 

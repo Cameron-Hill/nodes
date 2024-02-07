@@ -1,11 +1,11 @@
-from audioop import add
 from fastapi import APIRouter, Depends, HTTPException
 from server.database.tables import get_workflow_table, WorkflowTable  # type: ignore
 from server.utils import omit
 from contextlib import contextmanager
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Literal, Any, Type
 from nodes import NodeRegistry, get_node_registry
+from nodes.base import Node
 
 
 @omit("PartitionKey", "SortKey", "WorkflowID", "ID")
@@ -21,14 +21,19 @@ class WorkflowPatchRequest(BaseModel):
     Owner: Optional[str]
 
 
+class NodeDataPostRequest(BaseModel):
+    Type: Literal["options"]
+    Key: str
+    Value: Any
+
+
 router = APIRouter(prefix="/workflows", tags=["workflows"])
 
 
 def get_workflow_object(
-    workflow_id: str, table: WorkflowTable
+    workflow_id: str,
+    table: WorkflowTable,
 ) -> WorkflowTable.Workflow:
-    if not workflow_id.startswith("Workflow-"):
-        workflow_id = f"Workflow-{workflow_id}"
     workflow = table.Workflow.get(key=workflow_id, sort_key=workflow_id)
     if not workflow:
         raise HTTPException(
@@ -37,7 +42,7 @@ def get_workflow_object(
     return workflow
 
 
-def get_node_object(address: str, version: int, registry: NodeRegistry):
+def get_node_class(address: str, version: int, registry: NodeRegistry) -> Type[Node]:
     try:
         return registry[address][version]
     except KeyError as e:
@@ -47,6 +52,21 @@ def get_node_object(address: str, version: int, registry: NodeRegistry):
         else:
             msg = f"Node not found: {address}"
         raise HTTPException(status_code=404, detail=msg)
+
+
+def get_node_object(
+    node_id: str,
+    workflow_id: str,
+    table: WorkflowTable,
+) -> WorkflowTable.Node:
+    node = table.Node.get(key=workflow_id, sort_key=node_id)
+    if not node:
+        raise HTTPException(
+            status_code=404, detail=f"Node not found: {workflow_id}  {node_id}"
+        )
+    return node
+
+def get_data_node_instance(type: Literal['options', 'input', 'output'], key: str, instance: Node):
 
 
 @router.get("/", response_model=list[WorkflowTable.Workflow])
@@ -99,7 +119,37 @@ def add_node_to_workflow(
     node_registry: NodeRegistry = Depends(get_node_registry),
 ):
     workflow = get_workflow_object(workflow_id, table)
-    node_obj = get_node_object(body.Address, body.Version, registry=node_registry)
-    node = table.Node(WorkflowID=workflow_id, **body.model_dump())  #type: ignore   -  pydantic is not currently handling aliases
+    node_obj = get_node_class(body.Address, body.Version, registry=node_registry)
+    node = table.Node(
+        PartitionKey=workflow_id,
+        **body.model_dump(),
+        Manifest=node_obj.schema().model_dump(),
+    )
     node.put()
     return node
+
+@router.post("/{workflow_id}/nodes/{node_id}/data")
+def add_node_data_to_workflow(
+    workflow_id: str,
+    node_id: str,
+    body: NodeDataPostRequest,
+    registry: NodeRegistry = Depends(get_node_registry),
+    table: WorkflowTable = Depends(get_workflow_table),
+):
+    node = get_node_object(node_id, workflow_id, table)
+    instance = get_node_class(node.Address, node.Version, registry=registry)
+    instance = instance(id=node_id)
+
+    if body.Type == "options":
+        instance.options[body.Key].set(body.Value)
+    else:
+        raise HTTPException(
+            status_code=400, detail=f"Invalid Node Data Type: {body.Type}   Available Types: \"options\""
+        )
+
+    node_data = table.NodeData(
+        PartitionKey=workflow_id,
+        NodeID=node_id,
+    )
+    node_data.put()
+    return node_data

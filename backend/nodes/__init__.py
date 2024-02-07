@@ -2,8 +2,9 @@ from .patches import *
 from .base import Node
 from functools import lru_cache as _lru_cache
 from .manager import NodeManager
+from typing import Type
 
-NodeRegistry = dict[str, dict[int, Node]]
+NodeRegistry = dict[str, dict[int, Type[Node]]]
 
 
 @_lru_cache
