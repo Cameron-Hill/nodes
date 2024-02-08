@@ -11,6 +11,7 @@ To be honest, we really want a good exception system that can bubble up to the e
 """
 
 
+
 class Workflow:
     """
     There can only be once instance of a node within a workflow.

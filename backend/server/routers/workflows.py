@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
-from server.database.tables import get_workflow_table, WorkflowTable  # type: ignore
+from server.database.tables import get_workflow_table, WorkflowTable, WorkflowID, NodeDataID, NodeID  # type: ignore
 from server.utils import omit
 from contextlib import contextmanager
-from pydantic import BaseModel
-from typing import Optional, Literal, Any, Type
+from pydantic import BaseModel, ValidationError
+from typing import Annotated, Optional, Literal, Any, Type
 from nodes import NodeRegistry, get_node_registry
 from nodes.base import Node
+from boto3.dynamodb.conditions import Key
 
 
 @omit("PartitionKey", "SortKey", "WorkflowID", "ID")
@@ -24,7 +25,7 @@ class WorkflowPatchRequest(BaseModel):
 class NodeDataPostRequest(BaseModel):
     Type: Literal["options"]
     Key: str
-    Value: Any
+    Data: Any
 
 
 router = APIRouter(prefix="/workflows", tags=["workflows"])
@@ -65,8 +66,6 @@ def get_node_object(
             status_code=404, detail=f"Node not found: {workflow_id}  {node_id}"
         )
     return node
-
-def get_data_node_instance(type: Literal['options', 'input', 'output'], key: str, instance: Node):
 
 
 @router.get("/", response_model=list[WorkflowTable.Workflow])
@@ -128,6 +127,18 @@ def add_node_to_workflow(
     node.put()
     return node
 
+
+@router.get("/{workflow_id}/nodes/{node_id}/data")
+def get_node_data(
+    workflow_id: Annotated[str, WorkflowID],
+    node_id: Annotated[str, NodeID],
+    table: WorkflowTable = Depends(get_workflow_table),
+) -> list[WorkflowTable.NodeData]:
+    exp = Key(table.sort_key.name).begins_with(f"{node_id}#Data-")
+    result = table.NodeData.query(key=workflow_id, key_expression=exp)
+    return result.items
+
+
 @router.post("/{workflow_id}/nodes/{node_id}/data")
 def add_node_data_to_workflow(
     workflow_id: str,
@@ -135,21 +146,24 @@ def add_node_data_to_workflow(
     body: NodeDataPostRequest,
     registry: NodeRegistry = Depends(get_node_registry),
     table: WorkflowTable = Depends(get_workflow_table),
-):
+) -> WorkflowTable.NodeData:
     node = get_node_object(node_id, workflow_id, table)
     instance = get_node_class(node.Address, node.Version, registry=registry)
     instance = instance(id=node_id)
 
     if body.Type == "options":
-        instance.options[body.Key].set(body.Value)
+        if body.Key not in instance.options:
+            raise HTTPException(
+                status_code=400,
+                detail=f"'{body.Key}' is not a valid key for {instance.address()}   Available Options: {list(instance.options)}",
+            )
+        instance.options[body.Key].set(body.Data)
     else:
         raise HTTPException(
-            status_code=400, detail=f"Invalid Node Data Type: {body.Type}   Available Types: \"options\""
+            status_code=400,
+            detail=f'Invalid Node Data Type: {body.Type}   Available Types: "options"',
         )
 
-    node_data = table.NodeData(
-        PartitionKey=workflow_id,
-        NodeID=node_id,
-    )
+    node_data = table.NodeData.from_node_data(instance.options[body.Key], workflow_id)
     node_data.put()
     return node_data

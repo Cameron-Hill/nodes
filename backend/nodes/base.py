@@ -2,13 +2,20 @@ from nodes.errors import UnhandledNodeError
 from abc import ABC, abstractmethod
 from pydantic_core import ValidationError, core_schema
 from typing_extensions import get_args
-from pydantic import BaseModel, GetCoreSchemaHandler, ValidationInfo, TypeAdapter
+from pydantic import (
+    BaseModel,
+    GetCoreSchemaHandler,
+    ValidationInfo,
+    TypeAdapter,
+    ValidationError,
+)
 from pydantic.fields import FieldInfo
 from typing import Generic, Type, TypeVar, Any, Literal
 from inspect import signature, _empty, Parameter
 from dataclasses import dataclass
 from shortuuid import uuid
 from logging import getLogger
+import json
 
 logger = getLogger(__name__)
 
@@ -64,10 +71,24 @@ class NodeData:
         except ValidationError:
             logger.debug(f"Cannot set default for {self.type} Node Data {self.key}")
 
+    def validate(self, value: Any) -> Any:
+        try:
+            return self.adapter.validate_python(
+                self._coerce_defaults(value, self.adapter)
+            )
+        except ValidationError as e:
+            msg = f"'{value}' is an invalid type for '{str(self.model)}'"
+            details = {
+                "msg": msg,
+                "title": e.title,
+                "schema": self.adapter.json_schema(),
+            }
+
+            e.add_note(json.dumps(details))
+            raise e
+
     def set(self, value):
-        self._value = self.adapter.validate_python(
-            self._coerce_defaults(value, self.adapter)
-        )
+        self._value = self.validate(value)
         self._set = True
 
     @property

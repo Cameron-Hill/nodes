@@ -1,6 +1,7 @@
+from lib2to3.fixes.fix_idioms import TYPE
 import sys
 from boto3 import resource
-from boto3.dynamodb.conditions import Key, Attr, And, Or, Equals, NotEquals
+from boto3.dynamodb.conditions import Key, Attr, And, Or, Equals, NotEquals, BeginsWith
 from dataclasses import dataclass
 from pydantic import BaseModel, TypeAdapter, ConfigDict
 from pydantic.fields import FieldInfo, Field, computed_field
@@ -29,8 +30,10 @@ from typing import (
 DYNAMODB_DATABASE_URL = "http://localhost:8000"
 
 # TYPES #
-OperatorClasses = Union[Type[And], Type[Or], Type[Equals], Type[NotEquals]]
-Operators = Union[And, Or, Equals, NotEquals]
+OperatorClasses = Union[
+    Type[And], Type[Or], Type[Equals], Type[NotEquals], Type[BeginsWith]
+]
+Operators = Union[And, Or, Equals, NotEquals, BeginsWith]
 Selections = Literal[
     "ALL_ATTRIBUTES", "ALL_PROJECTED_ATTRIBUTES", "COUNT", "SPECIFIC_ATTRIBUTES"
 ]
@@ -181,12 +184,8 @@ class Item(BaseModel):
         pk = cls.__table__._get_partition_key()
         sk = cls.__table__._get_sort_key()
         cls._validate_field_value(pk.name, key)
-        conditions: List[Key | Operators] = [Key(pk.name).eq(key)]
-        if sk:
-            conditions.extend(
-                cls._get_key_constraints(sk.name, cls.model_fields[sk.name])
-            )
-        exp = cls._get_expression(conditions)
+        exp = Key(pk.name).eq(key)
+
         if key_expression:
             exp = key_operator(exp, key_expression)
 

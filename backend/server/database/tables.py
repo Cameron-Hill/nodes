@@ -1,27 +1,27 @@
 from server.database import Table, Item, SortKey, PartitionKey
 from shortuuid import uuid
-from pydantic import Field, BaseModel, field_validator
+from pydantic import Field, BaseModel, field_validator, ValidationInfo
 from pydantic.fields import computed_field
 from typing import Any, Annotated, Self, Literal
 from nodes.base import NodeData as _NodeDataClass, NodeDataTypes as _NodeDataTypes
 
 UUID_PATTERN = r"[a-zA-Z0-9]{22}"  # Change this to shortuuid's only
 
-_WorkflowID = Field(
+WorkflowID = Field(
     pattern=rf"Workflow\-{UUID_PATTERN}",
     alias="WorkflowID",
 )
-_NodeID = Field(
+NodeID = Field(
     pattern=rf"Node\-{UUID_PATTERN}",
     alias="NodeID",
 )
 
-_NodeDataID = Field(
+NodeDataID = Field(
     pattern=rf"Node\-{UUID_PATTERN}#Data\-{UUID_PATTERN}",
     alias="NodeDataID",
 )
 
-_EdgeID = Field(
+EdgeID = Field(
     pattern=rf"Edge\-{UUID_PATTERN}",
     alias="EdgeID",
 )
@@ -37,10 +37,10 @@ class WorkflowTable(Table):
         PartitionKey: Annotated[
             str,
             Field(default_factory=lambda: f"Workflow-{uuid()}", validate_default=True),
-            _WorkflowID,
+            WorkflowID,
         ]
         SortKey: Annotated[
-            str, Field(default_factory=lambda: None, validate_default=True), _WorkflowID
+            str, Field(default_factory=lambda: None, validate_default=True), WorkflowID
         ]  # Sort key is set by validator
         Name: str
         Owner: str
@@ -50,15 +50,15 @@ class WorkflowTable(Table):
             return self.PartitionKey
 
         @field_validator("SortKey", mode="before")
-        def set_sort_key(cls, v, values):
-            return values["PartitionKey"]
+        def set_sort_key(cls, v, info: ValidationInfo):
+            return info.data["PartitionKey"]
 
     class Node(Item):
-        PartitionKey: str = _WorkflowID
+        PartitionKey: str = WorkflowID
         SortKey: Annotated[
             str,
             Field(default_factory=lambda: f"Node-{uuid()}", validate_default=True),
-            _NodeID,
+            NodeID,
         ]
         Version: int
         Address: str
@@ -69,27 +69,28 @@ class WorkflowTable(Table):
             return self.SortKey
 
     class Edge(Item):
-        PartitionKey: str = _WorkflowID
-        SortKey: str = _EdgeID
+        PartitionKey: str = WorkflowID
+        SortKey: str = EdgeID
         From: str
         To: str
 
     class NodeData(Item):
-        PartitionKey: str = _WorkflowID
+        PartitionKey: str = WorkflowID
         NodeID: str = Field(pattern=UUID_PATTERN)
-        SortKey: Annotated[str, _NodeDataID] = ""
+        SortKey: Annotated[str, NodeDataID, Field(validate_default=True)] = ""
         Key: str
         Type: _NodeDataTypes
-        Data: dict[str, Any] = Field(
-            default_factory=lambda: {}, description="Persisted Node Data"
+        Data: Any = Field(
+            ...,
+            description="The data value for the node data. This must be compatible with the node data schema",
         )
 
         @field_validator("SortKey", mode="before")
-        def def_set_sort_key(cls, v, values) -> str:
+        def set_sort_key(cls, v, info: ValidationInfo) -> str:
             if not v:
-                node = values.get("NodeID")
-                assert node, "SortKey requires NodeID"
-                v = f"Node-{cls.NodeID}#Data-{uuid()}"
+                node = info.data.get("NodeID")
+                assert node, "NodeData SortKey requires NodeID"
+                v = f"{node}#Data-{uuid()}"
             return v
 
         @computed_field
@@ -97,8 +98,9 @@ class WorkflowTable(Table):
             return self.SortKey.replace(f"{self.NodeID}#", "")
 
         @classmethod
-        def from_node_data(cls, node_data: _NodeDataClass) -> Self:
+        def from_node_data(cls, node_data: _NodeDataClass, workflow_id: str) -> Self:
             return cls(
+                PartitionKey=workflow_id,
                 NodeID=node_data.node.id,
                 Data=node_data.value,
                 Key=node_data.key,
