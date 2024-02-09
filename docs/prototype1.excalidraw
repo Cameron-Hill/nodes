@@ -37,7 +37,7 @@
       "containerId": null,
       "originalText": "Principles",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -109,7 +109,7 @@
       "containerId": null,
       "originalText": "Functionality",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -459,7 +459,7 @@
       "containerId": null,
       "originalText": "> requests\n  - GET\n  - POST\n  - PATCH",
       "lineHeight": 1.2,
-      "baseline": 73
+      "baseline": 72
     },
     {
       "type": "text",
@@ -1088,7 +1088,7 @@
       "containerId": null,
       "originalText": "Prototype",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -1275,7 +1275,7 @@
       "containerId": null,
       "originalText": "x:obj -",
       "lineHeight": 1.2,
-      "baseline": 13
+      "baseline": 12
     },
     {
       "type": "line",
@@ -1361,7 +1361,7 @@
       "containerId": null,
       "originalText": "Example",
       "lineHeight": 1.2,
-      "baseline": 13
+      "baseline": 12
     },
     {
       "type": "line",
@@ -2183,7 +2183,7 @@
       "containerId": null,
       "originalText": "Example",
       "lineHeight": 1.2,
-      "baseline": 13
+      "baseline": 12
     },
     {
       "type": "line",
@@ -2950,7 +2950,7 @@
       "containerId": null,
       "originalText": "{\n  a: int,\n  b: str,\n  c: {\n   x: str\n   y: str \n  }\n}",
       "lineHeight": 1.2,
-      "baseline": 109
+      "baseline": 108
     },
     {
       "type": "text",
@@ -3125,7 +3125,7 @@
       "containerId": null,
       "originalText": "attr:obj -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "line",
@@ -3213,7 +3213,7 @@
       "containerId": null,
       "originalText": "Action",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -3609,7 +3609,7 @@
       "containerId": null,
       "originalText": "Selector",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -3651,7 +3651,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -3981,7 +3981,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -4731,7 +4731,7 @@
       "containerId": null,
       "originalText": "Join",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -4773,7 +4773,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -5103,7 +5103,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -5428,7 +5428,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -5904,7 +5904,7 @@
       "containerId": null,
       "originalText": "Filter",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -5946,7 +5946,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -6276,7 +6276,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -7130,7 +7130,7 @@
       "containerId": null,
       "originalText": "Rename",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -7171,7 +7171,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -7488,7 +7488,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -8043,7 +8043,7 @@
       "containerId": null,
       "originalText": "Will need to come up with definitions of \ntransform tasks, and how they apply to \ncomplex (Objects and Arrays) and primitive\ntypes.",
       "lineHeight": 1.2,
-      "baseline": 73
+      "baseline": 72
     },
     {
       "type": "text",
@@ -8197,7 +8197,7 @@
       "containerId": null,
       "originalText": "We want to be able to support an action\nthat fires off a simple get request and \nand produces an object type created\nfrom the JSON response of the API.\nThis brings up the question of how to\ndeal with potentially unknown schemas.\nAn action may produce an unknown complex\nobject or an object that is composed of\nunknown complex objects. For example,\nthe get request action may produce an \noutput:\n\n\n\n\n\nHere, the body of the request is an\nunknown object because the output\ndepends on the URL that was provided as \nan input to the action. However, at\nruntime, we still need to know what the\noutput schema for this instance of the \naction is so we can manipulate the data.\nSimilarly, are there occasions where \nthere are unknown elements within a \ncomplex that we don't care about, and\ndon't need to define a schema for?\nFor this exploration, we'll break \nthese 2 questions down into sections.\n\n# How can we apply schemas \n# to unknown objects?\nLet's consider a few options:\n1. Do not allow unknown objects:\n   You cannot have a generic GET\n   request action. You must define an\n   explicit action with an explicit schema\n   for each endpoint you want to use.\n   e.g. the 'GetUsers Action' would have\n   an explicit schema based on the response\n   from the getUsers endpoint.\n2. Action Template:\n   An action template allows you to \n   create a new action from a template\n   by defining custom schemas for inputs,\n   options  and outputs over a constant\n   backend implementation.\n   This would allow a more \n   explicit definition of actions,\n   similar to approach 1, while allowing\n   users to get started without adding\n   custom extensions.\n3. Some sort of behaviour pattern for\n   unknown objects.\n\n",
       "lineHeight": 1.2,
-      "baseline": 1070
+      "baseline": 1071
     },
     {
       "type": "text",
@@ -8502,7 +8502,7 @@
       "containerId": null,
       "originalText": "attr:obj -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "line",
@@ -8588,7 +8588,7 @@
       "containerId": null,
       "originalText": "Action",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -8974,7 +8974,7 @@
       "containerId": null,
       "originalText": "Selector",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "text",
@@ -9015,7 +9015,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -9332,7 +9332,7 @@
       "containerId": null,
       "originalText": " -",
       "lineHeight": 1.2,
-      "baseline": 6
+      "baseline": 7
     },
     {
       "type": "ellipse",
@@ -9935,7 +9935,7 @@
       "containerId": null,
       "originalText": "{\n  a: int,\n  b: str,\n  c: {\n   x: str\n   y: str \n  }\n}",
       "lineHeight": 1.2,
-      "baseline": 109
+      "baseline": 108
     },
     {
       "type": "ellipse",
@@ -10675,7 +10675,7 @@
       "containerId": null,
       "originalText": "Data Access",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -10787,7 +10787,7 @@
       "containerId": null,
       "originalText": "Actions should have a versioning\nsystem. Some attribute on the class\nthat allows you to specify a version\nso we can have several actions with\nthe same name. Actions should also be\nallowed to be deprecated. A deprecated\naction will display a warning and some \nmessage to the user, and optionally\nemail the author of a workflow\nthat contains a deprecated action.",
       "lineHeight": 1.2,
-      "baseline": 188
+      "baseline": 187
     },
     {
       "type": "text",
@@ -10823,7 +10823,7 @@
       "containerId": null,
       "originalText": "Create a new workflow\nDelete a workflow\nGet me all available nodes.\nCreate a new node as part of a workflow\nRemove a node from a workflow\nupdate a node within a workflow\nGet all nodes that belong to a workflow.\n\nCreate a new user\nCreate a new team\nAdd a user to a team\nRemove a user from a team\ndelete a team\nGet me all users in a Team\nGet me all teams that a user is a member of\nGet all workflows visible to a team\nGet me all workflows that belong to a user\n\n\n",
       "lineHeight": 1.2,
-      "baseline": 474
+      "baseline": 475
     },
     {
       "type": "ellipse",
@@ -13546,7 +13546,7 @@
       "containerId": null,
       "originalText": "1. How to handle uniqueness\n   in Nodes.\n2. How to handle Node versions\n3. What is a node id? and how is\n   it calculated",
       "lineHeight": 1.2,
-      "baseline": 92
+      "baseline": 91
     },
     {
       "type": "text",
@@ -13882,8 +13882,8 @@
     },
     {
       "type": "text",
-      "version": 721,
-      "versionNonce": 1670206184,
+      "version": 735,
+      "versionNonce": 1067084742,
       "isDeleted": false,
       "id": "Vwf_iS4x9PXwdlyNk74I2",
       "fillStyle": "cross-hatch",
@@ -13905,7 +13905,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378152,
       "link": null,
       "locked": false,
       "fontSize": 10.60825196543822,
@@ -13920,8 +13920,8 @@
     },
     {
       "type": "rectangle",
-      "version": 384,
-      "versionNonce": 1691594648,
+      "version": 398,
+      "versionNonce": 1852283802,
       "isDeleted": false,
       "id": "YeCGPL91ixULMQE7yTGF2",
       "fillStyle": "cross-hatch",
@@ -13952,14 +13952,14 @@
           "type": "arrow"
         }
       ],
-      "updated": 1706953019605,
+      "updated": 1707384378152,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 340,
-      "versionNonce": 1194505704,
+      "version": 354,
+      "versionNonce": 1109721862,
       "isDeleted": false,
       "id": "KFLDu7RSl_0dnGcfWWU71",
       "fillStyle": "cross-hatch",
@@ -13981,7 +13981,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378152,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -13996,8 +13996,8 @@
     },
     {
       "type": "rectangle",
-      "version": 405,
-      "versionNonce": 48888984,
+      "version": 419,
+      "versionNonce": 551884890,
       "isDeleted": false,
       "id": "NtvkEJYeDgzX5e78phVgc",
       "fillStyle": "cross-hatch",
@@ -14026,14 +14026,14 @@
           "type": "arrow"
         }
       ],
-      "updated": 1706953019605,
+      "updated": 1707384378152,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 373,
-      "versionNonce": 1983101160,
+      "version": 387,
+      "versionNonce": 500871750,
       "isDeleted": false,
       "id": "ZI_KNE6RzdNz-xVSixg81",
       "fillStyle": "cross-hatch",
@@ -14053,7 +14053,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378152,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -14068,8 +14068,8 @@
     },
     {
       "type": "text",
-      "version": 100,
-      "versionNonce": 45001112,
+      "version": 113,
+      "versionNonce": 1209335066,
       "isDeleted": false,
       "id": "cahRto4wWYvXGum42j_iW",
       "fillStyle": "cross-hatch",
@@ -14089,7 +14089,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378153,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -14218,8 +14218,8 @@
     },
     {
       "type": "rectangle",
-      "version": 385,
-      "versionNonce": 227746712,
+      "version": 399,
+      "versionNonce": 764967302,
       "isDeleted": false,
       "id": "IgyaAjPVtycnHohQRT5t5",
       "fillStyle": "cross-hatch",
@@ -14256,14 +14256,14 @@
           "type": "arrow"
         }
       ],
-      "updated": 1706953019605,
+      "updated": 1707384378153,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 368,
-      "versionNonce": 592740840,
+      "version": 382,
+      "versionNonce": 1902791130,
       "isDeleted": false,
       "id": "A5IYGKCjgZP8JayW-BYLM",
       "fillStyle": "cross-hatch",
@@ -14283,7 +14283,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378153,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -14298,8 +14298,8 @@
     },
     {
       "type": "arrow",
-      "version": 145,
-      "versionNonce": 1268445336,
+      "version": 191,
+      "versionNonce": 1755011270,
       "isDeleted": false,
       "id": "-8AkTGMZsEQXV8reDB9O_",
       "fillStyle": "cross-hatch",
@@ -14319,7 +14319,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378153,
       "link": null,
       "locked": false,
       "startBinding": {
@@ -14348,8 +14348,8 @@
     },
     {
       "type": "arrow",
-      "version": 155,
-      "versionNonce": 1897995672,
+      "version": 201,
+      "versionNonce": 66584218,
       "isDeleted": false,
       "id": "X5tqpN8S5u4aZut5sAOl9",
       "fillStyle": "cross-hatch",
@@ -14369,7 +14369,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378153,
       "link": null,
       "locked": false,
       "startBinding": {
@@ -14398,8 +14398,8 @@
     },
     {
       "type": "text",
-      "version": 886,
-      "versionNonce": 54208488,
+      "version": 900,
+      "versionNonce": 1451249670,
       "isDeleted": false,
       "id": "-2tOaHr1Nw2Fi4NftmYBO",
       "fillStyle": "cross-hatch",
@@ -14421,7 +14421,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384378153,
       "link": null,
       "locked": false,
       "fontSize": 10.60825196543822,
@@ -14504,7 +14504,7 @@
       "containerId": null,
       "originalText": "How do we construct and execute a worklow?\nWhat is a workflow?\n\nI need to know, right away, that nodes are not\ncompatible.\nDoes this calculation happen on the server side?\nOr the client side?\nOr Both?\n\nClient Side:\n - We should have all the json schema objects we\n   need to work this out.\n - It would create a snappier experience for the\n   user\n - It would be difficult to debug.\n\nServer Side:\n - If the server side also does the validation,\n   It could be used without the front end.\n - It needs to do some sort of construction for\n   the api.\n - If server side needs to do it anyway, should\n   we do it all on the server side?\n\nok we absolutly need to do it on the server side, \nwe maybe need to do it on the client side also.\nSo how do we do it on the server side?\n\nServer side requirements:\n  - Build the workflow, step by step.\n    \n    So I make a PUT call, add node to workflow,\n    as a child of this Node.\n    I basically say, Take this node, add it to my\n    workflow after that node. connect A to B.\n    The back end will validate that this is a\n    valid edge. If yay - perform db insert to \n    describe node / workflow. If Nay - kick back\n    big stinky error message.  \n\n    This is a very server-cetric way of thinking.\n    Can we come up with a local scripting solution\n    that could be compatable with with the server\n    approach? Could have a system that writes to \n    a json file each add request? Or memory?\n    Workflow.put(Node, parent=<what?>)\n    A node has to have an ID within the workflow\n    that can be reffered to. So...\n    Workflow.put(Node) -> WorkflowNode?\n    WorkflowNode is some subclass of node that has\n    a Node id?, when in stateless mode, this is just\n    some Id that is saved in the DB. In stateful mode\n    we return a WorkflowNode and you can use that \n    in the Workflow.\n    Workflow.put(Node, parent=WorkflowNode | NodeID)\n    In Stateless mode, you can hook up the workflow\n    class to data layer. You can then rebuild the\n    workflow object from the data layer whenever\n    a request is made.\n        \n## ASIDE ## Do all nodes have 1 input, 1 output?\n   Or do I need to figure out how to map specific\n   I/O to kids. Can I move forward with 1-1 and give\n   myself room to change it later?\n   Actualy, a node will need to have more than 1 inupt\n   no? because how do we do operations like joining\n   two object together or concatanating strings?\n   \n ",
       "lineHeight": 1.2,
-      "baseline": 1650
+      "baseline": 1651
     },
     {
       "type": "text",
@@ -14540,7 +14540,7 @@
       "containerId": null,
       "originalText": "Workflows",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -16796,7 +16796,7 @@
       "containerId": null,
       "originalText": "\n[\n  {\"key\": \"\", \"value\": \"\",\n]\n\nIf we want to create maps from the UI,\nwe can do it like above.\nI don't know if we should support it\nby way of open-ended map type defs.\ne.g. dict ",
       "lineHeight": 1.2,
-      "baseline": 188
+      "baseline": 187
     },
     {
       "type": "rectangle",
@@ -17275,8 +17275,8 @@
     },
     {
       "type": "text",
-      "version": 333,
-      "versionNonce": 669939864,
+      "version": 365,
+      "versionNonce": 1029632902,
       "isDeleted": false,
       "id": "GR4jOJVuXhp3OiN7AaG8W",
       "fillStyle": "cross-hatch",
@@ -17285,8 +17285,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -217.63172603167726,
-      "y": 2280.8891667388375,
+      "x": -168.65065578350658,
+      "y": 2313.0766283490525,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 180.87890625,
@@ -17299,7 +17299,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17310,12 +17310,12 @@
       "containerId": null,
       "originalText": "Recursion Depth",
       "lineHeight": 1.2,
-      "baseline": 19
+      "baseline": 20
     },
     {
       "type": "text",
-      "version": 393,
-      "versionNonce": 1858403560,
+      "version": 425,
+      "versionNonce": 1837273798,
       "isDeleted": false,
       "id": "nByFJOk7v8VBJZve7QL9P",
       "fillStyle": "cross-hatch",
@@ -17324,8 +17324,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -514.3203728206677,
-      "y": 2106.693218726605,
+      "x": -465.339302572497,
+      "y": 2138.88068033682,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 168.80859375,
@@ -17339,7 +17339,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 28.813455657492355,
@@ -17350,12 +17350,12 @@
       "containerId": null,
       "originalText": "Word Cloud",
       "lineHeight": 1.2,
-      "baseline": 28
+      "baseline": 27
     },
     {
       "type": "text",
-      "version": 424,
-      "versionNonce": 163816856,
+      "version": 456,
+      "versionNonce": 1852852742,
       "isDeleted": false,
       "id": "VeQJ_iQdSVhCBS1SFUnbP",
       "fillStyle": "cross-hatch",
@@ -17364,8 +17364,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -533.6150975913098,
-      "y": 2134.143180500306,
+      "x": -484.6340273431391,
+      "y": 2166.330642110521,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 202.5348358154297,
@@ -17379,7 +17379,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 16.464831804281346,
@@ -17394,8 +17394,8 @@
     },
     {
       "type": "ellipse",
-      "version": 683,
-      "versionNonce": 568664040,
+      "version": 715,
+      "versionNonce": 1327831366,
       "isDeleted": false,
       "id": "nfFyqnXnMbED0NjL4z0j-",
       "fillStyle": "cross-hatch",
@@ -17404,8 +17404,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -1096.9799676218904,
-      "y": 1661.656559705199,
+      "x": -1047.9988973737197,
+      "y": 1693.844021315414,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 1323.4374999999995,
@@ -17418,14 +17418,14 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 363,
-      "versionNonce": 845886104,
+      "version": 395,
+      "versionNonce": 922615942,
       "isDeleted": false,
       "id": "pVReAcaRXtlmq1dX8oB7U",
       "fillStyle": "cross-hatch",
@@ -17434,8 +17434,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -732.1534552939088,
-      "y": 2274.4575918152905,
+      "x": -683.1723850457381,
+      "y": 2306.6450534255055,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 168.8203125,
@@ -17448,7 +17448,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17459,12 +17459,12 @@
       "containerId": null,
       "originalText": "Schema Subtype\nReport",
       "lineHeight": 1.2,
-      "baseline": 43
+      "baseline": 45
     },
     {
       "type": "text",
-      "version": 462,
-      "versionNonce": 1661526760,
+      "version": 494,
+      "versionNonce": 1505230790,
       "isDeleted": false,
       "id": "DcpXjr-xbTPS3zNRFHcuC",
       "fillStyle": "cross-hatch",
@@ -17473,8 +17473,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -894.2268574687116,
-      "y": 1835.1055958563566,
+      "x": -845.2457872205409,
+      "y": 1867.2930574665716,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 156.76171875,
@@ -17487,7 +17487,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17498,12 +17498,12 @@
       "containerId": null,
       "originalText": "Option Values\nare persisted",
       "lineHeight": 1.2,
-      "baseline": 43
+      "baseline": 45
     },
     {
       "type": "text",
-      "version": 367,
-      "versionNonce": 1486430104,
+      "version": 399,
+      "versionNonce": 1802508038,
       "isDeleted": false,
       "id": "Abm1eU4NZFtj4lXvoGnLL",
       "fillStyle": "cross-hatch",
@@ -17512,8 +17512,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -736.6711665283447,
-      "y": 1736.2218038074268,
+      "x": -687.690096280174,
+      "y": 1768.4092654176418,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 204.99609375,
@@ -17526,7 +17526,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17537,12 +17537,12 @@
       "containerId": null,
       "originalText": "All Options must\nbe set to execute\na flow.",
       "lineHeight": 1.2,
-      "baseline": 68
+      "baseline": 69
     },
     {
       "type": "text",
-      "version": 300,
-      "versionNonce": 1891386856,
+      "version": 332,
+      "versionNonce": 346244678,
       "isDeleted": false,
       "id": "ElB82yQOTKywDSZAubecZ",
       "fillStyle": "cross-hatch",
@@ -17551,8 +17551,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -676.2900240024821,
-      "y": 1854.7283876715985,
+      "x": -627.3089537543115,
+      "y": 1886.9158492818135,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 289.40625,
@@ -17565,7 +17565,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17576,12 +17576,12 @@
       "containerId": null,
       "originalText": "Options are set up front",
       "lineHeight": 1.2,
-      "baseline": 19
+      "baseline": 20
     },
     {
       "type": "text",
-      "version": 157,
-      "versionNonce": 1015114904,
+      "version": 189,
+      "versionNonce": 1714326918,
       "isDeleted": false,
       "id": "biPltqBVCMUiwEeJsUxjC",
       "fillStyle": "solid",
@@ -17590,8 +17590,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -1040.3197279709639,
-      "y": 2012.709440631933,
+      "x": -991.3386577227932,
+      "y": 2044.896902242148,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ffffff",
       "width": 234.375,
@@ -17604,7 +17604,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -17619,8 +17619,8 @@
     },
     {
       "type": "line",
-      "version": 120,
-      "versionNonce": 1477134568,
+      "version": 152,
+      "versionNonce": 1297018054,
       "isDeleted": false,
       "id": "1UdX1rUYTesCFfejgZrCq",
       "fillStyle": "solid",
@@ -17629,8 +17629,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -804.2569195571687,
-      "y": 1909.1949210632595,
+      "x": -755.275849308998,
+      "y": 1941.3823826734745,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ffffff",
       "width": 82.6666259765625,
@@ -17642,7 +17642,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -17735,8 +17735,8 @@
     },
     {
       "type": "text",
-      "version": 140,
-      "versionNonce": 1305552536,
+      "version": 172,
+      "versionNonce": 128017414,
       "isDeleted": false,
       "id": "G8HD4xRqEDFBWEsohG7uE",
       "fillStyle": "solid",
@@ -17745,8 +17745,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -207.12361820771616,
-      "y": 1803.9037659605383,
+      "x": -158.14254795954548,
+      "y": 1836.0912275707533,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ffffff",
       "width": 281.25,
@@ -17759,7 +17759,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1706953019605,
+      "updated": 1707384396187,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -18333,7 +18333,7 @@
       "containerId": null,
       "originalText": "schema",
       "lineHeight": 1.2,
-      "baseline": 10
+      "baseline": 9
     },
     {
       "type": "text",
@@ -18372,7 +18372,7 @@
       "containerId": null,
       "originalText": "values",
       "lineHeight": 1.2,
-      "baseline": 10
+      "baseline": 9
     },
     {
       "type": "text",
@@ -18411,7 +18411,7 @@
       "containerId": null,
       "originalText": "{\n a:1\n b:true\n}",
       "lineHeight": 1.2,
-      "baseline": 48
+      "baseline": 47
     },
     {
       "type": "text",
@@ -18450,7 +18450,7 @@
       "containerId": null,
       "originalText": "{\n a:int\n b:bool\n}",
       "lineHeight": 1.2,
-      "baseline": 48
+      "baseline": 47
     },
     {
       "type": "rectangle",
@@ -18728,7 +18728,7 @@
       "containerId": null,
       "originalText": "{\n  \"a\": int,\n  \"b\": bool,\n}",
       "lineHeight": 1.2,
-      "baseline": 73
+      "baseline": 72
     },
     {
       "type": "text",
@@ -19089,7 +19089,7 @@
       "containerId": null,
       "originalText": "Initial Draft\n",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 42
     },
     {
       "type": "line",
@@ -19167,7 +19167,7 @@
       "containerId": null,
       "originalText": "API",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
       "type": "text",
@@ -19243,7 +19243,7 @@
       "containerId": null,
       "originalText": "- Workflow\n- Node\n- Edge\n- NodeData\n- Run",
       "lineHeight": 1.2,
-      "baseline": 92
+      "baseline": 91
     },
     {
       "type": "text",
@@ -19398,27 +19398,27 @@
       "baseline": 168
     },
     {
-      "id": "ZZ_6PX8PdR7Ytcf2iH8vl",
       "type": "ellipse",
-      "x": -4626.175333353158,
-      "y": 5415.277957473176,
-      "width": 161.1093752936915,
-      "height": 48,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 302,
+      "versionNonce": 1341041564,
+      "isDeleted": false,
+      "id": "ZZ_6PX8PdR7Ytcf2iH8vl",
       "fillStyle": "cross-hatch",
       "strokeWidth": 1,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": -4626.175333353158,
+      "y": 5415.277957473176,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 161.1093752936915,
+      "height": 48,
+      "seed": 1610704156,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 1610704156,
-      "version": 302,
-      "versionNonce": 1341041564,
-      "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
@@ -19430,40 +19430,40 @@
       "locked": false
     },
     {
-      "id": "xThffdx7PFooWjZ-W3Te9",
       "type": "text",
-      "x": -4580.737661597761,
-      "y": 5427.3073947246985,
-      "width": 70.3125,
-      "height": 24,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 321,
+      "versionNonce": 1959712796,
+      "isDeleted": false,
+      "id": "xThffdx7PFooWjZ-W3Te9",
       "fillStyle": "cross-hatch",
       "strokeWidth": 1,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": -4580.737661597761,
+      "y": 5427.3073947246985,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 70.3125,
+      "height": 24,
+      "seed": 1959699996,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 1959699996,
-      "version": 321,
-      "versionNonce": 1959712796,
-      "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1707038547025,
       "link": null,
       "locked": false,
-      "text": "option",
       "fontSize": 20,
       "fontFamily": 3,
+      "text": "option",
       "textAlign": "center",
       "verticalAlign": "middle",
-      "baseline": 19,
       "containerId": "ZZ_6PX8PdR7Ytcf2iH8vl",
       "originalText": "option",
-      "lineHeight": 1.2
+      "lineHeight": 1.2,
+      "baseline": 19
     },
     {
       "type": "line",
@@ -19541,42 +19541,120 @@
       "containerId": null,
       "originalText": "Rewrite considerations",
       "lineHeight": 1.2,
-      "baseline": 26
+      "baseline": 27
     },
     {
-      "id": "jhCm5ND-4fYHjk-aITgxx",
       "type": "text",
-      "x": 2257.201618099072,
-      "y": 1034.3242009004432,
-      "width": 667.96875,
-      "height": 96,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
+      "version": 315,
+      "versionNonce": 540495140,
+      "isDeleted": false,
+      "id": "jhCm5ND-4fYHjk-aITgxx",
       "fillStyle": "cross-hatch",
       "strokeWidth": 1,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": 2257.201618099072,
+      "y": 1034.3242009004432,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 667.96875,
+      "height": 96,
+      "seed": 1278196772,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "seed": 1278196772,
-      "version": 315,
-      "versionNonce": 540495140,
-      "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1707042355746,
       "link": null,
       "locked": false,
+      "fontSize": 20,
+      "fontFamily": 3,
       "text": "Separate Data schemas\nand database implementation.\nWe should be able to swap out the database implementation\nand keep the data schemas.",
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Separate Data schemas\nand database implementation.\nWe should be able to swap out the database implementation\nand keep the data schemas.",
+      "lineHeight": 1.2,
+      "baseline": 91
+    },
+    {
+      "id": "r5GqseIzcAQs1sBGxKKX-",
+      "type": "text",
+      "x": -423.1498873099674,
+      "y": 2369.8500691278537,
+      "width": 164.0625,
+      "height": 24,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 54812486,
+      "version": 64,
+      "versionNonce": 875741466,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1707384405303,
+      "link": null,
+      "locked": false,
+      "text": "Error Handling",
       "fontSize": 20,
       "fontFamily": 3,
       "textAlign": "left",
       "verticalAlign": "top",
-      "baseline": 91,
+      "baseline": 19,
       "containerId": null,
-      "originalText": "Separate Data schemas\nand database implementation.\nWe should be able to swap out the database implementation\nand keep the data schemas.",
+      "originalText": "Error Handling",
+      "lineHeight": 1.2
+    },
+    {
+      "id": "EunlVmr1cahYrYaxUk7Hg",
+      "type": "text",
+      "x": -493.1226800763832,
+      "y": 2390.8419838322316,
+      "width": 292.96875,
+      "height": 24,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [
+        "-T6XSV0G0yJ8BTXYFf3Vp",
+        "GaX286lhjKP9MT72N6300"
+      ],
+      "frameId": null,
+      "roundness": null,
+      "seed": 850747226,
+      "version": 66,
+      "versionNonce": 647968922,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1707384421694,
+      "link": null,
+      "locked": false,
+      "text": "Validation Error Handling",
+      "fontSize": 20,
+      "fontFamily": 3,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 19,
+      "containerId": null,
+      "originalText": "Validation Error Handling",
       "lineHeight": 1.2
     }
   ],

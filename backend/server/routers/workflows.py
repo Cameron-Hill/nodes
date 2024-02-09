@@ -5,7 +5,7 @@ from contextlib import contextmanager
 from pydantic import BaseModel, ValidationError
 from typing import Annotated, Optional, Literal, Any, Type
 from nodes import NodeRegistry, get_node_registry
-from nodes.base import Node
+from nodes.base import Node, NodeData, NodeDataTypes
 from boto3.dynamodb.conditions import Key
 
 
@@ -66,6 +66,21 @@ def get_node_object(
             status_code=404, detail=f"Node not found: {workflow_id}  {node_id}"
         )
     return node
+
+
+def set_data_on_node(node: Node, key: str, type: NodeDataTypes, value: Any) -> None:
+    if type == "options":
+        if key not in node.options:
+            raise HTTPException(
+                status_code=400,
+                detail=f"'{key}' is not a valid key for {node.address()}   Available Options: {list(node.options)}",
+            )
+        node.options[key].set(value)
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail=f'Invalid Node Data Type: {type}   Available Types: "options"',
+        )
 
 
 @router.get("/", response_model=list[WorkflowTable.Workflow])
@@ -150,20 +165,15 @@ def add_node_data_to_workflow(
     node = get_node_object(node_id, workflow_id, table)
     instance = get_node_class(node.Address, node.Version, registry=registry)
     instance = instance(id=node_id)
-
-    if body.Type == "options":
-        if body.Key not in instance.options:
-            raise HTTPException(
-                status_code=400,
-                detail=f"'{body.Key}' is not a valid key for {instance.address()}   Available Options: {list(instance.options)}",
-            )
-        instance.options[body.Key].set(body.Data)
-    else:
-        raise HTTPException(
-            status_code=400,
-            detail=f'Invalid Node Data Type: {body.Type}   Available Types: "options"',
-        )
-
+    set_data_on_node(instance, body.Key, body.Type, body.Data)
     node_data = table.NodeData.from_node_data(instance.options[body.Key], workflow_id)
     node_data.put()
     return node_data
+
+
+@router.post("/{workflow_id}/run")
+def run_workflow(workflow_id, table: WorkflowTable = Depends(get_workflow_table)):
+    workflow_data = table.query(
+        Key(table.partition_key.name).eq(workflow_id),
+    )
+    a=1

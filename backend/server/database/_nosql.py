@@ -3,7 +3,7 @@ import sys
 from boto3 import resource
 from boto3.dynamodb.conditions import Key, Attr, And, Or, Equals, NotEquals, BeginsWith
 from dataclasses import dataclass
-from pydantic import BaseModel, TypeAdapter, ConfigDict
+from pydantic import BaseModel, TypeAdapter, ConfigDict, ValidationError
 from pydantic.fields import FieldInfo, Field, computed_field
 from logging import getLogger, StreamHandler
 from shortuuid import uuid
@@ -25,6 +25,7 @@ from typing import (
     TypedDict,
     List,
     Type,
+    overload,
 )
 
 DYNAMODB_DATABASE_URL = "http://localhost:8000"
@@ -189,11 +190,12 @@ class Item(BaseModel):
         if key_expression:
             exp = key_operator(exp, key_expression)
 
-        response = cls.__table__.query(
+        response: Boto3QueryResponseType = cls.__table__.query( # type: ignore
             key_condition_expression=exp,
             select="SPECIFIC_ATTRIBUTES",
             projection_expression=projection_expression,
             expression_attribute_names=projection_attribute_names,
+            raw=True,
         )
         return QueryResponse(
             Count=response.get("Count"),
@@ -300,6 +302,14 @@ class Table:
             self._table = self.resource.Table(self.__tablename__)
         self._apply_table_to_items()
 
+    @classmethod
+    def items(cls) -> Generator[tuple[str, Type[Item]], None, None]:
+        for attr in dir(cls):
+            if not attr.startswith("_"):
+                obj = getattr(cls, attr)
+                if isclass(obj) and issubclass(obj, Item):
+                    yield attr, obj
+
     def create_table(self):
         return self.resource.create_table(
             TableName=self.__tablename__,
@@ -313,7 +323,8 @@ class Table:
         select: SelectType = "ALL_ATTRIBUTES",
         limit: int | None = None,
         index_name: str | None = None,
-    ):
+        raw: bool = False,
+    ) -> Boto3QueryResponseType | QueryResponse[Item]:
         params = {
             k: v
             for k, v in {
@@ -323,7 +334,11 @@ class Table:
             }.items()
             if v
         }
-        return self.table.scan(**params)
+        response: Boto3QueryResponseType = self.table.scan(**params)
+        if raw:
+            return response
+        else:
+            return self._get_query_response_from_boto3_response(response)
 
     def query(
         self,
@@ -335,7 +350,9 @@ class Table:
         limit: int | None = None,
         index_name: str | None = None,
         exclusive_start_key: dict[str, Any] | None = None,
-    ) -> Boto3QueryResponseType:
+        raw:bool = False
+    ) -> Boto3QueryResponseType | QueryResponse[Item]:
+
         params = dict(
             ProjectionExpression=projection_expression,
             ExpressionAttributeNames=expression_attribute_names,
@@ -345,11 +362,15 @@ class Table:
             ExclusiveStartKey=exclusive_start_key,
         )
         params = {k: v for k, v in params.items() if v is not None}
-        return self.table.query(
+        response: Boto3QueryResponseType = self.table.query(
             KeyConditionExpression=key_condition_expression,
             Select=select,
             **params,
         )
+        if raw:
+            return response
+        else:
+            return self._get_query_response_from_boto3_response(response)
 
     def delete(self):
         logger.info(f"Deleting table: {self.__tablename__}")
@@ -358,6 +379,21 @@ class Table:
 
     def put_item(self, item: dict):
         return self.table.put_item(Item=item)
+
+    @classmethod
+    def _get_query_response_from_boto3_response(
+        cls, response: Boto3QueryResponseType
+    ) -> QueryResponse[Item]:
+        for i, item in enumerate(response["Items"]):
+            for key, Item in cls.items():
+                try:
+                    response["Items"][i] = Item(**item)  # type: ignore
+                    break
+                except ValidationError as e:
+                    pass
+            else:
+                raise ValueError(f"Cannot infer item type for : {item}")
+        return QueryResponse(**response)  # type: ignore
 
     def _get_partition_key(self) -> PartitionKey:
         keys = [

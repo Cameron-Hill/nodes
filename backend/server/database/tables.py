@@ -1,6 +1,6 @@
 from server.database import Table, Item, SortKey, PartitionKey
 from shortuuid import uuid
-from pydantic import Field, BaseModel, field_validator, ValidationInfo
+from pydantic import Field, BaseModel, ValidationError, field_validator, ValidationInfo
 from pydantic.fields import computed_field
 from typing import Any, Annotated, Self, Literal
 from nodes.base import NodeData as _NodeDataClass, NodeDataTypes as _NodeDataTypes
@@ -110,3 +110,16 @@ class WorkflowTable(Table):
 
 def get_workflow_table() -> WorkflowTable:
     return WorkflowTable()
+
+
+if __name__ == "__main__":
+    table = get_workflow_table()
+    scan_results = table.scan()
+    for i, scan_item in enumerate(scan_results["Items"]):
+        for key, Item in table.items():
+            try:
+                Item(**scan_item)
+                print(f"{i}: {key} SUCCESS")
+                break
+            except ValidationError as e:
+                print(f"{i}: {key} FAILED: ")
