@@ -240,6 +240,7 @@ class Item(BaseModel):
             ProjectionExpression=projection_expression,
             ExpressionAttributeNames=projection_attribute_names,
             **params,
+            raw=True,
         )
         items["Items"] = [cls(**item) for item in items["Items"]]
         return QueryResponse(**items)

@@ -3,7 +3,8 @@ from shortuuid import uuid
 from pydantic import Field, BaseModel, ValidationError, field_validator, ValidationInfo
 from pydantic.fields import computed_field
 from typing import Any, Annotated, Self, Literal
-from nodes.base import NodeData as _NodeDataClass, NodeDataTypes as _NodeDataTypes
+from nodes.base import NodeData as _NodeDataClass, NodeDataTypes
+from functools import cached_property
 
 UUID_PATTERN = r"[a-zA-Z0-9]{22}"  # Change this to shortuuid's only
 
@@ -46,6 +47,7 @@ class WorkflowTable(Table):
         Owner: str
 
         @computed_field
+        @cached_property
         def ID(self) -> str:
             return self.PartitionKey
 
@@ -65,6 +67,7 @@ class WorkflowTable(Table):
         Manifest: dict[str, Any] = {}
 
         @computed_field
+        @property
         def ID(self) -> str:
             return self.SortKey
 
@@ -79,7 +82,7 @@ class WorkflowTable(Table):
         NodeID: str = Field(pattern=UUID_PATTERN)
         SortKey: Annotated[str, NodeDataID, Field(validate_default=True)] = ""
         Key: str
-        Type: _NodeDataTypes
+        Type: NodeDataTypes
         Data: Any = Field(
             ...,
             description="The data value for the node data. This must be compatible with the node data schema",
@@ -110,16 +113,3 @@ class WorkflowTable(Table):
 
 def get_workflow_table() -> WorkflowTable:
     return WorkflowTable()
-
-
-if __name__ == "__main__":
-    table = get_workflow_table()
-    scan_results = table.scan()
-    for i, scan_item in enumerate(scan_results["Items"]):
-        for key, Item in table.items():
-            try:
-                Item(**scan_item)
-                print(f"{i}: {key} SUCCESS")
-                break
-            except ValidationError as e:
-                print(f"{i}: {key} FAILED: ")

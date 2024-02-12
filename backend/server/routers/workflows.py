@@ -118,11 +118,21 @@ def update_workflow_by_id(
 
 
 @router.get("/{workflow_id}/nodes", response_model=list[WorkflowTable.Node])
-def get_nodes_by_workflow_id(
+def get_nodes_by_workflow(
     workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ):
     response = table.Node.query(key=workflow_id)
     return response.items
+
+
+@router.get("/{workflow_id}/nodes/{node_id}", response_model=WorkflowTable.Node)
+def get_node_by_id(
+    workflow_id: str,
+    node_id: str,
+    table: WorkflowTable = Depends(get_workflow_table),
+):
+    node = get_node_object(node_id, workflow_id, table)
+    return node
 
 
 @router.post("/{workflow_id}/nodes")
@@ -170,10 +180,11 @@ def add_node_data_to_workflow(
     node_data.put()
     return node_data
 
+@router
 
 @router.post("/{workflow_id}/run")
 def run_workflow(workflow_id, table: WorkflowTable = Depends(get_workflow_table)):
     workflow_data = table.query(
         Key(table.partition_key.name).eq(workflow_id),
     )
-    a=1
+    a = 1
