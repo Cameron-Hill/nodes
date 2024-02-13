@@ -171,11 +171,25 @@ class Item(BaseModel):
             return cls(**response["Items"][0])
 
     @classmethod
+    def _filter(
+        cls, items: list[dict], raise_validation_error: bool = False
+    ) -> list[Self]:
+        filtered: list[Self] = []
+        for item in items:
+            try:
+                filtered.append(cls(**item))
+            except ValidationError as e:
+                if raise_validation_error:
+                    raise
+        return filtered
+
+    @classmethod
     def query(
         cls,
         key: str | int,
         key_expression: Key | Operators | None = None,
         key_operator: OperatorClasses = And,
+        filter: bool = True,
     ) -> "QueryResponse[Self]":
         assert cls.__table__ is not None, "You must define a table for this item"
         (
@@ -190,7 +204,7 @@ class Item(BaseModel):
         if key_expression:
             exp = key_operator(exp, key_expression)
 
-        response: Boto3QueryResponseType = cls.__table__.query( # type: ignore
+        response: Boto3QueryResponseType = cls.__table__.query(  # type: ignore
             key_condition_expression=exp,
             select="SPECIFIC_ATTRIBUTES",
             projection_expression=projection_expression,
@@ -200,7 +214,7 @@ class Item(BaseModel):
         return QueryResponse(
             Count=response.get("Count"),
             ScannedCount=response.get("ScannedCount"),
-            Items=[cls(**item) for item in response["Items"]],
+            Items=cls._filter(response["Items"], raise_validation_error=not filter),
             ResponseMetadata=response.get("ResponseMetadata"),
         )
 
@@ -210,6 +224,7 @@ class Item(BaseModel):
         limit: int | None = None,
         index_name: str | None = None,
         start_key: str | None = None,
+        filter: bool = True, 
     ) -> "QueryResponse[Self]":
         assert cls.__table__ is not None, "You must define a table for this item"
         (
@@ -240,9 +255,8 @@ class Item(BaseModel):
             ProjectionExpression=projection_expression,
             ExpressionAttributeNames=projection_attribute_names,
             **params,
-            raw=True,
         )
-        items["Items"] = [cls(**item) for item in items["Items"]]
+        items["Items"] = cls._filter(items["Items"], not filter)
         return QueryResponse(**items)
 
     @staticmethod
@@ -351,8 +365,8 @@ class Table:
         limit: int | None = None,
         index_name: str | None = None,
         exclusive_start_key: dict[str, Any] | None = None,
-        raw:bool = False
-    ) -> Boto3QueryResponseType | QueryResponse[Item]:
+        raw: bool = False,
+    ) -> QueryResponse[Item]:
 
         params = dict(
             ProjectionExpression=projection_expression,

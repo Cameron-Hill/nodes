@@ -45,6 +45,9 @@ def post(path, data: dict, headers: dict | None = None) -> dict:
     response.raise_for_status()
     return response.json()
 
+def get_all_workflows() -> list[WorkflowTable.Workflow]:
+    data = get(f"/workflows")
+    return [WorkflowTable.Workflow(**x) for x in data]
 
 def get_workflow(workflow_id: str) -> WorkflowTable.Workflow:
     data = get(f"/workflows/{workflow_id}/")
@@ -62,6 +65,9 @@ def create_node(workflow_id: str, address: str, version: int) -> WorkflowTable.N
     )
     return WorkflowTable.Node(**node)
 
+def get_nodes(workflow_id:str) -> list[WorkflowTable.Node]:
+    data = get(f"/workflows/{workflow_id}/nodes/")
+    return [WorkflowTable.Node(**x) for x in data]
 
 def get_node(workflow_id: str, node_id: str) -> WorkflowTable.Node:
     data = get(f"/workflows/{workflow_id}/nodes/{node_id}")
@@ -77,8 +83,11 @@ def add_data_to_node(
     )
     return WorkflowTable.NodeData(**data)
 
-def get_node_data(workflow_id:str, node_id:str, node_data_id:str)->WorkflowTable.NodeData:
-    data = get(f'')
+def get_node_data(workflow_id: str, node_id:str)-> list[WorkflowTable.NodeData]:
+    data = get(
+        f"/workflows/{workflow_id}/nodes/{node_id}/data/",
+    )
+    return [WorkflowTable.NodeData(**x) for x in data]
 
 
 if __name__ == "__main__":
@@ -120,5 +129,7 @@ if __name__ == "__main__":
     )
     print(f"Added Data to Node: {node_data.Key} with ID: {node_data.ID}")
 
-    print("Verifying node Data")
-    assert get_node_data()
+    print("Verifying node Data in Workflow")
+    workflow_node_data = get_node_data(workflow.ID, node.ID)
+    assert node_data.ID in [x.ID for x in workflow_node_data]   
+    print('\n\nAll Good! 😎')

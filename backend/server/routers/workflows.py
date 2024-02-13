@@ -1,11 +1,13 @@
+from logging import Manager
 from fastapi import APIRouter, Depends, HTTPException
 from server.database.tables import get_workflow_table, WorkflowTable, WorkflowID, NodeDataID, NodeID  # type: ignore
 from server.utils import omit
 from contextlib import contextmanager
 from pydantic import BaseModel, ValidationError
 from typing import Annotated, Optional, Literal, Any, Type
-from nodes import NodeRegistry, get_node_registry
+from nodes import NodeRegistry, get_node_registry, manager
 from nodes.base import Node, NodeData, NodeDataTypes
+from nodes.workflow import Workflow
 from boto3.dynamodb.conditions import Key
 
 
@@ -180,11 +182,20 @@ def add_node_data_to_workflow(
     node_data.put()
     return node_data
 
-@router
 
 @router.post("/{workflow_id}/run")
-def run_workflow(workflow_id, table: WorkflowTable = Depends(get_workflow_table)):
+def run_workflow(workflow_id, table: WorkflowTable = Depends(get_workflow_table), registry: NodeRegistry = Depends(get_node_registry)):
     workflow_data = table.query(
         Key(table.partition_key.name).eq(workflow_id),
+    
     )
-    a = 1
+    if not workflow_data:
+        raise HTTPException(status_code=404, detail=f'No such workflow: {workflow_id}')
+    workflow = Workflow()
+    nodes: dict[str, Node] = {}
+    for item in workflow_data.items: # type: ignore
+        if isinstance(item, WorkflowTable.Node):
+            nodes[item.ID] = get_node_class(item.Address, item.Version, registry)(id=item.ID)
+    for item in workflow_data.items:
+        if isinstance(item, WorkflowTable.NodeData):
+            set_data_on_node(nodes[item.NodeID], item.Key, item.Type, item.Data)
