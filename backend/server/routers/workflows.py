@@ -154,6 +154,12 @@ def add_node_to_workflow(
     node.put()
     return node
 
+@router.delete("/{workflow_id}/nodes/{node_id}")
+def remove_a_node_from_workflow(workflow_id: str, node_id: str, table: WorkflowTable = Depends(get_workflow_table)) -> WorkflowTable.Node:
+    node = get_node_object(node_id, workflow_id, table)
+    node.delete()
+    return node 
+
 
 @router.get("/{workflow_id}/nodes/{node_id}/data")
 def get_node_data(
@@ -182,6 +188,22 @@ def add_node_data_to_workflow(
     node_data.put()
     return node_data
 
+@router.get("/{workflow_id}/edges")
+def get_edges_by_workflow(
+    workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
+):
+    response = table.Edge.query(key=workflow_id)
+    return response.items
+
+@router.post("/{workflow_id}/edges")
+def add_edge_to_workflow(
+    workflow_id: str,
+    body: WorkflowTable.Edge,
+    table: WorkflowTable = Depends(get_workflow_table),
+):
+    edge = table.Edge(PartitionKey=workflow_id, **body.model_dump())
+    edge.put()
+    return edge
 
 @router.post("/{workflow_id}/run")
 def run_workflow(workflow_id, table: WorkflowTable = Depends(get_workflow_table), registry: NodeRegistry = Depends(get_node_registry)):
