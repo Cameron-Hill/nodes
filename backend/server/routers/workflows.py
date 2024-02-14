@@ -1,15 +1,18 @@
-from logging import Manager
+from ast import alias
+from logging import getLogger
 from fastapi import APIRouter, Depends, HTTPException
+from nodes import workflow
 from server.database.tables import get_workflow_table, WorkflowTable, WorkflowID, NodeDataID, NodeID  # type: ignore
 from server.utils import omit
 from contextlib import contextmanager
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, Field
 from typing import Annotated, Optional, Literal, Any, Type
 from nodes import NodeRegistry, get_node_registry, manager
-from nodes.base import Node, NodeData, NodeDataTypes
+from nodes.base import Edge, Node, NodeData, NodeDataTypes
 from nodes.workflow import Workflow
-from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Key, And
 
+logger = getLogger(__name__)
 
 @omit("PartitionKey", "SortKey", "WorkflowID", "ID")
 class WorkflowPostRequest(WorkflowTable.Workflow): ...
@@ -28,6 +31,10 @@ class NodeDataPostRequest(BaseModel):
     Type: Literal["options"]
     Key: str
     Data: Any
+
+class EdgePostRequest(BaseModel):
+    From: Annotated[str, NodeDataID, Field(alias="From"), ]
+    To: Annotated[str, NodeDataID, Field(alias="To"), ]
 
 
 router = APIRouter(prefix="/workflows", tags=["workflows"])
@@ -107,6 +114,11 @@ def get_workflow_by_id(
     workflow = get_workflow_object(workflow_id, table)
     return workflow
 
+@router.get('/{workflow_id}/all')
+def get_all_workflow_elements(workflow_id:str, table:WorkflowTable = Depends(get_workflow_table)) -> list[WorkflowTable.Workflow | WorkflowTable.Node | WorkflowTable.Edge | WorkflowTable.NodeData]:
+    items = table.query(Key(table.partition_key.name).eq(workflow_id))
+    return items.items # type: ignore
+            
 
 @router.patch("/{workflow_id}", response_model=WorkflowTable.Workflow)
 def update_workflow_by_id(
@@ -155,11 +167,28 @@ def add_node_to_workflow(
     return node
 
 @router.delete("/{workflow_id}/nodes/{node_id}")
-def remove_a_node_from_workflow(workflow_id: str, node_id: str, table: WorkflowTable = Depends(get_workflow_table)) -> WorkflowTable.Node:
-    node = get_node_object(node_id, workflow_id, table)
-    node.delete()
-    return node 
+def delete_node_from_workflow(workflow_id: str, node_id: str, table: WorkflowTable = Depends(get_workflow_table)) -> list[WorkflowTable.Node | WorkflowTable.NodeData]:
+    expression = And(Key(table.partition_key.name).eq(workflow_id), Key(table.sort_key.name).begins_with(node_id))
+    items: list[WorkflowTable.NodeData | WorkflowTable.Node] = table.query(expression).items #type: ignore
+    nodes = [x for x in items if isinstance(x, table.Node)]
 
+    if len(nodes)<1 or len(nodes)>1: 
+        raise HTTPException(status_code=404, detail=f'Node not found: {workflow_id}/{node_id}')
+
+    if len(nodes) > 1:
+        logger.warning(f'Delete Node: {workflow_id}/{node_id} returned multiple nodes')
+        raise HTTPException(status_code=404, detail=f'Node not found: {workflow_id}/{node_id}')
+    
+    node = nodes[0]
+    if node.PartitionKey != workflow_id or node.SortKey != node_id:
+        logger.warning(f'Delete Node: {workflow_id}/{node_id} returned a node with a different key. {node.PartitionKey}/{node.SortKey}')
+        raise HTTPException(status_code=404, detail=f'Node not found: {workflow_id}/{node_id}')
+    
+    for item in items:
+        logger.debug(f'delete {workflow_id}/{node_id}: Deleted: {item}')
+        item.delete()
+
+    return items
 
 @router.get("/{workflow_id}/nodes/{node_id}/data")
 def get_node_data(
@@ -198,7 +227,7 @@ def get_edges_by_workflow(
 @router.post("/{workflow_id}/edges")
 def add_edge_to_workflow(
     workflow_id: str,
-    body: WorkflowTable.Edge,
+    body: EdgePostRequest,
     table: WorkflowTable = Depends(get_workflow_table),
 ):
     edge = table.Edge(PartitionKey=workflow_id, **body.model_dump())

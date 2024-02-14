@@ -73,9 +73,19 @@ class WorkflowTable(Table):
 
     class Edge(Item):
         PartitionKey: str = WorkflowID
-        SortKey: str = EdgeID
+        SortKey: Annotated[str, EdgeID, Field(validate_default=True)] = ""
         From: str
         To: str
+        
+        @field_validator("SortKey", mode="before")
+        def set_sort_key(cls, v, info: ValidationInfo) -> str:
+            if not v:
+                v = f"#Edge-{uuid()}"
+            return v  
+ 
+        @computed_field
+        def ID(self) -> str:
+            return self.SortKey
 
     class NodeData(Item):
         PartitionKey: str = WorkflowID
