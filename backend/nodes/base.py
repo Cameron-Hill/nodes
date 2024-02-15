@@ -10,7 +10,7 @@ from pydantic import (
     ValidationError,
 )
 from pydantic.fields import FieldInfo
-from typing import Generic, Type, TypeVar, Any, Literal
+from typing import Generic, Type, TypeVar, Any, Literal, Optional
 from inspect import signature, _empty, Parameter
 from dataclasses import dataclass
 from shortuuid import uuid
@@ -21,6 +21,7 @@ logger = getLogger(__name__)
 
 T = TypeVar("T")
 UNSET = object()
+NodeDataTypes = Literal["input", "output", "options"]
 
 
 class Option(BaseModel):
@@ -28,22 +29,19 @@ class Option(BaseModel):
     Options must be object-type base models that are a subclass of this option class.
     """
 
-
+class NodeDataSchema(BaseModel):
+    Type: NodeDataTypes
+    Schema: dict
+    Value: Optional[Any | None] = None
+    
 class NodeSchema(BaseModel):
     """This class represents the schema for a node."""
-
-    label: str
-    address: str
-    group: str | None
-    sub_group: str | None
-    version: int
-    inputs: dict | None
-    output: dict | None
-    options: dict | None
-
-
-NodeDataTypes = Literal["input", "output", "options"]
-
+    Label: str
+    Address: str
+    Group: str | None
+    SubGroup: str | None
+    Version: int
+    Data: dict[str, NodeDataSchema]
 
 class NodeData:
     def __init__(
@@ -238,27 +236,55 @@ class Node(ABC):
         ) from exception
 
     @classmethod
-    def schema(cls) -> NodeSchema:
-        """Return the schema for the node."""
-        output_schema = cls.run.__annotations__.get("return")
+    def data_schema(cls, data_values: dict[tuple[NodeDataTypes, str], Any]|None=None) -> dict[str,NodeDataSchema]:
+        data_values = data_values or {}
+        output_schema = {("output","output"):TypeAdapter(cls.run.__annotations__.get("return")).json_schema()} 
         input_params = cls._get_input_params()
         option_params = cls._get_option_params()
         input_schema = {
-            k: TypeAdapter(v.annotation).json_schema() for k, v in input_params.items()
+            ('input', k): TypeAdapter(v.annotation).json_schema() for k, v in input_params.items()
         }
         options_schema = {
-            k: TypeAdapter(v.annotation).json_schema() for k, v in option_params.items()
+            ('options', k): TypeAdapter(v.annotation).json_schema() for k, v in option_params.items()
         }
 
+        data = {}
+        data.update(input_schema)
+        data.update(options_schema)
+        data.update(output_schema)
+
+        data_schema: dict[str, NodeDataSchema] = {}
+        for (type, key), schema in data.items():
+            if (type, key) in data_values:
+                data_schema[key] = NodeDataSchema(Type=type, Schema=schema, Value=data_values[(type, key)])
+            else:
+                data_schema[key] = NodeDataSchema(Type=type, Schema=schema)
+        
+        return data_schema
+
+    @classmethod
+    def class_schema(cls) -> NodeSchema:
+        """Return the schema for the node."""
+        data_schema = cls.data_schema()
         return NodeSchema(
-            address=cls.address(),
-            label=cls.label(),
-            group=cls.__group__,
-            sub_group=cls.__sub_group__,
-            version=cls.__version__,
-            inputs=input_schema,
-            output=TypeAdapter(output_schema).json_schema(),
-            options=options_schema,
+            Address=cls.address(),
+            Label=cls.label(),
+            Group=cls.__group__,
+            SubGroup=cls.__sub_group__,
+            Version=cls.__version__,
+            Data=data_schema,
+        )
+
+    def schema(self) -> NodeSchema:
+        data_schema = {(k.type, k.key): k.value for k in self.data.values() if k.is_set}
+        data_schema = self.data_schema(data_values=data_schema)
+        return NodeSchema(
+            Address=self.address(),
+            Label=self.label(),
+            Group=self.__group__,
+            SubGroup=self.__sub_group__,
+            Version=self.__version__,
+            Data=data_schema,
         )
 
 

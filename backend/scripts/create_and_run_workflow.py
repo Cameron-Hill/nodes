@@ -76,18 +76,18 @@ def get_node(workflow_id: str, node_id: str) -> WorkflowTable.Node:
 
 def add_data_to_node(
     workflow_id: str, node_id: str, node_data_type: NodeDataTypes, key: str, data: Any
-) -> WorkflowTable.NodeData:
+) -> WorkflowTable.Node:
     data = post(
         f"/workflows/{workflow_id}/nodes/{node_id}/data/",
         {"Key": key, "Type": node_data_type, "Data": data},
     )
-    return WorkflowTable.NodeData(**data)
+    return WorkflowTable.Node(**data)
 
-def get_node_data(workflow_id: str, node_id:str)-> list[WorkflowTable.NodeData]:
+def get_node_data(workflow_id: str, node_id:str)-> list[WorkflowTable.Node]:
     data = get(
         f"/workflows/{workflow_id}/nodes/{node_id}/data/",
     )
-    return [WorkflowTable.NodeData(**x) for x in data]
+    return [WorkflowTable.Node(**x) for x in data]
 
 
 if __name__ == "__main__":
@@ -120,16 +120,19 @@ if __name__ == "__main__":
     # --------------------------------------------------
 
     print("Adding Data to Node...")
-    node_data = add_data_to_node(
+    node = add_data_to_node(
         workflow_id=workflow.ID,
         node_id=node.ID,
         node_data_type="options",
         key="options",
         data={"value": f"Test Data: {test_id}"},
     )
-    print(f"Added Data to Node: {node_data.Key} with ID: {node_data.ID}")
+    print(f"Added Data to Node: {node.Address} with ID: {node.ID}")
 
     print("Verifying node Data in Workflow")
-    workflow_node_data = get_node_data(workflow.ID, node.ID)
-    assert node_data.ID in [x.ID for x in workflow_node_data]   
+    node_w_data = get_node(workflow.ID, node.ID)
+    assert node_w_data.ID == node.ID
+    assert node_w_data.Data["options"].Type == "options"
+    assert isinstance(node_w_data.Data["options"].Value, dict)
+    assert node_w_data.Data["options"].Value['value'] == f"Test Data: {test_id}"
     print('\n\nAll Good! 😎')

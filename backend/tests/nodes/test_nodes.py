@@ -85,18 +85,18 @@ def test_call_node_with_input_and_options(manager, node_id, input, options, expe
 
 
 def test_schema_generation_from_user_node_class(UserNode):
-    schema = UserNode.schema()
-    assert schema.address == "user_nodes.UserNode"
-    assert schema.label == "UserNode"
-    assert schema.version == 0
+    schema = UserNode.class_schema()
+    assert schema.Address == "user_nodes.UserNode"
+    assert schema.Label == "UserNode"
+    assert schema.Version == 0
 
 
 def test_schema_generation_for_builtin_node_classes(manager):
     for node in manager.nodes:
-        schema = node.schema()
-        assert schema.address == node.address()
-        assert schema.label == node.label()
-        assert schema.version == node.__version__
+        schema = node.class_schema()
+        assert schema.Address == node.address()
+        assert schema.Label == node.label()
+        assert schema.Version == node.__version__
 
 
 def test_initialize_user_node_with_input_data(UserNode):
