@@ -21,7 +21,7 @@ class WorkflowPostRequest(WorkflowTable.Workflow): ...
 
 class WorkflowNodePostRequest(BaseModel):
     Address: str = Field(
-        ..., title="Node Address", examples=['nodes.builtins.producers.StringProducer'] # type: ignore 
+        ..., title="Node Address", examples=["nodes.builtins.producers.StringProducer"]  # type: ignore
     )
     Version: int
 
@@ -31,15 +31,20 @@ class WorkflowPatchRequest(BaseModel):
     Owner: Optional[str]
 
 
-class NodeDataPostRequest(BaseModel):
-    Type: Literal["options"]
+class NodeDataHandle(BaseModel):
+    NodeID: Annotated[str, NodeID]
     Key: str
+
+
+class NodeDataPostRequest(BaseModel):
+    Key: str
+    Type: Literal["options"]
     Data: Any
 
 
 class EdgePostRequest(BaseModel):
-    From: NodeDataPostRequest
-    To: NodeDataPostRequest
+    From: NodeDataHandle
+    To: NodeDataHandle
 
 
 router = APIRouter(prefix="/workflows", tags=["workflows"])
@@ -249,17 +254,11 @@ def set_data_on_node(
     node = get_node_object(node_id, workflow_id, table)
     instance = get_node_class(node.Address, node.Version, registry=registry)(id=node_id)
     _set_data_on_node(instance, body.Key, body.Type, body.Data)
-    node = WorkflowTable.Node(PartitionKey=workflow_id, **instance.schema().model_dump())
+    node = WorkflowTable.Node(
+        PartitionKey=workflow_id, SortKey=node_id, **instance.schema().model_dump()
+    )
     node.put()
     return node
-
-
-@router.get("/{workflow_id}/edges")
-def get_edges_by_workflow(
-    workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
-):
-    response = table.Edge.query(key=workflow_id)
-    return response.items
 
 
 @router.post("/{workflow_id}/edges")
@@ -267,9 +266,31 @@ def add_edge_to_workflow(
     workflow_id: str,
     body: EdgePostRequest,
     table: WorkflowTable = Depends(get_workflow_table),
-):
+) -> WorkflowTable.Edge:
     edge = table.Edge(PartitionKey=workflow_id, **body.model_dump())
     edge.put()
+    return edge
+
+
+@router.get("/{workflow_id}/edges")
+def get_edges_by_workflow(
+    workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
+) -> list[WorkflowTable.Edge]:
+    response = table.Edge.query(
+        key=workflow_id, key_expression=Key(table.sort_key.name).begins_with("Edge-")
+    )
+    return response.items
+
+
+@router.get("/{workflow_id}/edges/{edge_id}")
+def get_edge_by_id(
+    workflow_id: str, edge_id: str, table: WorkflowTable = Depends(get_workflow_table)
+) -> WorkflowTable.Edge:
+    edge = table.Edge.get(key=workflow_id, sort_key=edge_id)
+    if not edge:
+        raise HTTPException(
+            status_code=404, detail=f"Edge not found: {workflow_id}/{edge_id}"
+        )
     return edge
 
 
@@ -288,12 +309,18 @@ def run_workflow(
     nodes: dict[str, Node] = {}
     for item in workflow_data.items:  # type: ignore
         if isinstance(item, WorkflowTable.Node):
-            nodes[item.ID] = get_node_class(item.Address, item.Version, registry)(
-                id=item.ID
+            workflow.add_node(
+                get_node_class(item.Address, item.Version, registry)(id=item.ID)
             )
     for item in workflow_data.items:
-        a = 1
-
-
+        if isinstance(item, WorkflowTable.Edge):
+           from_node = workflow.get_node_by_id(item.From.NodeID) 
+           to_node = workflow.get_node_by_id(item.To.NodeID) 
+           workflow.add_edge(
+               source=from_node.data[item.From.Key],
+               target=to_node.data[item.To.Key]
+           )
+    output = workflow.run()
+    return output
 #        if isinstance(item, WorkflowTable.NodeData):
 #            _set_data_on_node(nodes[item.NodeID], item.Key, item.Type, item.Data)

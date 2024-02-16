@@ -4,7 +4,16 @@ from pprint import pprint
 from server.database.tables import WorkflowTable, NodeDataTypes
 from typing import Any
 
+from server.routers.workflows import NodeDataHandle
+
+
 URL = "http://localhost:8081"
+VERBOSE = False
+
+
+def verbose(*args):
+    if VERBOSE:
+        print(*args)
 
 
 def exception_handler(func):
@@ -31,16 +40,16 @@ def exception_handler(func):
 @exception_handler
 def get(path, query: dict | None = None, headers: dict | None = None) -> dict:
     url = f'{URL}/{path.lstrip("/")}'.rstrip("/") + "/"
-    print("GET", url, query, headers)
+    verbose("GET", url, query, headers)
     response = requests.get(url, params=query, headers=headers)
     response.raise_for_status()
     return response.json()
 
 
 @exception_handler
-def post(path, data: dict, headers: dict | None = None) -> dict:
-    url = f'{URL}/{path.lstrip("/")}'.rstrip("/") + "/"
-    print("POST", url, data, headers)
+def post(path, data: dict |None = None, headers: dict | None = None) -> dict:
+    url = f'{URL}/{path.lstrip("/")}'.rstrip("/") 
+    verbose("POST", url, data, headers)
     response = requests.post(url, json=data, headers=headers)
     response.raise_for_status()
     return response.json()
@@ -48,6 +57,7 @@ def post(path, data: dict, headers: dict | None = None) -> dict:
 def get_all_workflows() -> list[WorkflowTable.Workflow]:
     data = get(f"/workflows")
     return [WorkflowTable.Workflow(**x) for x in data]
+
 
 def get_workflow(workflow_id: str) -> WorkflowTable.Workflow:
     data = get(f"/workflows/{workflow_id}/")
@@ -65,9 +75,11 @@ def create_node(workflow_id: str, address: str, version: int) -> WorkflowTable.N
     )
     return WorkflowTable.Node(**node)
 
-def get_nodes(workflow_id:str) -> list[WorkflowTable.Node]:
+
+def get_nodes(workflow_id: str) -> list[WorkflowTable.Node]:
     data = get(f"/workflows/{workflow_id}/nodes/")
     return [WorkflowTable.Node(**x) for x in data]
+
 
 def get_node(workflow_id: str, node_id: str) -> WorkflowTable.Node:
     data = get(f"/workflows/{workflow_id}/nodes/{node_id}")
@@ -83,12 +95,30 @@ def add_data_to_node(
     )
     return WorkflowTable.Node(**data)
 
-def get_node_data(workflow_id: str, node_id:str)-> list[WorkflowTable.Node]:
+
+def get_node_data(workflow_id: str, node_id: str) -> list[WorkflowTable.Node]:
     data = get(
         f"/workflows/{workflow_id}/nodes/{node_id}/data/",
     )
     return [WorkflowTable.Node(**x) for x in data]
 
+
+def add_edge_to_workflow(
+    workflow_id: str, from_data: NodeDataHandle, to_data: NodeDataHandle
+) -> WorkflowTable.Edge:
+    edge = post(
+        f"/workflows/{workflow_id}/edges", data={"From": from_data.model_dump(), "To": to_data.model_dump()}
+    )
+    return WorkflowTable.Edge(**edge)
+
+
+def get_edge_from_workflow(workflow_id: str, edge_id: str) -> WorkflowTable.Edge:
+    edge = get(f"/workflows/{workflow_id}/edges/{edge_id}")
+    return WorkflowTable.Edge(**edge)
+
+def run_workflow(workflow_id):
+    run = post(f'/workflows/{workflow_id}/run')
+    a=1
 
 if __name__ == "__main__":
     test_id = uuid()
@@ -97,29 +127,27 @@ if __name__ == "__main__":
 
     print("Creating Workflow...")
     workflow = create_workflow(workflow_name, workflow_owner)
-    print(f"Created Workflow: {workflow.Name} with ID: {workflow.ID}")
+    print(f" - {workflow.ID}")
 
-    print("Verifying workflow ID")
     assert get_workflow(workflow.ID).ID == workflow.ID
-    print("Good!\n\n")
+    print("✅\n\n")
 
     # --------------------------------------------------
 
-    print("Creating Node...")
+    print("Creating String Producer Node...")
     node = create_node(
         workflow_id=workflow.ID,
         address="nodes.builtins.producers.StringProducer",
         version=0,
     )
-    print(f"Created Node: {node.Address} with ID: {node.ID}")
+    print(f" - {node.ID}")
 
-    print("Verifying node ID")
     assert get_node(workflow.ID, node.ID).ID == node.ID
-    print("Good!\n\n")
+    print("✅\n\n")
 
     # --------------------------------------------------
 
-    print("Adding Data to Node...")
+    print("Adding Data to String Producer Node...")
     node = add_data_to_node(
         workflow_id=workflow.ID,
         node_id=node.ID,
@@ -127,12 +155,35 @@ if __name__ == "__main__":
         key="options",
         data={"value": f"Test Data: {test_id}"},
     )
-    print(f"Added Data to Node: {node.Address} with ID: {node.ID}")
 
-    print("Verifying node Data in Workflow")
     node_w_data = get_node(workflow.ID, node.ID)
     assert node_w_data.ID == node.ID
     assert node_w_data.Data["options"].Type == "options"
     assert isinstance(node_w_data.Data["options"].Value, dict)
-    assert node_w_data.Data["options"].Value['value'] == f"Test Data: {test_id}"
-    print('\n\nAll Good! 😎')
+    assert node_w_data.Data["options"].Value["value"] == f"Test Data: {test_id}"
+    print("✅\n\n")
+
+    print("Adding HTTP Get Request Node...")
+    request_node = create_node(
+        workflow_id=workflow.ID,
+        address="nodes.builtins.requests.HTTPGetRequest",
+        version=0,
+    )
+    print(f" - {request_node.ID}")
+
+    assert get_node(workflow.ID, request_node.ID).ID == request_node.ID
+    print("✅\n\n")
+
+    print("Creating new Edge from String Producer to HTTP Get...")
+    edge = add_edge_to_workflow(
+        workflow.ID,
+        from_data=NodeDataHandle(NodeID=node.ID, Key="output"),
+        to_data=NodeDataHandle(NodeID=request_node.ID, Key="url"),
+    )
+    print(f" - {edge.ID}")
+    assert get_edge_from_workflow(workflow.ID, edge.ID).ID == edge.ID
+    print("✅\n\n")
+
+    run_workflow(workflow_id = workflow.ID)
+
+    print("\n\nAll Good! 😎")

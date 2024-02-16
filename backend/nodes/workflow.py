@@ -39,6 +39,12 @@ class Workflow:
     def add_node(self, node: Node) -> None:
         self.nodes.add(node)
 
+    def get_node_by_id(self, id:str) -> Node:
+        for node in self.nodes:
+            if node.id == id:
+                return node
+        raise KeyError(id)
+
     def add_edge(self, source: NodeData, target: NodeData):
         assert source.type == "output", "Source must be a node output"
         assert target.type == "input", "Target must be a node input"
@@ -84,3 +90,4 @@ class Workflow:
             for edge in self.edges:
                 if edge.source == node.output:
                     edge.target.set(node.output.value)
+        a=1

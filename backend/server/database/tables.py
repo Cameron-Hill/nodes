@@ -8,6 +8,7 @@ from functools import cached_property
 
 UUID_PATTERN = r"[a-zA-Z0-9]{22}"  # Change this to shortuuid's only
 
+
 WorkflowID = Field(
     pattern=rf"Workflow\-{UUID_PATTERN}",
     alias="WorkflowID",
@@ -26,6 +27,10 @@ EdgeID = Field(
     pattern=rf"Edge\-{UUID_PATTERN}",
     alias="EdgeID",
 )
+
+class NodeDataHandle(BaseModel):
+    NodeID: Annotated[str, NodeID]
+    Key: str
 
 
 class WorkflowTable(Table):
@@ -70,16 +75,17 @@ class WorkflowTable(Table):
     class Edge(Item):
         PartitionKey: str = WorkflowID
         SortKey: Annotated[str, EdgeID, Field(validate_default=True)] = ""
-        From: str
-        To: str
+        From: NodeDataHandle
+        To: NodeDataHandle
         
         @field_validator("SortKey", mode="before")
         def set_sort_key(cls, v, info: ValidationInfo) -> str:
             if not v:
-                v = f"#Edge-{uuid()}"
+                v = f"Edge-{uuid()}"
             return v  
  
         @computed_field
+        @property
         def ID(self) -> str:
             return self.SortKey
 

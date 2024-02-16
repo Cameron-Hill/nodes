@@ -130,8 +130,8 @@ class Node(ABC):
         self.id: str = id or uuid()
         self.options: dict[str, NodeData] = self._get_options()
         self.inputs: dict[str, NodeData] = self._get_inputs(self.options)
-        self.data: dict[str, NodeData] = {**self.inputs, **self.options}
         self.output: NodeData = self._get_output()
+        self.data: dict[str, NodeData] = {**self.inputs, **self.options, **{'output': self.output}}
 
     @property
     def options_set(self) -> bool:
