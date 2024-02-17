@@ -1,8 +1,11 @@
+import time
 from shortuuid import uuid
 import requests
 from pprint import pprint
+from nodes.workflow import WorkflowSchema
 from server.database.tables import WorkflowTable, NodeDataTypes
 from typing import Any
+import json
 
 from server.routers.workflows import NodeDataHandle
 
@@ -26,9 +29,9 @@ def exception_handler(func):
                 print(f"Error for request: {func.__name__}  :  {args},  {kwargs}")
                 print(f"HTTPError: {e.response.status_code} {e.response.reason}\n")
                 print("--------------------------------------------------\n")
-                if e.response.json():
+                try:
                     pprint(e.response.json())
-                else:
+                except json.JSONDecodeError:
                     print(e.response.text)
                 exit(1)
             else:
@@ -116,9 +119,9 @@ def get_edge_from_workflow(workflow_id: str, edge_id: str) -> WorkflowTable.Edge
     edge = get(f"/workflows/{workflow_id}/edges/{edge_id}")
     return WorkflowTable.Edge(**edge)
 
-def run_workflow(workflow_id):
+def run_workflow(workflow_id) -> WorkflowSchema:
     run = post(f'/workflows/{workflow_id}/run')
-    a=1
+    return WorkflowSchema(**run)
 
 if __name__ == "__main__":
     test_id = uuid()
@@ -153,14 +156,14 @@ if __name__ == "__main__":
         node_id=node.ID,
         node_data_type="options",
         key="options",
-        data={"value": f"Test Data: {test_id}"},
+        data={"value": "http://localhost:8081/info"},
     )
 
     node_w_data = get_node(workflow.ID, node.ID)
     assert node_w_data.ID == node.ID
     assert node_w_data.Data["options"].Type == "options"
     assert isinstance(node_w_data.Data["options"].Value, dict)
-    assert node_w_data.Data["options"].Value["value"] == f"Test Data: {test_id}"
+    assert node_w_data.Data["options"].Value["value"] == "http://localhost:8081/info"
     print("✅\n\n")
 
     print("Adding HTTP Get Request Node...")
@@ -184,6 +187,15 @@ if __name__ == "__main__":
     assert get_edge_from_workflow(workflow.ID, edge.ID).ID == edge.ID
     print("✅\n\n")
 
-    run_workflow(workflow_id = workflow.ID)
+    print("Running Workflow...")
+    t1 = time.time()
+    response = run_workflow(workflow_id = workflow.ID)
+    assert response.LastRunDetails
+    print(f'Finished Executing: {response.LastRunDetails.NodesExecuted} nodes after {time.time() - t1:.2f} seconds')
+    print("✅\n\n")
+
+    final_output = [x for x in response.Nodes if x.Address == "nodes.builtins.requests.HTTPGetRequest"][0]
+    print(json.dumps(final_output.Data["output"].Value, indent=4))
+    print("✅\n\n")
 
     print("\n\nAll Good! 😎")

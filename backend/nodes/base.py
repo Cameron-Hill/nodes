@@ -29,19 +29,33 @@ class Option(BaseModel):
     Options must be object-type base models that are a subclass of this option class.
     """
 
+
 class NodeDataSchema(BaseModel):
     Type: NodeDataTypes
     Schema: dict
     Value: Optional[Any | None] = None
-    
+
+
+class NodeDataHandle(BaseModel):
+    NodeID: str
+    Key: str
+
+
 class NodeSchema(BaseModel):
     """This class represents the schema for a node."""
+
     Label: str
     Address: str
     Group: str | None
     SubGroup: str | None
     Version: int
     Data: dict[str, NodeDataSchema]
+
+
+class EdgeSchema(BaseModel):
+    From: NodeDataHandle
+    To: NodeDataHandle
+
 
 class NodeData:
     def __init__(
@@ -131,7 +145,12 @@ class Node(ABC):
         self.options: dict[str, NodeData] = self._get_options()
         self.inputs: dict[str, NodeData] = self._get_inputs(self.options)
         self.output: NodeData = self._get_output()
-        self.data: dict[str, NodeData] = {**self.inputs, **self.options, **{'output': self.output}}
+        self.data: dict[str, NodeData] = {
+            **self.inputs,
+            **self.options,
+            **{"output": self.output},
+        }
+        self.input_data: dict[str, NodeData] = {**self.inputs, **self.options}
 
     @property
     def options_set(self) -> bool:
@@ -143,7 +162,7 @@ class Node(ABC):
         A node is ready if:
          - All data is set.
         """
-        return all(data.is_set for data in self.data.values())
+        return all(data.is_set for data in self.input_data.values())
 
     @classmethod
     def _get_option_params(cls) -> dict[str, Parameter]:
@@ -211,12 +230,12 @@ class Node(ABC):
             if key in self.data:
                 self.data[key].set(value)
 
-        if unset := [k for k, v in self.data.items() if not v.is_set]:
+        if unset := [k for k, v in self.input_data.items() if not v.is_set and v.type]:
             raise ValueError(
                 f"Cannot Call Node: {self.label()} due to unset Inputs: {unset}"
             )
 
-        params = {k: v.value for k, v in self.data.items()}
+        params = {k: v.value for k, v in self.input_data.items()}
 
         try:
             ret = self.run(**params)
@@ -236,16 +255,24 @@ class Node(ABC):
         ) from exception
 
     @classmethod
-    def data_schema(cls, data_values: dict[tuple[NodeDataTypes, str], Any]|None=None) -> dict[str,NodeDataSchema]:
+    def data_schema(
+        cls, data_values: dict[tuple[NodeDataTypes, str], Any] | None = None
+    ) -> dict[str, NodeDataSchema]:
         data_values = data_values or {}
-        output_schema = {("output","output"):TypeAdapter(cls.run.__annotations__.get("return")).json_schema()} 
+        output_schema = {
+            ("output", "output"): TypeAdapter(
+                cls.run.__annotations__.get("return")
+            ).json_schema()
+        }
         input_params = cls._get_input_params()
         option_params = cls._get_option_params()
         input_schema = {
-            ('input', k): TypeAdapter(v.annotation).json_schema() for k, v in input_params.items()
+            ("input", k): TypeAdapter(v.annotation).json_schema()
+            for k, v in input_params.items()
         }
         options_schema = {
-            ('options', k): TypeAdapter(v.annotation).json_schema() for k, v in option_params.items()
+            ("options", k): TypeAdapter(v.annotation).json_schema()
+            for k, v in option_params.items()
         }
 
         data = {}
@@ -256,10 +283,12 @@ class Node(ABC):
         data_schema: dict[str, NodeDataSchema] = {}
         for (type, key), schema in data.items():
             if (type, key) in data_values:
-                data_schema[key] = NodeDataSchema(Type=type, Schema=schema, Value=data_values[(type, key)])
+                data_schema[key] = NodeDataSchema(
+                    Type=type, Schema=schema, Value=data_values[(type, key)]
+                )
             else:
                 data_schema[key] = NodeDataSchema(Type=type, Schema=schema)
-        
+
         return data_schema
 
     @classmethod
@@ -310,3 +339,9 @@ class NodeSource(ABC):
 class Edge:
     source: NodeData
     target: NodeData
+
+    def schema(self) -> EdgeSchema:
+        return EdgeSchema(
+            From=NodeDataHandle(NodeID=self.source.node.id, Key=self.source.key),
+            To=NodeDataHandle(NodeID=self.target.node.id, Key=self.target.key),
+        )

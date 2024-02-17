@@ -9,7 +9,7 @@ from pydantic import BaseModel, ValidationError, Field
 from typing import Annotated, Optional, Literal, Any, Type
 from nodes import NodeRegistry, get_node_registry, manager
 from nodes.base import Edge, Node, NodeData, NodeDataTypes
-from nodes.workflow import Workflow
+from nodes.workflow import Workflow, WorkflowSchema
 from boto3.dynamodb.conditions import Key, And
 
 logger = getLogger(__name__)
@@ -299,19 +299,21 @@ def run_workflow(
     workflow_id,
     table: WorkflowTable = Depends(get_workflow_table),
     registry: NodeRegistry = Depends(get_node_registry),
-):
+) -> WorkflowSchema:
     workflow_data = table.query(
         Key(table.partition_key.name).eq(workflow_id),
     )
     if not workflow_data:
         raise HTTPException(status_code=404, detail=f"No such workflow: {workflow_id}")
-    workflow = Workflow()
+    workflow = Workflow(workflow_id)
     nodes: dict[str, Node] = {}
     for item in workflow_data.items:  # type: ignore
         if isinstance(item, WorkflowTable.Node):
-            workflow.add_node(
-                get_node_class(item.Address, item.Version, registry)(id=item.ID)
-            )
+            node = get_node_class(item.Address, item.Version, registry)(id=item.ID)
+            for key, data in item.Data.items():
+                if data.Value is not None:
+                    node.data[key].set(data.Value)
+            workflow.add_node(node)
     for item in workflow_data.items:
         if isinstance(item, WorkflowTable.Edge):
            from_node = workflow.get_node_by_id(item.From.NodeID) 
@@ -320,7 +322,7 @@ def run_workflow(
                source=from_node.data[item.From.Key],
                target=to_node.data[item.To.Key]
            )
-    output = workflow.run()
-    return output
+    workflow.run()
+    return workflow.schema() 
 #        if isinstance(item, WorkflowTable.NodeData):
 #            _set_data_on_node(nodes[item.NodeID], item.Key, item.Type, item.Data)
