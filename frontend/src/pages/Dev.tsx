@@ -14,6 +14,8 @@ const Break = () => {
   );
 };
 
+
+
 export default function Dev() {
   return (
     <Page>
@@ -24,6 +26,7 @@ export default function Dev() {
       </section>
       <Break />
       <section>
+        <h2 className="text-2xl">Workflows</h2>
         <WorkflowListView />
       </section>
     <Break />

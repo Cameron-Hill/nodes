@@ -125,6 +125,17 @@ def get_workflow_by_id(
     workflow = get_workflow_object(workflow_id, table)
     return workflow
 
+@router.delete("/{workflow_id}", responses={404: Error404, 500: Error500})
+def delete_workflow_by_id(
+    workflow_id: str, dryRun=False, table: WorkflowTable = Depends(get_workflow_table)
+) -> list[WorkflowTable.Node | WorkflowTable.Edge | WorkflowTable.Workflow]  :
+    get_workflow_object(workflow_id, table) # Raises 404 if not found
+    response = table.query(Key(table.partition_key.name).eq(workflow_id))
+    for item in response.items:
+        if not dryRun:
+            item.delete()
+        logger.debug(f"{'DRY_RUN:  'if dryRun else ''}delete {workflow_id}: Deleted: {item}")
+    return response.items # type: ignore 
 
 @router.get("/{workflow_id}/all", responses={404: Error404, 500: Error500})
 def get_all_workflow_elements(
