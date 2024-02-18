@@ -24,7 +24,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DialogClose } from "@radix-ui/react-dialog";
 
 export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workflow, onSuccess?: ()=>void}) {
@@ -33,8 +33,7 @@ export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workf
     queryFn: () => deleteWorkflow(workflow.ID, true),
   });
 
-  const client = new QueryClient();
-
+  const client = useQueryClient();
   const mutation = useMutation({
     mutationFn: () => deleteWorkflow(workflow.ID),
     onSuccess: () => {
@@ -43,7 +42,6 @@ export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workf
     },
   });
 
-  console.log("Preview Fired!");
 
   if (query.isLoading) {
     return <p>Loading...</p>;
@@ -139,9 +137,11 @@ export function ConfirmDeleteDialog({ workflow, onSuccess}: { workflow: Workflow
 export function DeleteWorkflowDialogButton({
   workflowList,
   buttonText = "Delete workflow",
+  onSuccess,
 }: {
   buttonText?: string;
   workflowList: Workflow[];
+  onSuccess?: ()=>void;
 }) {
   const [selected, setSelected] = useState<Workflow | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -211,7 +211,10 @@ export function DeleteWorkflowDialogButton({
           )}
         </div>
         <DialogFooter>
-          <ConfirmDeleteDialog workflow={selected} onSuccess={()=> setSelected(null)}/>
+          <ConfirmDeleteDialog workflow={selected} onSuccess={()=> {
+            setSelected(null)
+            if (onSuccess) onSuccess()
+          }}/>
         </DialogFooter>
       </DialogContent>
     </Dialog>

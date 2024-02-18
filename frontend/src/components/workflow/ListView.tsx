@@ -17,14 +17,13 @@ const WorkflowListItem = (workflow: Workflow) => {
 export default function WorkflowListView() {
   const query = useQuery({ queryKey: ["workflows"], queryFn: getWorkflows });
   const queryClient = useQueryClient();
-
   const mutation = useMutation({
     mutationFn: createWorkflow,
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["workflows"]});
-    }
+      queryClient.invalidateQueries({ queryKey: ["workflows"] });
+    },
   });
-  
+
   if (query.isLoading) {
     return <div>Loading...</div>;
   }
@@ -37,13 +36,11 @@ export default function WorkflowListView() {
   if (query.data) {
     workflows = query.data;
   }
-
   return (
     <Table>
       <TableCaption className="space-x-32">
-
-        <CreateWorkflowDialogButton buttonText="Add" onSubmit={mutation.mutate}/>
-        <DeleteWorkflowDialogButton buttonText="Delete" workflowList={workflows}/>
+        <CreateWorkflowDialogButton buttonText="Add" onSubmit={mutation.mutate} />
+        <DeleteWorkflowDialogButton buttonText="Delete" workflowList={workflows} />
       </TableCaption>
       <TableHeader>
         <TableRow>
