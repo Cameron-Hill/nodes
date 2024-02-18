@@ -28,3 +28,31 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+
+
+### Initial Setup
+
+#### Project Setup
+https://vitejs.dev/guide/
+
+https://tailwindcss.com/docs/guides/vite
+
+https://tanstack.com/query/latest/docs/framework/react/installation
+
+https://ui.shadcn.com/docs/installation/vite
+
+#### IDE Setup
+
+https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss#recommended-vs-code-settings
+
+You definitely want at least these:
+
+    "editor.quickSuggestions": {
+      "strings": "on"
+    },
+    "files.associations": {
+      "*.css": "tailwindcss"
+    },
+ 
