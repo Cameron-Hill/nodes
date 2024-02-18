@@ -11,6 +11,7 @@ from nodes import NodeRegistry, get_node_registry, manager
 from nodes.base import Edge, Node, NodeData, NodeDataTypes
 from nodes.workflow import Workflow, WorkflowSchema
 from boto3.dynamodb.conditions import Key, And
+from server.responses import Error404, Error500
 
 logger = getLogger(__name__)
 
@@ -102,13 +103,13 @@ def _set_data_on_node(node: Node, key: str, type: NodeDataTypes, value: Any) -> 
         )
 
 
-@router.get("/", response_model=list[WorkflowTable.Workflow])
+@router.get("/", response_model=list[WorkflowTable.Workflow], responses={500: Error500})
 def get_workflows(table: WorkflowTable = Depends(get_workflow_table)):
     scanned_items = table.Workflow.scan()
     return scanned_items.items
 
 
-@router.post("/", response_model=WorkflowTable.Workflow)
+@router.post("/", response_model=WorkflowTable.Workflow, responses={500: Error500})
 def create_workflow(
     body: WorkflowPostRequest, table: WorkflowTable = Depends(get_workflow_table)
 ):
@@ -117,7 +118,7 @@ def create_workflow(
     return workflow
 
 
-@router.get("/{workflow_id}", response_model=WorkflowTable.Workflow)
+@router.get("/{workflow_id}", response_model=WorkflowTable.Workflow, responses={404: Error404, 500: Error500})
 def get_workflow_by_id(
     workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ):
@@ -125,7 +126,7 @@ def get_workflow_by_id(
     return workflow
 
 
-@router.get("/{workflow_id}/all")
+@router.get("/{workflow_id}/all", responses={404: Error404, 500: Error500})
 def get_all_workflow_elements(
     workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ) -> list[WorkflowTable.Workflow | WorkflowTable.Node | WorkflowTable.Edge]:
@@ -133,7 +134,7 @@ def get_all_workflow_elements(
     return items.items  # type: ignore
 
 
-@router.patch("/{workflow_id}", response_model=WorkflowTable.Workflow)
+@router.patch("/{workflow_id}", response_model=WorkflowTable.Workflow, responses={404: Error404, 500: Error500})
 def update_workflow_by_id(
     workflow_id: str,
     body: WorkflowPatchRequest,
@@ -144,7 +145,7 @@ def update_workflow_by_id(
     return workflow
 
 
-@router.get("/{workflow_id}/nodes", response_model=list[WorkflowTable.Node])
+@router.get("/{workflow_id}/nodes", response_model=list[WorkflowTable.Node], responses={404: Error404, 500: Error500})
 def get_nodes_by_workflow(
     workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ):
@@ -152,7 +153,7 @@ def get_nodes_by_workflow(
     return response.items
 
 
-@router.get("/{workflow_id}/nodes/{node_id}", response_model=WorkflowTable.Node)
+@router.get("/{workflow_id}/nodes/{node_id}", response_model=WorkflowTable.Node, responses={404: Error404, 500: Error500})
 def get_node_by_id(
     workflow_id: str,
     node_id: str,
@@ -162,7 +163,7 @@ def get_node_by_id(
     return node
 
 
-@router.post("/{workflow_id}/nodes")
+@router.post("/{workflow_id}/nodes", responses={404: Error404, 500: Error500})
 def add_node_to_workflow(
     workflow_id: str,
     body: WorkflowNodePostRequest,
@@ -177,7 +178,7 @@ def add_node_to_workflow(
     return node
 
 
-@router.delete("/{workflow_id}/nodes/{node_id}")
+@router.delete("/{workflow_id}/nodes/{node_id}", responses={404: Error404, 500: Error500})
 def delete_node_from_workflow(
     workflow_id: str, node_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ) -> list[WorkflowTable.Node]:
@@ -243,7 +244,7 @@ def delete_node_from_workflow(
 #    return node_data
 
 
-@router.post("/{workflow_id}/nodes/{node_id}/data")
+@router.post("/{workflow_id}/nodes/{node_id}/data", responses={404: Error404, 500: Error500})
 def set_data_on_node(
     workflow_id: str,
     node_id: str,
@@ -261,7 +262,7 @@ def set_data_on_node(
     return node
 
 
-@router.post("/{workflow_id}/edges")
+@router.post("/{workflow_id}/edges", responses={404: Error404, 500: Error500})
 def add_edge_to_workflow(
     workflow_id: str,
     body: EdgePostRequest,
@@ -272,7 +273,7 @@ def add_edge_to_workflow(
     return edge
 
 
-@router.get("/{workflow_id}/edges")
+@router.get("/{workflow_id}/edges", responses={404: Error404, 500: Error500})
 def get_edges_by_workflow(
     workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ) -> list[WorkflowTable.Edge]:
@@ -282,7 +283,7 @@ def get_edges_by_workflow(
     return response.items
 
 
-@router.get("/{workflow_id}/edges/{edge_id}")
+@router.get("/{workflow_id}/edges/{edge_id}", responses={404: Error404, 500: Error500})
 def get_edge_by_id(
     workflow_id: str, edge_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ) -> WorkflowTable.Edge:
@@ -294,7 +295,7 @@ def get_edge_by_id(
     return edge
 
 
-@router.post("/{workflow_id}/run")
+@router.post("/{workflow_id}/run", responses={404: Error404, 500: Error500})
 def run_workflow(
     workflow_id,
     table: WorkflowTable = Depends(get_workflow_table),

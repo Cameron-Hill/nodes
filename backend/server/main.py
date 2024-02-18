@@ -1,13 +1,16 @@
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from . import models
 from .database import engine
 from .routers import users, nodes, items, workflows
 from pydantic import ValidationError, BaseModel
-import json
 import os
 import logging
+import logging.config
+from yaml import safe_load
 
+ROOT = os.path.dirname(__file__)
 
 LOG_LEVELS = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "OFF"]
 
@@ -15,6 +18,11 @@ level = os.environ.get("LOG_LEVEL", "DEBUG").upper().strip()
 if level not in LOG_LEVELS:
     raise ValueError(f"Invalid log level {level}, must be one of{LOG_LEVELS}")
 
+config = os.environ.get("LOG_CONFIG", os.path.join(ROOT, "log_config.yaml"))
+
+with open(config) as f:
+    config = safe_load(f)
+logging.config.dictConfig(config) 
 logging.basicConfig(level=level)
 
 logger = logging.getLogger(__name__)
@@ -23,23 +31,47 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-@app.exception_handler(ValidationError)
-def handle_pydantic_validation_errors(
-    request: Request, exc: ValidationError
-) -> JSONResponse:
-    detail = {}
-    detail["error"] = json.loads(exc.json())
-    for error in detail["error"]:
-        if isinstance(error, dict):
-            error.pop("url", None)
-            error.pop("ctx", None)
-    detail["extra"] = []
-    for note in getattr(exc, "__notes__", []):
-        try:
-            detail["extra"].append(json.loads(note))
-        except Exception:
-            detail["extra"].append({"msg": note})
-    return JSONResponse(content=detail, status_code=422)
+origin  = [
+    "http://localhost",
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:8000",
+    "http://localhost:8081",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origin,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+
+)
+
+# @app.exception_handler(ValidationError)
+# def handle_pydantic_validation_errors(
+#     request: Request, exc: ValidationError
+# ) -> JSONResponse:
+#     detail = {}
+#     detail["error"] = json.loads(exc.json())
+#     for error in detail["error"]:
+#         if isinstance(error, dict):
+#             error.pop("url", None)
+#             error.pop("ctx", None)
+#     detail["extra"] = []
+#     for note in getattr(exc, "__notes__", []):
+#         try:
+#             detail["extra"].append(json.loads(note))
+#         except Exception:
+#             detail["extra"].append({"msg": note})
+#     return JSONResponse(content=detail, status_code=422)
+
+@app.exception_handler(Exception)
+def handle_internal_server_errors(request: Request, exc: Exception) -> JSONResponse:
+    logger.exception(exc)
+    return JSONResponse(
+        content={"detail": "Internal Server Error"}, status_code=500
+    )
 
 class InfoSchema(BaseModel):
     name: str = "Workflow Engine"

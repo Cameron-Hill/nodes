@@ -66,10 +66,7 @@ SelectType = Literal[
     "ALL_ATTRIBUTES", "ALL_PROJECTED_ATTRIBUTES", "COUNT", "SPECIFIC_ATTRIBUTES"
 ]
 
-logger = getLogger(__name__)
-logger.addHandler(StreamHandler(sys.stdout))
-logger.setLevel("INFO")
-
+logger = getLogger('server.database')
 
 class KeySchemaElementType(TypedDict):
     AttributeName: str
@@ -337,7 +334,7 @@ class Table:
             finally:
                 _cache_clear()
         else:
-            logger.info(f"Using existing table: {self.__tablename__}")
+            logger.debug(f"Using existing table: {self.__tablename__}")
             self._table = self.resource.Table(self.__tablename__)
         self._apply_table_to_items()
 

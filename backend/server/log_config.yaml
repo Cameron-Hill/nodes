@@ -3,10 +3,12 @@ disable_existing_loggers: False
 formatters:
   default:
     # "()": uvicorn.logging.DefaultFormatter
-    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format: '%(asctime)s %(levelname)s:   %(name)s - %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
   access:
     # "()": uvicorn.logging.AccessFormatter
-    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format: '%(asctime)s %(levelname)s:   %(name)s - %(message)'
+    datefmt: '%Y-%m-%d %H:%M:%S'
 handlers:
   default:
     formatter: default
@@ -26,6 +28,21 @@ loggers:
     level: INFO
     handlers:
       - access
+    propagate: no
+  botocore:
+    level: INFO
+    handlers:
+      - default
+    propagate: no
+  boto3:
+    level: INFO
+    handlers:
+      - default
+    propagate: no
+  urllib3:
+    level: INFO
+    handlers:
+      - default
     propagate: no
 root:
   level: DEBUG
