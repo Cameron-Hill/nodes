@@ -50,6 +50,7 @@ class WorkflowTable(Table):
         ]  # Sort key is set by validator
         Name: str
         Owner: str
+        Resource: Literal["Workflow"] = "Workflow"
 
         @computed_field
         @cached_property
@@ -67,6 +68,8 @@ class WorkflowTable(Table):
             Field(default_factory=lambda: f"Node-{uuid()}", validate_default=True),
             NodeID,
         ]
+        Resource: Literal["Node"] = "Node"
+
         @computed_field
         @property
         def ID(self) -> str:
@@ -77,6 +80,7 @@ class WorkflowTable(Table):
         SortKey: Annotated[str, EdgeID, Field(validate_default=True)] = ""
         From: NodeDataHandle
         To: NodeDataHandle
+        Resource: Literal["Edge"] = "Edge"
         
         @field_validator("SortKey", mode="before")
         def set_sort_key(cls, v, info: ValidationInfo) -> str:

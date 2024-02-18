@@ -9,6 +9,7 @@ export type Workflow = {
   Name: string;
   Owner: string;
   ID: string;
+  Resource: "Workflow"
 };
 
 interface NodeDataItem {
@@ -35,6 +36,7 @@ export type Node = {
   WorkflowID: string;
   NodeID: string;
   ID: string;
+  Resource: "Node";
 };
 
 export type Edge = {
@@ -43,6 +45,7 @@ export type Edge = {
   ID: string;
   From: NodeDataHandle;
   To: NodeDataHandle;
+  Resource: "Edge";
 };
 export type WorkflowPost = {
   Name: string;

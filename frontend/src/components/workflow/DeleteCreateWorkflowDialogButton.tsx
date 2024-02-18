@@ -24,18 +24,25 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { DialogClose } from "@radix-ui/react-dialog";
 
-export function DeleteWorkflowPreview({
-  workflow,
-}: {
-  workflow: Workflow;
-  onPreviewReady: (ready: boolean) => void;
-}) {
+export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workflow, onSuccess?: ()=>void}) {
   const query = useQuery({
     queryKey: ["deleteWorkflow", workflow.ID, "dryRun"],
     queryFn: () => deleteWorkflow(workflow.ID, true),
   });
+
+  const client = new QueryClient();
+
+  const mutation = useMutation({
+    mutationFn: () => deleteWorkflow(workflow.ID),
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["workflows"] });
+      if (onSuccess) onSuccess();
+    },
+  });
+
   console.log("Preview Fired!");
 
   if (query.isLoading) {
@@ -47,16 +54,61 @@ export function DeleteWorkflowPreview({
   if (query.data === undefined) {
     return <p>Unable to fetch preview data.</p>;
   }
+  console.log("Preview Data", query.data);
+  const workspaces = query.data.filter((d) => d.Resource === "Workflow");
+  const edges = query.data.filter((d) => d.Resource === "Edge");
+  const nodes = query.data.filter((d) => d.Resource === "Node");
   return (
-    <div>
-      {query.data.map((item) => (
-        <div key={item.ID} className="grid grid-cols-5 items-center gap-2"></div>
-      ))}
-    </div>
+    <>
+      <div>
+        <h2 className="text-sm">
+          <b>Workspaces:</b>
+        </h2>
+        {workspaces.map((w) => (
+          <p className="text-xs text-slate-700" key={w.ID}>
+            - {w.ID}
+          </p>
+        ))}
+      </div>
+      <div>
+        <h2 className="text-sm">
+          <b>Edges</b>
+        </h2>
+        {edges.map((e) => (
+          <p className="text-xs" key={e.ID}>
+            {" "}
+            - {e.ID}
+          </p>
+        ))}
+      </div>
+      <div>
+        <h2 className="text-sm">
+          <b>Nodes</b>
+        </h2>
+        {nodes.map((n) => (
+          <p className="text-xs" key={n.ID}>
+            {n.ID}
+          </p>
+        ))}
+      </div>
+      <DialogClose asChild>
+        <AlertDialogAction
+          className="bg-destructive"
+          onClick={() => {
+            console.log("See Ya!");
+            mutation.mutate();
+          }}
+        >
+          <Trash2 className="mr-1" />
+          Delete
+        </AlertDialogAction>
+      </DialogClose>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+    </>
   );
 }
 
-export function ConfirmDeleteDialog({ workflow }: { workflow: Workflow | null }) {
+export function ConfirmDeleteDialog({ workflow, onSuccess}: { workflow: Workflow | null, onSuccess?: ()=>void }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -72,16 +124,11 @@ export function ConfirmDeleteDialog({ workflow }: { workflow: Workflow | null })
             This will permanently delete the workflow <b>{workflow?.Name}</b> and all of its data.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogContent>
-          {workflow && <DeleteWorkflowPreview workflow={workflow} />}
-        </AlertDialogContent>
+
+        {workflow && <DeleteWorkflowPreview workflow={workflow} onSuccess={onSuccess} />}
         {!workflow && (
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-destructive">
-              <Trash2 className="mr-1" />
-              Delete
-            </AlertDialogAction>
           </AlertDialogFooter>
         )}
       </AlertDialogContent>
@@ -164,7 +211,7 @@ export function DeleteWorkflowDialogButton({
           )}
         </div>
         <DialogFooter>
-          <ConfirmDeleteDialog workflow={selected} />
+          <ConfirmDeleteDialog workflow={selected} onSuccess={()=> setSelected(null)}/>
         </DialogFooter>
       </DialogContent>
     </Dialog>

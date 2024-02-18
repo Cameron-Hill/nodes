@@ -127,7 +127,7 @@ def get_workflow_by_id(
 
 @router.delete("/{workflow_id}", responses={404: Error404, 500: Error500})
 def delete_workflow_by_id(
-    workflow_id: str, dryRun=False, table: WorkflowTable = Depends(get_workflow_table)
+    workflow_id: str, dryRun:bool=False, table: WorkflowTable = Depends(get_workflow_table)
 ) -> list[WorkflowTable.Node | WorkflowTable.Edge | WorkflowTable.Workflow]  :
     get_workflow_object(workflow_id, table) # Raises 404 if not found
     response = table.query(Key(table.partition_key.name).eq(workflow_id))

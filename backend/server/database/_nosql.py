@@ -334,7 +334,6 @@ class Table:
             finally:
                 _cache_clear()
         else:
-            logger.debug(f"Using existing table: {self.__tablename__}")
             self._table = self.resource.Table(self.__tablename__)
         self._apply_table_to_items()
 

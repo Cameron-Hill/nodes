@@ -6,13 +6,24 @@ from nodes.workflow import WorkflowSchema
 from server.database.tables import WorkflowTable, NodeDataTypes
 from typing import Any
 import json
-
+from contextlib import contextmanager
 from server.routers.workflows import NodeDataHandle
 
 
 URL = "http://localhost:8081"
 VERBOSE = False
 
+class TimingsData:
+    def __init__(self ):
+        self.label = ""
+        self.start_time = time.time()
+        self.suffix = "\n"
+
+@contextmanager
+def timings():
+    t = TimingsData()
+    yield t
+    print(f"{t.label} ({time.time() - t.start_time:.2f}s){t.suffix}")
 
 def verbose(*args):
     if VERBOSE:
@@ -129,73 +140,75 @@ if __name__ == "__main__":
     workflow_name = f"Test Workflow {test_id}"
 
     print("Creating Workflow...")
-    workflow = create_workflow(workflow_name, workflow_owner)
-    print(f" - {workflow.ID}")
-
-    assert get_workflow(workflow.ID).ID == workflow.ID
-    print("✅\n\n")
+    with timings() as t:
+        workflow = create_workflow(workflow_name, workflow_owner)
+        t.label = f"✅ - {workflow.ID}"
+        assert get_workflow(workflow.ID).ID == workflow.ID
 
     # --------------------------------------------------
 
     print("Creating String Producer Node...")
-    node = create_node(
-        workflow_id=workflow.ID,
-        address="nodes.builtins.producers.StringProducer",
-        version=0,
-    )
-    print(f" - {node.ID}")
+    with timings() as t:
+        node = create_node(
+            workflow_id=workflow.ID,
+            address="nodes.builtins.producers.StringProducer",
+            version=0,
+        )
+        t.label = f"✅ - {node.ID}"
 
-    assert get_node(workflow.ID, node.ID).ID == node.ID
-    print("✅\n\n")
+        assert get_node(workflow.ID, node.ID).ID == node.ID
 
     # --------------------------------------------------
 
     print("Adding Data to String Producer Node...")
-    node = add_data_to_node(
-        workflow_id=workflow.ID,
-        node_id=node.ID,
-        node_data_type="options",
-        key="options",
-        data={"value": "http://localhost:8081/info"},
-    )
+    with timings() as t: 
+        node = add_data_to_node(
+            workflow_id=workflow.ID,
+            node_id=node.ID,
+            node_data_type="options",
+            key="options",
+            data={"value": "http://localhost:8081/info"},
+        )
 
-    node_w_data = get_node(workflow.ID, node.ID)
-    assert node_w_data.ID == node.ID
-    assert node_w_data.Data["options"].Type == "options"
-    assert isinstance(node_w_data.Data["options"].Value, dict)
-    assert node_w_data.Data["options"].Value["value"] == "http://localhost:8081/info"
-    print("✅\n\n")
-
+        node_w_data = get_node(workflow.ID, node.ID)
+        assert node_w_data.ID == node.ID
+        assert node_w_data.Data["options"].Type == "options"
+        assert isinstance(node_w_data.Data["options"].Value, dict)
+        assert node_w_data.Data["options"].Value["value"] == "http://localhost:8081/info"
+        t.label = f'✅ - {node_w_data.Data["options"].Value["value"] }'
+    
+    
     print("Adding HTTP Get Request Node...")
-    request_node = create_node(
-        workflow_id=workflow.ID,
-        address="nodes.builtins.requests.HTTPGetRequest",
-        version=0,
-    )
-    print(f" - {request_node.ID}")
+    with timings() as t:
+        request_node = create_node(
+            workflow_id=workflow.ID,
+            address="nodes.builtins.requests.HTTPGetRequest",
+            version=0,
+        )
 
-    assert get_node(workflow.ID, request_node.ID).ID == request_node.ID
-    print("✅\n\n")
+        assert get_node(workflow.ID, request_node.ID).ID == request_node.ID
+        t.label = f"✅ - {request_node.ID}"
 
     print("Creating new Edge from String Producer to HTTP Get...")
-    edge = add_edge_to_workflow(
-        workflow.ID,
-        from_data=NodeDataHandle(NodeID=node.ID, Key="output"),
-        to_data=NodeDataHandle(NodeID=request_node.ID, Key="url"),
-    )
-    print(f" - {edge.ID}")
-    assert get_edge_from_workflow(workflow.ID, edge.ID).ID == edge.ID
-    print("✅\n\n")
+    with timings() as t:
+        edge = add_edge_to_workflow(
+            workflow.ID,
+            from_data=NodeDataHandle(NodeID=node.ID, Key="output"),
+            to_data=NodeDataHandle(NodeID=request_node.ID, Key="url"),
+        )
+        print(f" - {edge.ID}")
+        assert get_edge_from_workflow(workflow.ID, edge.ID).ID == edge.ID
+        t.label = "✅"
 
     print("Running Workflow...")
-    t1 = time.time()
-    response = run_workflow(workflow_id = workflow.ID)
-    assert response.LastRunDetails
-    print(f'Finished Executing: {response.LastRunDetails.NodesExecuted} nodes after {time.time() - t1:.2f} seconds')
-    print("✅\n\n")
+    with timings() as t:
+        response = run_workflow(workflow_id = workflow.ID)
+        assert response.LastRunDetails
+        t.label = f'✅ - Finished Executing: {response.LastRunDetails.NodesExecuted}'
 
+
+    print("\n\n-----------------\n")
     final_output = [x for x in response.Nodes if x.Address == "nodes.builtins.requests.HTTPGetRequest"][0]
     print(json.dumps(final_output.Data["output"].Value, indent=4))
-    print("✅\n\n")
 
     print("\n\nAll Good! 😎")
