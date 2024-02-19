@@ -104,3 +104,35 @@ export async function deleteWorkflow(workflowId: string, dryRun: boolean = false
   }
   return response.json();
 }
+
+
+export async function getWorkflowDetails(workflowId: string): Promise<{ workflow: Workflow, nodes: Node[], edges: Edge[] }> {
+  const response = await fetch(`${URL}/workflows/${workflowId}/all`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const data = await response.json();
+  const workflow = data.find((d: { Resource: string; }) => d.Resource === "Workflow");
+  const edges = data.filter((d: { Resource: string; }) => d.Resource === "Edge");
+  const nodes = data.filter((d: { Resource: string; }) => d.Resource === "Node");
+  return { workflow, nodes, edges};  
+}
+
+
+export async function getNodes(){
+  const response = await fetch(`${URL}/nodes/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+}

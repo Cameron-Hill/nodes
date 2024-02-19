@@ -1,6 +1,6 @@
-import { createWorkflow, getWorkflows, Workflow } from "@/api/workflowAPI";
+import { createWorkflow, Workflow } from "@/api/workflowAPI";
 import { Table, TableCaption, TableBody, TableRow, TableHead, TableHeader, TableCell } from "@/components/ui/table";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateWorkflowDialogButton } from "./CreateWorkflowDialogButton";
 import { DeleteWorkflowDialogButton } from "./DeleteCreateWorkflowDialogButton";
 
@@ -14,8 +14,7 @@ const WorkflowListItem = (workflow: Workflow) => {
   );
 };
 
-export default function WorkflowListView() {
-  const query = useQuery({ queryKey: ["workflows"], queryFn: getWorkflows });
+export default function WorkflowListView({ workflows }: { workflows: Workflow[]}) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: createWorkflow,
@@ -23,19 +22,6 @@ export default function WorkflowListView() {
       queryClient.invalidateQueries({ queryKey: ["workflows"] });
     },
   });
-
-  if (query.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (query.isError) {
-    return <div>Error: {query.error.message}</div>;
-  }
-
-  let workflows = [] as Workflow[];
-  if (query.data) {
-    workflows = query.data;
-  }
   return (
     <Table>
       <TableCaption className="space-x-32">
