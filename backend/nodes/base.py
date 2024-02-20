@@ -45,6 +45,7 @@ class NodeSchema(BaseModel):
     """This class represents the schema for a node."""
 
     Label: str
+    Description: str
     Address: str
     Group: str | None
     SubGroup: str | None
@@ -213,6 +214,10 @@ class Node(ABC):
         return f"{cls.__module__}.{cls.__name__}"
 
     @classmethod
+    def description(cls) -> str:
+        return cls.__doc__ or ""
+
+    @classmethod
     def label(cls):
         return cls.__label__ or cls.__name__
 
@@ -302,6 +307,7 @@ class Node(ABC):
             SubGroup=cls.__sub_group__,
             Version=cls.__version__,
             Data=data_schema,
+            Description=cls.description(),
         )
 
     def schema(self) -> NodeSchema:
@@ -314,6 +320,7 @@ class Node(ABC):
             SubGroup=self.__sub_group__,
             Version=self.__version__,
             Data=data_schema,
+            Description=self.description(),
         )
 
 

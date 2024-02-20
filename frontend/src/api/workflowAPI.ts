@@ -1,5 +1,5 @@
-const URL = "http://localhost:8081";
-
+import { URL } from "./constants";
+import { Node } from "./nodeAPI"
 export type APIError = {
   detail: string;
 };
@@ -11,33 +11,17 @@ export type Workflow = {
   ID: string;
   Resource: "Workflow"
 };
-
-interface NodeDataItem {
-  Type: "input" | "option" | "output";
-  Schema: object;
-  Value: unknown;
-}
-interface NodeData {
-  [key: string]: NodeDataItem;
-}
-
 interface NodeDataHandle {
   NodeID: string;
   Key: string;
 }
 
-export type Node = {
-  Label: string;
-  Address: string;
-  Group: string | null;
-  SubGroup: string | null;
-  Version: number;
-  Data: NodeData;
-  WorkflowID: string;
-  NodeID: string;
+interface WorkflowNode extends Node {
   ID: string;
+  NodeID: string;
+  WorkflowID: string;
   Resource: "Node";
-};
+}
 
 export type Edge = {
   WorkflowID: string;
@@ -92,7 +76,7 @@ export async function createWorkflow(body: WorkflowPost): Promise<Workflow> {
   return response.json();
 }
 
-export async function deleteWorkflow(workflowId: string, dryRun: boolean = false): Promise<(Workflow | Edge | Node)[]> {
+export async function deleteWorkflow(workflowId: string, dryRun: boolean = false): Promise<(Workflow | Edge | WorkflowNode)[]> {
   const response = await fetch(`${URL}/workflows/${workflowId}?` + new URLSearchParams({ dryRun: dryRun.toString() }), {
     method: "DELETE",
     headers: {
@@ -106,7 +90,7 @@ export async function deleteWorkflow(workflowId: string, dryRun: boolean = false
 }
 
 
-export async function getWorkflowDetails(workflowId: string): Promise<{ workflow: Workflow, nodes: Node[], edges: Edge[] }> {
+export async function getWorkflowDetails(workflowId: string): Promise<{ workflow: Workflow, nodes: WorkflowNode[], edges: Edge[] }> {
   const response = await fetch(`${URL}/workflows/${workflowId}/all`, {
     method: "GET",
     headers: {
