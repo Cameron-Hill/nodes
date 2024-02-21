@@ -27,32 +27,34 @@ export default function WorkflowEditorFlow({ workflowID }: { workflowID: string 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
+  if (query.isSuccess) {
+    console.log(query.data);
+  }
+
+  if (query.isError) {
+    <div className="w-full h-full flex items-center justify-center">
+      <p>Error...</p>
+    </div>;
+  }
+
+  if (query.isLoading) {
+    <div className="w-full h-full flex items-center justify-center">
+      <p>Loading...</p>
+    </div>;
+  }
+
   const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
   return (
-    <>
-      {query.isError && (
-        <div className="w-full h-full flex items-center justify-center">
-          <p>Error!</p>
-        </div>
-      )}
-      {query.isLoading && (
-        <div className="w-full h-full flex items-center justify-center">
-          <p>Loading...</p>
-        </div>
-      )}
-      {query.data && (
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-        >
-          <Controls />
-          <MiniMap />
-          <Background variant={"dots" as BackgroundVariant} gap={12} size={1} />
-        </ReactFlow>
-      )}
-    </>
+    <ReactFlow
+      nodes={nodes}
+      edges={edges}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
+    >
+      <Controls />
+      <MiniMap />
+      <Background variant={"dots" as BackgroundVariant} gap={12} size={1} />
+    </ReactFlow>
   );
 }
