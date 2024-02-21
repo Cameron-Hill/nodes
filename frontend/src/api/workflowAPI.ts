@@ -52,6 +52,12 @@ export type WorkflowPost = {
   Owner: string;
 };
 
+export type WorkflowDetails = {
+  workflow: Workflow;
+  nodes: Node[];
+  edges: Edge[];
+};
+
 export async function getWorkflows(): Promise<Workflow[]> {
   const response = await fetch(`${URL}/workflows/`, {
     method: "GET",
@@ -106,7 +112,7 @@ export async function deleteWorkflow(workflowId: string, dryRun: boolean = false
 }
 
 
-export async function getWorkflowDetails(workflowId: string): Promise<{ workflow: Workflow, nodes: Node[], edges: Edge[] }> {
+export async function getWorkflowDetails(workflowId: string): Promise<WorkflowDetails> {
   const response = await fetch(`${URL}/workflows/${workflowId}/all`, {
     method: "GET",
     headers: {
