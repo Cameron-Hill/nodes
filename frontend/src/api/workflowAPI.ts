@@ -1,5 +1,7 @@
 import { URL } from "./constants";
 import { Node } from "./nodeAPI"
+
+
 export type APIError = {
   detail: string;
 };
@@ -16,7 +18,7 @@ interface NodeDataHandle {
   Key: string;
 }
 
-interface WorkflowNode extends Node {
+export interface WorkflowNode extends Node {
   ID: string;
   NodeID: string;
   WorkflowID: string;
@@ -34,6 +36,12 @@ export type Edge = {
 export type WorkflowPost = {
   Name: string;
   Owner: string;
+};
+
+export type WorkflowDetails = {
+  workflow: Workflow;
+  nodes: WorkflowNode[];
+  edges: Edge[];
 };
 
 export async function getWorkflows(): Promise<Workflow[]> {
@@ -90,7 +98,7 @@ export async function deleteWorkflow(workflowId: string, dryRun: boolean = false
 }
 
 
-export async function getWorkflowDetails(workflowId: string): Promise<{ workflow: Workflow, nodes: WorkflowNode[], edges: Edge[] }> {
+export async function getWorkflowDetails(workflowId: string): Promise<WorkflowDetails> {
   const response = await fetch(`${URL}/workflows/${workflowId}/all`, {
     method: "GET",
     headers: {

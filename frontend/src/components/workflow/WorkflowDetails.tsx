@@ -1,4 +1,4 @@
-import { Node, Edge, Workflow, getWorkflowDetails } from "@/api/workflowAPI";
+import { WorkflowNode, Edge, Workflow, getWorkflowDetails } from "@/api/workflowAPI";
 import { useQuery } from "@tanstack/react-query";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "../ui/skeleton";
@@ -46,7 +46,7 @@ const WorkflowDetailPanel = ({ workflow }: { workflow: Workflow }) => {
   );
 };
 
-const NodesDetailPanel = ({ nodes }: { nodes: Node[] }) => {
+const NodesDetailPanel = ({ nodes }: { nodes: WorkflowNode[] }) => {
   return (
     <div>
       <h2>Nodes</h2>
