@@ -10,7 +10,6 @@ import Flow from "./pages/Flow";
 
 const queryClient = new QueryClient();
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,14 +18,20 @@ const router = createBrowserRouter([
         <Header />
       </Page>
     ),
-  },
-  {
-    path: "/dev",
-    element: <Dev />,
-  },
-  {
-    path: "/flow",
-    element: <Flow />,
+    children: [
+      {
+        path: "dev",
+        element: <Dev />,
+      },
+      {
+        path: "flow",
+        element: <Flow />,
+      },  
+      {
+        path: "flow/:workflowID",
+        element: <Flow />,
+      },  
+    ],
   },
 ]);
 

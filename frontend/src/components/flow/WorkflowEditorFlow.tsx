@@ -22,6 +22,8 @@ const initialNodes = [
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 
 export default function WorkflowEditorFlow({ workflowID }: { workflowID: string }) {
+
+  
   const query = useQuery({ queryFn: () => getWorkflowDetails(workflowID), queryKey: ["workflow", workflowID] });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);

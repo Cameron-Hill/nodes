@@ -1,5 +1,3 @@
-import Page from "@/components/Page";
-import Headers from "@/components/Header";
 import WorkflowListView from "@/components/workflow/ListView";
 import WorkflowEditor from "@/components/workflow/WorkflowEditor";
 import { getWorkflows } from "@/api/workflowAPI";
@@ -26,8 +24,7 @@ export default function Dev() {
   const nodesQuery = useQuery({ queryFn: getNodes, queryKey: ["nodes"] });
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   return (
-    <Page>
-      <Headers />
+    <>
       <section className="mt-4">
         <h1 className="text-3xl pb-3">Dev Tools</h1>
         <p>This is a page for development purposes. It is not meant to be part of the final product.</p>
@@ -64,6 +61,6 @@ export default function Dev() {
       </div>
 
       </section> 
-    </Page>
+    </>
   );
 }

@@ -8,7 +8,13 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import WorkflowDetails from "./WorkflowDetails";
 
-export default function WorkflowEditor({ workflows }: { workflows: Workflow[] }) {
+export default function WorkflowEditor({
+  workflows,
+  onChange,
+}: {
+  workflows: Workflow[];
+  onChange?: (workflow: Workflow | null) => void;
+}) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const workflow = workflows.find((workflow) => workflow.ID === value);
@@ -38,6 +44,9 @@ export default function WorkflowEditor({ workflows }: { workflows: Workflow[] })
                   value={workflow.ID}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : workflow.ID);
+                    if (onChange) {
+                      onChange(workflow);
+                    }
                     setOpen(false);
                   }}
                 >
@@ -51,8 +60,6 @@ export default function WorkflowEditor({ workflows }: { workflows: Workflow[] })
       </Popover>
 
       {workflow && <WorkflowDetails workflow={workflow} />}
-
-      
     </div>
   );
 }
