@@ -2,10 +2,15 @@ import { getWorkflows } from "@/api/workflowAPI";
 import WorkflowEditorFlow from "@/components/flow/WorkflowEditorFlow";
 import WorkflowEditor from "@/components/workflow/WorkflowEditor";
 import { useQuery } from "@tanstack/react-query";
-import { redirect, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
 
 const WorkflowSelector = () => {
   const query = useQuery({ queryFn: getWorkflows, queryKey: ["workflows"] });
+  const [selected, setSelected] = useState<string | null>(null);
+  if (selected) {
+    return <Navigate to={`/flow/${selected}`}/>;
+  }
   if (query.isLoading) {
     return <p>Loading...</p>;
   }
@@ -20,7 +25,7 @@ const WorkflowSelector = () => {
       workflows={query.data}
       onChange={(workflow) => {
         if (workflow) {
-          redirect(`/flow/${workflow.ID}`);
+          setSelected(workflow.ID);
         }
       }}
     />

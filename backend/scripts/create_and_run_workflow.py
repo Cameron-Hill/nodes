@@ -1,4 +1,5 @@
 import time
+import sys
 from shortuuid import uuid
 import requests
 from pprint import pprint
@@ -135,7 +136,8 @@ def run_workflow(workflow_id) -> WorkflowSchema:
     return WorkflowSchema(**run)
 
 if __name__ == "__main__":
-    test_id = uuid()
+    args = sys.argv[1:]
+    test_id = " ".join(args) if args else uuid()
     workflow_owner = f"Test Owner {test_id}"
     workflow_name = f"Test Workflow {test_id}"
 
