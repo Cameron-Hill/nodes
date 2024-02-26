@@ -56,3 +56,13 @@ You definitely want at least these:
       "*.css": "tailwindcss"
     },
  
+ Also This:
+
+    npm install -D prettier prettier-plugin-tailwindcss
+
+prettier.config.js
+
+    // prettier.config.js
+    module.exports = {
+      plugins: ['prettier-plugin-tailwindcss'],
+    }

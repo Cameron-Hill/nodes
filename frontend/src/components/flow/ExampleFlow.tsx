@@ -24,9 +24,10 @@ export default function ExampleFlow() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  console.log(nodes);
-
-  const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+  const onConnect = useCallback(
+    (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges],
+  );
   return (
     <ReactFlow
       nodes={nodes}

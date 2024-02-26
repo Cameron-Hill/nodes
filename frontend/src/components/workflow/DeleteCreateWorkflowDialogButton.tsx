@@ -12,7 +12,13 @@ import { Label } from "../ui/label";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Workflow, deleteWorkflow } from "@/api/workflowAPI";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,7 +33,13 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DialogClose } from "@radix-ui/react-dialog";
 
-export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workflow, onSuccess?: ()=>void}) {
+export function DeleteWorkflowPreview({
+  workflow,
+  onSuccess,
+}: {
+  workflow: Workflow;
+  onSuccess?: () => void;
+}) {
   const query = useQuery({
     queryKey: ["deleteWorkflow", workflow.ID, "dryRun"],
     queryFn: () => deleteWorkflow(workflow.ID, true),
@@ -42,7 +54,6 @@ export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workf
     },
   });
 
-
   if (query.isLoading) {
     return <p>Loading...</p>;
   }
@@ -52,7 +63,6 @@ export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workf
   if (query.data === undefined) {
     return <p>Unable to fetch preview data.</p>;
   }
-  console.log("Preview Data", query.data);
   const workspaces = query.data.filter((d) => d.Resource === "Workflow");
   const edges = query.data.filter((d) => d.Resource === "Edge");
   const nodes = query.data.filter((d) => d.Resource === "Node");
@@ -93,7 +103,6 @@ export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workf
         <AlertDialogAction
           className="bg-destructive"
           onClick={() => {
-            console.log("See Ya!");
             mutation.mutate();
           }}
         >
@@ -106,7 +115,13 @@ export function DeleteWorkflowPreview({ workflow, onSuccess }: { workflow: Workf
   );
 }
 
-export function ConfirmDeleteDialog({ workflow, onSuccess}: { workflow: Workflow | null, onSuccess?: ()=>void }) {
+export function ConfirmDeleteDialog({
+  workflow,
+  onSuccess,
+}: {
+  workflow: Workflow | null;
+  onSuccess?: () => void;
+}) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -119,11 +134,14 @@ export function ConfirmDeleteDialog({ workflow, onSuccess}: { workflow: Workflow
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete the workflow <b>{workflow?.Name}</b> and all of its data.
+            This will permanently delete the workflow <b>{workflow?.Name}</b>{" "}
+            and all of its data.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        {workflow && <DeleteWorkflowPreview workflow={workflow} onSuccess={onSuccess} />}
+        {workflow && (
+          <DeleteWorkflowPreview workflow={workflow} onSuccess={onSuccess} />
+        )}
         {!workflow && (
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -141,14 +159,13 @@ export function DeleteWorkflowDialogButton({
 }: {
   buttonText?: string;
   workflowList: Workflow[];
-  onSuccess?: ()=>void;
+  onSuccess?: () => void;
 }) {
   const [selected, setSelected] = useState<Workflow | null>(null);
   const [submitting, setSubmitting] = useState(false);
   if (submitting && !selected) {
     setSubmitting(false);
   }
-  console.log("submitting", submitting, "selected", selected);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -211,10 +228,13 @@ export function DeleteWorkflowDialogButton({
           )}
         </div>
         <DialogFooter>
-          <ConfirmDeleteDialog workflow={selected} onSuccess={()=> {
-            setSelected(null)
-            if (onSuccess) onSuccess()
-          }}/>
+          <ConfirmDeleteDialog
+            workflow={selected}
+            onSuccess={() => {
+              setSelected(null);
+              if (onSuccess) onSuccess();
+            }}
+          />
         </DialogFooter>
       </DialogContent>
     </Dialog>
