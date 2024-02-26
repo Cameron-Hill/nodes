@@ -29,23 +29,31 @@ class ErrorDetails(BaseModel):
 class RunDetails(BaseModel):
     ID: Annotated[
         str,
-        Field(pattern=f'Run-{UUID_PATTERN}', default_factory=lambda: f'Run-{uuid()}', validate_default=True),
-    ]=""
+        Field(
+            pattern=f"Run-{UUID_PATTERN}",
+            default_factory=lambda: f"Run-{uuid()}",
+            validate_default=True,
+        ),
+    ] = ""
     StartedOn: datetime
     FinishedOn: datetime
     Status: RunStatusTypes
     FailureDetails: ErrorDetails | None = None
     NodesExecuted: int
 
+
 class WorkflowSchema(BaseModel):
     ID: Annotated[
         str,
-        Field(pattern=f'Workflow-{UUID_PATTERN}', default_factory=lambda: f'Workflow-{uuid()}', validate_default=True),
-    ]=""
+        Field(
+            pattern=f"Workflow-{UUID_PATTERN}",
+            default_factory=lambda: f"Workflow-{uuid()}",
+            validate_default=True,
+        ),
+    ] = ""
     Nodes: list[NodeSchema]
     Edges: list[EdgeSchema]
     LastRunDetails: RunDetails | None = None
-
 
 
 class Workflow:
@@ -123,10 +131,10 @@ class Workflow:
 
     def run(self) -> RunDetails:
         logger.info(f'Validating workflow: {self.id if self.id else ""}')
+        started_on = datetime.now()
+        executed = 0
         try:
             self.validate()
-            executed = 0
-            started_on = datetime.now()
             for node in self.traverse():
                 node.call()
                 executed += 1
@@ -159,5 +167,5 @@ class Workflow:
             ID=self.id or uuid(),
             Nodes=[node.schema() for node in self.nodes],
             Edges=[edge.schema() for edge in self.edges],
-            LastRunDetails=self.last_run_details
+            LastRunDetails=self.last_run_details,
         )

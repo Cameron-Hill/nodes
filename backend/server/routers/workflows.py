@@ -118,24 +118,34 @@ def create_workflow(
     return workflow
 
 
-@router.get("/{workflow_id}", response_model=WorkflowTable.Workflow, responses={404: Error404, 500: Error500})
+@router.get(
+    "/{workflow_id}",
+    response_model=WorkflowTable.Workflow,
+    responses={404: Error404, 500: Error500},
+)
 def get_workflow_by_id(
     workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ):
     workflow = get_workflow_object(workflow_id, table)
     return workflow
 
+
 @router.delete("/{workflow_id}", responses={404: Error404, 500: Error500})
 def delete_workflow_by_id(
-    workflow_id: str, dryRun:bool=False, table: WorkflowTable = Depends(get_workflow_table)
-) -> list[WorkflowTable.Node | WorkflowTable.Edge | WorkflowTable.Workflow]  :
-    get_workflow_object(workflow_id, table) # Raises 404 if not found
+    workflow_id: str,
+    dryRun: bool = False,
+    table: WorkflowTable = Depends(get_workflow_table),
+) -> list[WorkflowTable.Node | WorkflowTable.Edge | WorkflowTable.Workflow]:
+    get_workflow_object(workflow_id, table)  # Raises 404 if not found
     response = table.query(Key(table.partition_key.name).eq(workflow_id))
     for item in response.items:
         if not dryRun:
             item.delete()
-        logger.debug(f"{'DRY_RUN:  'if dryRun else ''}delete {workflow_id}: Deleted: {item}")
-    return response.items # type: ignore 
+        logger.debug(
+            f"{'DRY_RUN:  'if dryRun else ''}delete {workflow_id}: Deleted: {item}"
+        )
+    return response.items  # type: ignore
+
 
 @router.get("/{workflow_id}/all", responses={404: Error404, 500: Error500})
 def get_all_workflow_elements(
@@ -145,7 +155,11 @@ def get_all_workflow_elements(
     return items.items  # type: ignore
 
 
-@router.patch("/{workflow_id}", response_model=WorkflowTable.Workflow, responses={404: Error404, 500: Error500})
+@router.patch(
+    "/{workflow_id}",
+    response_model=WorkflowTable.Workflow,
+    responses={404: Error404, 500: Error500},
+)
 def update_workflow_by_id(
     workflow_id: str,
     body: WorkflowPatchRequest,
@@ -156,7 +170,11 @@ def update_workflow_by_id(
     return workflow
 
 
-@router.get("/{workflow_id}/nodes", response_model=list[WorkflowTable.Node], responses={404: Error404, 500: Error500})
+@router.get(
+    "/{workflow_id}/nodes",
+    response_model=list[WorkflowTable.Node],
+    responses={404: Error404, 500: Error500},
+)
 def get_nodes_by_workflow(
     workflow_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ):
@@ -164,7 +182,11 @@ def get_nodes_by_workflow(
     return response.items
 
 
-@router.get("/{workflow_id}/nodes/{node_id}", response_model=WorkflowTable.Node, responses={404: Error404, 500: Error500})
+@router.get(
+    "/{workflow_id}/nodes/{node_id}",
+    response_model=WorkflowTable.Node,
+    responses={404: Error404, 500: Error500},
+)
 def get_node_by_id(
     workflow_id: str,
     node_id: str,
@@ -189,7 +211,9 @@ def add_node_to_workflow(
     return node
 
 
-@router.delete("/{workflow_id}/nodes/{node_id}", responses={404: Error404, 500: Error500})
+@router.delete(
+    "/{workflow_id}/nodes/{node_id}", responses={404: Error404, 500: Error500}
+)
 def delete_node_from_workflow(
     workflow_id: str, node_id: str, table: WorkflowTable = Depends(get_workflow_table)
 ) -> list[WorkflowTable.Node]:
@@ -227,6 +251,26 @@ def delete_node_from_workflow(
     return items
 
 
+@router.put("/{workflow_id}/nodes/", responses={404: Error404, 500: Error500})
+def update_nodes(
+    workflow_id: str,
+    body: list[WorkflowTable.Node],
+    table: WorkflowTable = Depends(get_workflow_table),
+) -> list[WorkflowTable.Node]:
+    workflow = get_workflow_object(workflow_id, table)
+    updated: list[WorkflowTable.Node] = []
+    with table.batch_writer() as batch:
+        for node in body:
+            if node.PartitionKey == workflow.ID and node.Resource == "Node":
+                batch.put_item(Item=node)
+                updated.append(node)
+            else:
+                logger.warning(
+                    f"Attempted to update resource that is not a node belonging to {workflow.ID}: {node.PartitionKey}/{node.SortKey}"
+                )
+    return updated
+
+
 # @router.get("/{workflow_id}/nodes/{node_id}/data")
 # def get_node_data(
 #    workflow_id: Annotated[str, WorkflowID],
@@ -255,7 +299,9 @@ def delete_node_from_workflow(
 #    return node_data
 
 
-@router.post("/{workflow_id}/nodes/{node_id}/data", responses={404: Error404, 500: Error500})
+@router.post(
+    "/{workflow_id}/nodes/{node_id}/data", responses={404: Error404, 500: Error500}
+)
 def set_data_on_node(
     workflow_id: str,
     node_id: str,
@@ -306,6 +352,26 @@ def get_edge_by_id(
     return edge
 
 
+@router.put("/{workflow_id}/edges/", responses={404: Error404, 500: Error500})
+def update_edges(
+    workflow_id: str,
+    body: list[WorkflowTable.Edge],
+    table: WorkflowTable = Depends(get_workflow_table),
+) -> list[WorkflowTable.Edge]:
+    workflow = get_workflow_object(workflow_id, table)
+    updated: list[WorkflowTable.Edge] = []
+    with table.batch_writer() as batch:
+        for edge in body:
+            if edge.PartitionKey == workflow.ID and edge.Resource == "Edge":
+                batch.put_item(Item=edge)
+                updated.append(edge)
+            else:
+                logger.warning(
+                    f"Attempted to update resource that is not an edge belonging to {workflow.ID}: {edge.PartitionKey}/{edge.SortKey}"
+                )
+    return updated
+
+
 @router.post("/{workflow_id}/run", responses={404: Error404, 500: Error500})
 def run_workflow(
     workflow_id,
@@ -328,13 +394,14 @@ def run_workflow(
             workflow.add_node(node)
     for item in workflow_data.items:
         if isinstance(item, WorkflowTable.Edge):
-           from_node = workflow.get_node_by_id(item.From.NodeID) 
-           to_node = workflow.get_node_by_id(item.To.NodeID) 
-           workflow.add_edge(
-               source=from_node.data[item.From.Key],
-               target=to_node.data[item.To.Key]
-           )
+            from_node = workflow.get_node_by_id(item.From.NodeID)
+            to_node = workflow.get_node_by_id(item.To.NodeID)
+            workflow.add_edge(
+                source=from_node.data[item.From.Key], target=to_node.data[item.To.Key]
+            )
     workflow.run()
-    return workflow.schema() 
+    return workflow.schema()
+
+
 #        if isinstance(item, WorkflowTable.NodeData):
 #            _set_data_on_node(nodes[item.NodeID], item.Key, item.Type, item.Data)

@@ -138,8 +138,8 @@ def run_workflow(workflow_id) -> WorkflowSchema:
 if __name__ == "__main__":
     args = sys.argv[1:]
     test_id = " ".join(args) if args else uuid()
-    workflow_owner = f"Test Owner {test_id}"
-    workflow_name = f"Test Workflow {test_id}"
+    workflow_owner = f"Owner {test_id}"
+    workflow_name = f"{test_id}"
 
     print("Creating Workflow...")
     with timings() as t:

@@ -36,6 +36,12 @@ class HTTPGetRequest(Node):
     def run(
         self, url: str, params: RequestQueryParams, headers: RequestHeaders
     ) -> OutputHTTPGetRequest:
+        """
+        :param url: The url that will be called, should be in the format: http://example.com
+        :param params: Any query parameters. Should be passed in as an object, e.g. {"param1": "value1", "param2": "value2"}
+        :param headers: Any headers. Should be passed in as an object, e.g. {"header1": "value1", "header2": "value2"}
+        :return: The json response from the request
+        """
         response = requests.get(url, params=params, headers=headers)
         response.raise_for_status()
         return OutputHTTPGetRequest(

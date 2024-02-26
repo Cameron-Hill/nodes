@@ -20,11 +20,24 @@ class UserNode(Node):
         test_option: bool = Field(False, description="Test option")
 
     def run(self, input: Input, options: Options) -> Output:
+        """Run method for UserNode
+
+        :param input: the input object, consists of a, b, and c
+        :param options: driver options
+        :return: the output object, consists of x, y, z, and option
+        """
         return Output(x=input.a, y=input.b, z=input.c, option=options.test_option)
 
 
 class UserNodeWithMultipleInputs(Node):
     def run(self, a: str, b: int, c: float = 20) -> Output:
+        """_summary_
+
+        :param  a: the a parameter
+        :param b: the b parameter
+        :param c: the c parameter, defaults to 20
+        :return: the output object, consists of x, y, z
+        """
         return Output(x=a, y=b, z=c)
 
 

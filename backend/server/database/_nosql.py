@@ -1,3 +1,6 @@
+from contextlib import contextmanager
+from decimal import Decimal
+import json
 from lib2to3.fixes.fix_idioms import TYPE
 import sys
 from boto3 import resource
@@ -66,7 +69,8 @@ SelectType = Literal[
     "ALL_ATTRIBUTES", "ALL_PROJECTED_ATTRIBUTES", "COUNT", "SPECIFIC_ATTRIBUTES"
 ]
 
-logger = getLogger('server.database')
+logger = getLogger("server.database")
+
 
 class KeySchemaElementType(TypedDict):
     AttributeName: str
@@ -124,18 +128,18 @@ class Item(BaseModel):
         assert self.__table__ is not None, "You must define a table for this item"
         self.__table__.put_item(self.model_dump())
 
-#    @classmethod
-#    def delete(cls, key: str | int, sort_key: str | int | None = None):
-#        assert cls.__table__ is not None, "You must define a table for this item"
-#        pk = cls.__table__._get_partition_key()
-#        sk = cls.__table__._get_sort_key()
-#        cls._validate_field_value(pk.name, key)
-#        key_dict = {cls.__table__._get_partition_key().name: key}
-#        if sk:
-#            cls._validate_field_value(sk.name, sort_key)
-#            key_dict[cls.__table__._get_sort_key().name] = sort_key # type: ignore
-#        response=cls.__table__.table.delete_item(Key=key_dict, ReturnValues="ALL_OLD")
-#        return response
+    #    @classmethod
+    #    def delete(cls, key: str | int, sort_key: str | int | None = None):
+    #        assert cls.__table__ is not None, "You must define a table for this item"
+    #        pk = cls.__table__._get_partition_key()
+    #        sk = cls.__table__._get_sort_key()
+    #        cls._validate_field_value(pk.name, key)
+    #        key_dict = {cls.__table__._get_partition_key().name: key}
+    #        if sk:
+    #            cls._validate_field_value(sk.name, sort_key)
+    #            key_dict[cls.__table__._get_sort_key().name] = sort_key # type: ignore
+    #        response=cls.__table__.table.delete_item(Key=key_dict, ReturnValues="ALL_OLD")
+    #        return response
     def delete(self):
         assert self.__table__ is not None, "You must define a table for this item"
         pk = self.__table__._get_partition_key()
@@ -245,7 +249,7 @@ class Item(BaseModel):
         limit: int | None = None,
         index_name: str | None = None,
         start_key: str | None = None,
-        filter: bool = True, 
+        filter: bool = True,
     ) -> "QueryResponse[Self]":
         assert cls.__table__ is not None, "You must define a table for this item"
         (
@@ -315,6 +319,29 @@ class QueryResponse(Generic[T]):
         self.response_metadata: Boto3ResponseMetadata = ResponseMetadata
 
 
+def _convert_base_model(func):
+    def wrapper(*args, **kwargs):
+        new_args = [
+            (
+                json.loads(x.model_dump_json(), parse_float=Decimal)
+                if isinstance(x, BaseModel)
+                else x
+            )
+            for x in args
+        ]
+        new_kwargs = {
+            k: (
+                json.loads(v.model_dump_json(), parse_float=Decimal)
+                if isinstance(v, BaseModel)
+                else v
+            )
+            for k, v in kwargs.items()
+        }
+        return func(*new_args, **new_kwargs)
+
+    return wrapper
+
+
 class Table:
     __tablename__: str
     __billing_mode__: BillingModeType = "PAY_PER_REQUEST"
@@ -336,6 +363,13 @@ class Table:
         else:
             self._table = self.resource.Table(self.__tablename__)
         self._apply_table_to_items()
+
+    @contextmanager
+    def batch_writer(self):
+        with self._table.batch_writer() as batch:
+            batch.put_item = _convert_base_model(batch.put_item)
+            batch.delete_item = _convert_base_model(batch.delete_item)
+            yield batch
 
     @classmethod
     def items(cls) -> Generator[tuple[str, Type[Item]], None, None]:
@@ -403,7 +437,7 @@ class Table:
             **params,
         )
         if raw:
-            return response # type: ignore
+            return response  # type: ignore
         else:
             return self._get_query_response_from_boto3_response(response)
 

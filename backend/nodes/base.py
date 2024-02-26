@@ -2,15 +2,17 @@ from nodes.errors import UnhandledNodeError
 from abc import ABC, abstractmethod
 from pydantic_core import ValidationError, core_schema
 from typing_extensions import get_args
+from decimal import Decimal
 from pydantic import (
     BaseModel,
+    Field,
     GetCoreSchemaHandler,
     ValidationInfo,
     TypeAdapter,
     ValidationError,
 )
 from pydantic.fields import FieldInfo
-from typing import Generic, Type, TypeVar, Any, Literal, Optional
+from typing import Annotated, Generic, Type, TypeVar, Any, Literal, Optional
 from inspect import signature, _empty, Parameter
 from dataclasses import dataclass
 from shortuuid import uuid
@@ -41,6 +43,11 @@ class NodeDataHandle(BaseModel):
     Key: str
 
 
+class NodeDisplay(BaseModel):
+    x: float
+    y: float
+
+
 class NodeSchema(BaseModel):
     """This class represents the schema for a node."""
 
@@ -51,6 +58,7 @@ class NodeSchema(BaseModel):
     SubGroup: str | None
     Version: int
     Data: dict[str, NodeDataSchema]
+    Display: Optional[NodeDisplay] = None
 
 
 class EdgeSchema(BaseModel):
@@ -259,25 +267,92 @@ class Node(ABC):
             f"Unhandled exception in node {self.label()}: {exception}"
         ) from exception
 
+    @staticmethod
+    def _get_lines_between(doc: str, start: str, end: list[str]) -> str:
+        indexes: dict[str, int | None] = {"start": None, "stop": None}
+
+        def set_indexes(i: int, line: str) -> str:
+            if line.replace(" ", "").startswith(start.replace(" ", "")):
+                indexes["start"] = i
+                indexes["stop"] = None
+            elif (
+                indexes["start"] is not None
+                and indexes["stop"] is None
+                and any(line.startswith(x) for x in end)
+            ):
+                indexes["stop"] = i
+            return line
+
+        lines = [set_indexes(i, x.strip()) for i, x in enumerate(doc.split("\n"))]
+        if indexes["start"] is None:
+            return ""
+        return "\n".join(lines[indexes["start"] : indexes["stop"]]).strip()
+
+    @classmethod
+    def _get_param_doc(cls, name: str) -> str | None:
+        doc = cls.run.__doc__ or ""
+        lines = cls._get_lines_between(
+            doc,
+            f":param {name}",
+            [":return", ":param", ":raises", ":exception", "_summary_"],
+        )
+        return (
+            lines.strip()
+            .removeprefix(f":param")
+            .strip()
+            .removeprefix(name)
+            .strip()
+            .lstrip(":")
+            .strip()
+            .capitalize()
+        )
+
+    @classmethod
+    def _get_return_doc(cls) -> str | None:
+        doc = cls.run.__doc__ or ""
+        lines = cls._get_lines_between(
+            doc, ":return", [":param", ":raises", ":exception", "_summary_"]
+        )
+        return lines.strip().removeprefix(":return").lstrip(":").strip().capitalize()
+
+    @classmethod
+    def _get_arg_schema(cls, key) -> dict:
+        sig = signature(cls.run)
+        param = sig.parameters[key]
+        description = cls._get_param_doc(key) if param else None
+        annotation = (
+            None if param is None or param.annotation is sig.empty else param.annotation
+        )
+        details = (
+            Field(..., description=description)
+            if param.default is sig.empty
+            else Field(param.default, description=description)
+        )
+        return TypeAdapter(Annotated[annotation, details]).json_schema()  # type: ignore
+
+    @classmethod
+    def _get_return_schema(cls) -> dict:
+        sig = signature(cls.run)
+        description = cls._get_return_doc()
+        annotation = (
+            None if sig.return_annotation is sig.empty else sig.return_annotation
+        )
+        return TypeAdapter(Annotated[annotation, Field(..., description=description)]).json_schema()  # type: ignore
+
     @classmethod
     def data_schema(
         cls, data_values: dict[tuple[NodeDataTypes, str], Any] | None = None
     ) -> dict[str, NodeDataSchema]:
         data_values = data_values or {}
-        output_schema = {
-            ("output", "output"): TypeAdapter(
-                cls.run.__annotations__.get("return")
-            ).json_schema()
-        }
+        output_schema = {("output", "output"): cls._get_return_schema()}
+
         input_params = cls._get_input_params()
         option_params = cls._get_option_params()
         input_schema = {
-            ("input", k): TypeAdapter(v.annotation).json_schema()
-            for k, v in input_params.items()
+            ("input", k): cls._get_arg_schema(k) for k, v in input_params.items()
         }
         options_schema = {
-            ("options", k): TypeAdapter(v.annotation).json_schema()
-            for k, v in option_params.items()
+            ("options", k): cls._get_arg_schema(k) for k, v in option_params.items()
         }
 
         data = {}

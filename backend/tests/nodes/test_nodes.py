@@ -150,3 +150,12 @@ def test_nod_get_options(manager):
     node = manager.get_node_by_id("user_nodes.UserNode")
     node = node()
     assert node.options
+
+
+def test_user_node_with_multiple_options_get_schema_has_docstring_details(manager):
+    manager.add_source(USER_NODES)
+    node = manager.get_node_by_id("user_nodes.UserNodeWithMultipleInputs")
+    schema = node.class_schema()
+    assert schema.Data["a"].Schema["description"] == "The a parameter"
+    assert "description" in schema.Data["output"].Schema
+    assert "default" in schema.Data["c"].Schema

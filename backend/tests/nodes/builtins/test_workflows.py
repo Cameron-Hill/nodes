@@ -1,11 +1,10 @@
 from __future__ import annotations
-from audioop import tostereo
 import pytest
 from nodes.workflow import Workflow
 from nodes.builtins.requests import HTTPGetRequest
 from nodes.builtins.producers import MapProducer, StringProducer, IntProducer
 from nodes.builtins.transforms import StringConcat, ToString
-from pydantic import create_model, Field, BaseModel, conlist
+from pydantic import create_model, Field, BaseModel
 from annotated_types import Len
 from nodes.base import NodeData
 from typing import Annotated
@@ -56,8 +55,10 @@ def test_running_a_workflow_with_unset_options_raises_validation_error():
     workflow.add_node(producer)
     workflow.add_node(request)
     workflow.add_edge(producer.output, request.inputs["url"])
-    with pytest.raises(NodeDataNotSetException):
-        workflow.run()
+    result = workflow.run()
+    assert result.Status == "Failed"
+    assert result.FailureDetails
+    assert result.FailureDetails.Class == "NodeDataNotSetException"
 
 
 def test_running_a_multi_node_workflow_using_string_transform(mocked_request):
@@ -80,7 +81,6 @@ def test_running_a_multi_node_workflow_using_string_transform(mocked_request):
     string_producer.options["options"].set({"value": "http://example.com"})
     workflow.run()
     mocked_request.assert_called_once_with("1http://example.com", params={}, headers={})
-
 
 
 def test_get_roots():

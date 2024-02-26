@@ -15,6 +15,10 @@ class StringProducer(Node):
         value: str = Field(..., description="The value to produce")
 
     def run(self, options: Options) -> str:
+        """
+        :param options: Expects to find 'value' in the options, The string produce will be the value of 'value'
+        :return: The option: 'value' - converted to a string
+        """
         return options.value
 
 
