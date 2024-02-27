@@ -1,14 +1,20 @@
+import { Edge as EdgeData } from "@/api/workflowAPI";
 import { Button } from "@/components/ui/button";
+import useLog from "@/hooks/useLog";
 import { Trash2 } from "lucide-react";
 import {
   BaseEdge,
   getBezierPath,
-  EdgeProps,
+  EdgeProps as _EdgeProps,
   EdgeLabelRenderer,
   useReactFlow,
 } from "reactflow";
 
-const EditWidget = ({
+export interface EdgeProps extends _EdgeProps {
+  data: EdgeData;
+}
+
+export const EditWidget = ({
   id,
   labelX,
   labelY,
@@ -57,6 +63,8 @@ export default function EditableEdge({
   targetX,
   targetY,
   selected,
+  data,
+  style,
 }: EdgeProps) {
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
@@ -66,10 +74,13 @@ export default function EditableEdge({
   });
   // We might want to have Zustand know about the selected element. The we can render a context panel for that element.
   // Let's not bring in Zustand for now.
-
+  const log = useLog("Edge", id, data);
+  if (selected) {
+    log();
+  }
   return (
     <>
-      <BaseEdge id={id} path={edgePath} />
+      <BaseEdge id={id} path={edgePath} style={style} />
       {selected && <EditWidget id={id} labelX={labelX} labelY={labelY} />}
     </>
   );

@@ -27,7 +27,6 @@ import {
   WorkflowDetails,
   addEdgeToWorkflow,
   addNodeToWorkflow,
-  batchPutNodes,
   batchPutWorkflowEntities,
   getWorkflowDetails,
 } from "@/api/workflowAPI";
@@ -42,11 +41,9 @@ import {
 } from "@/components/ui/context-menu";
 import EditableEdge from "./edges/EditableEdge";
 import AddNodeDialog from "./AddNodeDialog";
-import { useToast } from "../ui/use-toast";
 import Loader from "../elements/Loader";
 import { Save } from "lucide-react";
-import { set } from "react-hook-form";
-import { get } from "http";
+import ErrorEdge from "./edges/ErrorEdge";
 
 type SetEdgesType = (
   edge: Dispatch<SetStateAction<Edge<EdgeData>[]>> | Edge[],
@@ -73,7 +70,7 @@ const getFlowEdges = (edges: EdgeData[]) => {
       target: edge.To.NodeID,
       sourceHandle: edge.From.Key,
       targetHandle: edge.To.Key,
-      type: "editableEdge",
+      type: edge.IsSubset ? "editableEdge" : "errorEdge",
       data: edge,
     };
   });
@@ -122,6 +119,7 @@ const getLayoutedElements = (
 
 const edgeTypes = {
   editableEdge: EditableEdge,
+  errorEdge: ErrorEdge,
 };
 
 const nodeTypes = {
@@ -230,7 +228,6 @@ const WorkflowPanel = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [nodes, edges],
   );
-  console.log(saving);
   return (
     <ContextMenu>
       <ContextMenuTrigger>
@@ -350,7 +347,6 @@ export default function WorkflowEditorFlow({
   const [nodes, setNodes] = useNodesState([]);
   const [edges, setEdges] = useEdgesState([]);
   const [saving, setSaving] = useState(false);
-  const { toast } = useToast();
   const query = useQuery({
     queryFn: () =>
       fetchAndSetWorkflowDetails(workflowID, setNodes, setEdges, () => {}),
@@ -363,7 +359,6 @@ export default function WorkflowEditorFlow({
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
-      console.log("node change", changes);
       handleNodeChanges(changes, nodes);
       return setNodes((nds) => applyNodeChanges(changes, nds));
     },
@@ -371,13 +366,7 @@ export default function WorkflowEditorFlow({
   );
   const onEdgesChange = useCallback(
     (changes: EdgeChange[]) => {
-      console.log("edge change", changes);
-
-      changes.forEach((change) => {
-        if (change.type === "add" && change.item.type === "editableEdge") {
-        }
-      }),
-        setEdges((eds) => applyEdgeChanges(changes, eds));
+      setEdges((eds) => applyEdgeChanges(changes, eds));
     },
     [setEdges],
   );

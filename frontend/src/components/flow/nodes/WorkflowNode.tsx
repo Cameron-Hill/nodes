@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/context-menu";
 import { Trash2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useLog from "@/hooks/useLog";
 
 const NodeBody = ({ children }: { children: ReactNode }) => {
   return (
@@ -70,14 +71,25 @@ const ToolTip = ({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const describeSchema = (schema: object) => {};
 
-export default function WorkflowNode({ data }: NodeProps<NodeData>) {
+export default function WorkflowNode({
+  id,
+  data,
+  selected,
+}: NodeProps<NodeData>) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+  const log = useLog("Node", id, data);
+  if (selected) {
+    log();
+  }
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: () => deleteNodeFromWorkflow(data.WorkflowID, data.NodeID),
     onSettled: async () => {
-      queryClient.invalidateQueries(["workflow", data.WorkflowID]);
+      queryClient.invalidateQueries({
+        queryKey: ["workflow", data.WorkflowID],
+      });
     },
   });
 

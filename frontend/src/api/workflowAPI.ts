@@ -31,6 +31,7 @@ export type Edge = {
   ID: string;
   From: NodeDataHandle;
   To: NodeDataHandle;
+  IsSubset: boolean;
   Resource: "Edge";
 };
 export type WorkflowPost = {

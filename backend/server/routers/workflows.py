@@ -287,35 +287,6 @@ def update_nodes(
                 )
     return updated
 
-
-# @router.get("/{workflow_id}/nodes/{node_id}/data")
-# def get_node_data(
-#    workflow_id: Annotated[str, WorkflowID],
-#    node_id: Annotated[str, NodeID],
-#    table: WorkflowTable = Depends(get_workflow_table),
-# ) -> list[WorkflowTable.NodeData]:
-#    exp = Key(table.sort_key.name).begins_with(f"{node_id}#Data-")
-#    result = table.NodeData.query(key=workflow_id, key_expression=exp)
-#    return result.items
-#
-#
-# @router.post("/{workflow_id}/nodes/{node_id}/data")
-# def add_node_data_to_workflow(
-#    workflow_id: str,
-#    node_id: str,
-#    body: NodeDataPostRequest,
-#    registry: NodeRegistry = Depends(get_node_registry),
-#    table: WorkflowTable = Depends(get_workflow_table),
-# ) -> WorkflowTable.NodeData:
-#    node = get_node_object(node_id, workflow_id, table)
-#    instance = get_node_class(node.Address, node.Version, registry=registry)
-#    instance = instance(id=node_id)
-#    set_data_on_node(instance, body.Key, body.Type, body.Data)
-#    node_data = table.NodeData.from_node_data(instance.options[body.Key], workflow_id)
-#    node_data.put()
-#    return node_data
-
-
 @router.post(
     "/{workflow_id}/nodes/{node_id}/data", responses={404: Error404, 500: Error500}
 )
