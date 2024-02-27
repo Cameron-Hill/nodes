@@ -87,6 +87,7 @@ class WorkflowTable(Table):
         SortKey: Annotated[str, EdgeID, Field(validate_default=True)] = ""
         From: NodeDataHandle
         To: NodeDataHandle
+        IsSubset: bool
         Resource: Literal["Edge"] = "Edge"
 
         @field_validator("SortKey", mode="before")

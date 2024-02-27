@@ -1,3 +1,4 @@
+import jsonsubschema
 from nodes.errors import UnhandledNodeError
 from abc import ABC, abstractmethod
 from pydantic_core import ValidationError, core_schema
@@ -64,6 +65,7 @@ class NodeSchema(BaseModel):
 class EdgeSchema(BaseModel):
     From: NodeDataHandle
     To: NodeDataHandle
+    IsSubset: bool
 
 
 class NodeData:
@@ -426,4 +428,10 @@ class Edge:
         return EdgeSchema(
             From=NodeDataHandle(NodeID=self.source.node.id, Key=self.source.key),
             To=NodeDataHandle(NodeID=self.target.node.id, Key=self.target.key),
+            IsSubset=self.is_sub_schema(),
+        )
+
+    def is_sub_schema(self) -> bool:
+        return jsonsubschema.isSubschema(
+            self.target.adapter.json_schema(), self.source.adapter.json_schema()
         )

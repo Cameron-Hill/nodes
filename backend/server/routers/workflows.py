@@ -48,7 +48,7 @@ class EdgePostRequest(BaseModel):
     To: NodeDataHandle
 
 
-router = APIRouter(prefix="/workflows", tags=["workflows"])
+router = APIRouter(prefix="/workflows", tags=["workflows"], redirect_slashes=True)
 
 
 def get_workflow_object(
@@ -86,6 +86,23 @@ def get_node_object(
             status_code=404, detail=f"Node not found: {workflow_id}  {node_id}"
         )
     return node
+
+
+def get_node_instance_by_id(
+    node_id: str, workflow_id: str, table: WorkflowTable, registry: NodeRegistry
+) -> Node:
+    node = get_node_object(node_id, workflow_id, table)
+    return get_node_class(node.Address, node.Version, registry)(id=node_id)
+
+
+def get_node_data_from_instance(node: Node, key: str) -> NodeData:
+    try:
+        return node.data[key]
+    except KeyError as e:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Node {node.address()} has no data with key: {key}.  Available Keys: {list(node.data)}",
+        )
 
 
 def _set_data_on_node(node: Node, key: str, type: NodeDataTypes, value: Any) -> None:
@@ -251,7 +268,7 @@ def delete_node_from_workflow(
     return items
 
 
-@router.put("/{workflow_id}/nodes/", responses={404: Error404, 500: Error500})
+@router.put("/{workflow_id}/nodes", responses={404: Error404, 500: Error500})
 def update_nodes(
     workflow_id: str,
     body: list[WorkflowTable.Node],
@@ -324,8 +341,15 @@ def add_edge_to_workflow(
     workflow_id: str,
     body: EdgePostRequest,
     table: WorkflowTable = Depends(get_workflow_table),
+    registry: NodeRegistry = Depends(get_node_registry),
 ) -> WorkflowTable.Edge:
-    edge = table.Edge(PartitionKey=workflow_id, **body.model_dump())
+    from_node = get_node_instance_by_id(body.From.NodeID, workflow_id, table, registry)
+    to_node = get_node_instance_by_id(body.To.NodeID, workflow_id, table, registry)
+    from_data = get_node_data_from_instance(from_node, body.From.Key)
+    to_data = get_node_data_from_instance(to_node, body.To.Key)
+    edge = Edge(from_data, to_data)
+
+    edge = table.Edge(PartitionKey=workflow_id, **edge.schema().model_dump())
     edge.put()
     return edge
 
@@ -352,7 +376,7 @@ def get_edge_by_id(
     return edge
 
 
-@router.put("/{workflow_id}/edges/", responses={404: Error404, 500: Error500})
+@router.put("/{workflow_id}/edges", responses={404: Error404, 500: Error500})
 def update_edges(
     workflow_id: str,
     body: list[WorkflowTable.Edge],

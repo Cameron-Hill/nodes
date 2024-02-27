@@ -45,7 +45,7 @@ export type WorkflowDetails = {
 };
 
 export async function getWorkflows(): Promise<Workflow[]> {
-  const response = await fetch(`${URL}/workflows/`, {
+  const response = await fetch(`${URL}/workflows`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export async function getWorkflows(): Promise<Workflow[]> {
 }
 
 export async function getWorkflow(workflowId: string): Promise<Workflow> {
-  const response = await fetch(`${URL}/workflows/${workflowId}/`, {
+  const response = await fetch(`${URL}/workflows/${workflowId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export async function getWorkflow(workflowId: string): Promise<Workflow> {
 }
 
 export async function createWorkflow(body: WorkflowPost): Promise<Workflow> {
-  const response = await fetch(`${URL}/workflows/`, {
+  const response = await fetch(`${URL}/workflows`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export async function getWorkflowDetails(
 }
 
 export async function getNodes() {
-  const response = await fetch(`${URL}/nodes/`, {
+  const response = await fetch(`${URL}/nodes`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export async function addNodeToWorkflow(
   workflowId: string,
   body: { Address: string; Version: number },
 ): Promise<WorkflowNode> {
-  const response = await fetch(`${URL}/workflows/${workflowId}/nodes/`, {
+  const response = await fetch(`${URL}/workflows/${workflowId}/nodes`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -211,7 +211,7 @@ export async function deleteEdgeFromWorkflow(
 }
 
 export async function batchPutNodes(workflowId: string, nodes: Node[]) {
-  const response = await fetch(`${URL}/workflows/${workflowId}/nodes/`, {
+  const response = await fetch(`${URL}/workflows/${workflowId}/nodes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -225,7 +225,7 @@ export async function batchPutNodes(workflowId: string, nodes: Node[]) {
 }
 
 export async function batchPutEdges(workflowId: string, edges: Edge[]) {
-  const response = await fetch(`${URL}/workflows/${workflowId}/edges/`, {
+  const response = await fetch(`${URL}/workflows/${workflowId}/edges`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
