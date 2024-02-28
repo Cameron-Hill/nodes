@@ -6,7 +6,8 @@ import Header from "@/components/Header";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dev from "@/pages/Dev";
-import Flow from "./pages/Flow";
+import Edit from "./pages/Edit";
+import Run from "./pages/Run";
 
 const queryClient = new QueryClient();
 
@@ -24,13 +25,21 @@ const router = createBrowserRouter([
         element: <Dev />,
       },
       {
-        path: "flow",
-        element: <Flow />,
-      },  
+        path: "edit",
+        element: <Edit />,
+      },
       {
-        path: "flow/:workflowID",
-        element: <Flow />,
-      },  
+        path: "edit/:workflowID",
+        element: <Edit />,
+      },
+      {
+        path: "run",
+        element: <Run />,
+      },
+      {
+        path: "run/:workflowID",
+        element: <Run />,
+      },
     ],
   },
 ]);
