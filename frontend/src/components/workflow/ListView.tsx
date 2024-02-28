@@ -1,5 +1,13 @@
-import { createWorkflow, Workflow } from "@/api/workflowAPI";
-import { Table, TableCaption, TableBody, TableRow, TableHead, TableHeader, TableCell } from "@/components/ui/table";
+import { createWorkflow, Workflow } from "@/data/api/workflowAPI";
+import {
+  Table,
+  TableCaption,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableHeader,
+  TableCell,
+} from "@/components/ui/table";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateWorkflowDialogButton } from "./CreateWorkflowDialogButton";
 import { DeleteWorkflowDialogButton } from "./DeleteCreateWorkflowDialogButton";
@@ -14,7 +22,11 @@ const WorkflowListItem = (workflow: Workflow) => {
   );
 };
 
-export default function WorkflowListView({ workflows }: { workflows: Workflow[]}) {
+export default function WorkflowListView({
+  workflows,
+}: {
+  workflows: Workflow[];
+}) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: createWorkflow,
@@ -25,8 +37,14 @@ export default function WorkflowListView({ workflows }: { workflows: Workflow[]}
   return (
     <Table>
       <TableCaption className="space-x-32">
-        <CreateWorkflowDialogButton buttonText="Add" onSubmit={mutation.mutate} />
-        <DeleteWorkflowDialogButton buttonText="Delete" workflowList={workflows} />
+        <CreateWorkflowDialogButton
+          buttonText="Add"
+          onSubmit={mutation.mutate}
+        />
+        <DeleteWorkflowDialogButton
+          buttonText="Delete"
+          workflowList={workflows}
+        />
       </TableCaption>
       <TableHeader>
         <TableRow>

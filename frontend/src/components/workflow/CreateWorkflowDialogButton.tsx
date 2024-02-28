@@ -12,7 +12,7 @@ import {
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Plus } from "lucide-react";
-import { WorkflowPost } from "@/api/workflowAPI";
+import { WorkflowPost } from "@/data/api/workflowAPI";
 import { useState } from "react";
 
 export function CreateWorkflowDialogButton({
@@ -22,7 +22,10 @@ export function CreateWorkflowDialogButton({
   buttonText?: string;
   onSubmit?: (body: WorkflowPost) => void;
 }) {
-  const [body, setBody] = useState<WorkflowPost>({ Name: "My Workflow", Owner: "peduarte" });
+  const [body, setBody] = useState<WorkflowPost>({
+    Name: "My Workflow",
+    Owner: "peduarte",
+  });
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -34,7 +37,9 @@ export function CreateWorkflowDialogButton({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create Workflow</DialogTitle>
-          <DialogDescription>Create a new workflow by filling out the form below.</DialogDescription>
+          <DialogDescription>
+            Create a new workflow by filling out the form below.
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -66,14 +71,20 @@ export function CreateWorkflowDialogButton({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-          <Button type="submit" onClick={onSubmit? () => {
-            onSubmit(body)
-          }
-            : () => {
-            console.log("No onSubmit function provided");
-          }}>
-            Submit
-          </Button>
+            <Button
+              type="submit"
+              onClick={
+                onSubmit
+                  ? () => {
+                      onSubmit(body);
+                    }
+                  : () => {
+                      console.log("No onSubmit function provided");
+                    }
+              }
+            >
+              Submit
+            </Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

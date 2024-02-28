@@ -26,10 +26,8 @@ import {
   NodeDataHandle,
   WorkflowDetails,
   addEdgeToWorkflow,
-  addNodeToWorkflow,
-  batchPutWorkflowEntities,
   getWorkflowDetails,
-} from "@/api/workflowAPI";
+} from "@/data/api/workflowAPI";
 import "reactflow/dist/style.css";
 import { Button } from "../ui/button";
 import WorkflowNode from "./nodes/WorkflowNode";
@@ -44,6 +42,10 @@ import AddNodeDialog from "./AddNodeDialog";
 import Loader from "../elements/Loader";
 import { Save } from "lucide-react";
 import ErrorEdge from "./edges/ErrorEdge";
+import {
+  useMutateSaveWorkflow,
+  useWorkflowNodeMutation,
+} from "@/data/mutations";
 
 type SetEdgesType = (
   edge: Dispatch<SetStateAction<Edge<EdgeData>[]>> | Edge[],
@@ -51,16 +53,6 @@ type SetEdgesType = (
 
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 const WORKFLOW_NODE_TYPE = "workflow";
-
-const getNodeData = (node: Node): NodeData => {
-  const nd = node.data;
-  nd.Display = node.position;
-  return nd;
-};
-
-const getEdgeData = (edge: Edge): EdgeData => {
-  return edge.data;
-};
 
 const getFlowEdges = (edges: EdgeData[]) => {
   return edges.map((edge) => {
@@ -124,52 +116,6 @@ const edgeTypes = {
 
 const nodeTypes = {
   workflow: WorkflowNode,
-};
-
-// Mutations
-
-const useWorkflowNodeMutation = (workflowId: string) => {
-  const queryClient = useQueryClient();
-
-  const addWorkflowNode = useMutation({
-    mutationFn: (body: { Address: string; Version: number }) =>
-      addNodeToWorkflow(workflowId, body),
-
-    onSettled: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ["workflow", workflowId],
-      });
-    },
-  });
-
-  return addWorkflowNode;
-};
-
-const useMutateSaveWorkflow = (
-  workflowId: string,
-  inProgress: (status: boolean) => void,
-) => {
-  const queryClient = useQueryClient();
-
-  const addWorkflowEntities = useMutation({
-    mutationFn: ({ nodes, edges }: { nodes: Node[]; edges: Edge[] }) => {
-      inProgress(true);
-      return batchPutWorkflowEntities(
-        workflowId,
-        nodes.map((n) => getNodeData(n)),
-        edges.map((e) => getEdgeData(e)),
-      );
-    },
-
-    onSettled: async () => {
-      inProgress(false);
-      await queryClient.invalidateQueries({
-        queryKey: ["workflow", workflowId],
-      });
-    },
-  });
-
-  return addWorkflowEntities;
 };
 
 const useAddEdgeMutation = (workflowId: string) => {
@@ -325,19 +271,6 @@ const fetchAndSetWorkflowDetails = async (
   return workflowDetails;
 };
 
-const handleNodeChanges = (changes: NodeChange[], nodes: Node[]) => {
-  changes.forEach((change) => {
-    let a = 1;
-    if (change.type === "add") {
-      a = 2;
-    } else if (change.type === "remove") {
-      a = 3;
-    } else if (change.type === "reset") {
-      a = 4;
-    }
-  });
-};
-
 //--------------------Main Editor--------------------
 export default function WorkflowEditorFlow({
   workflowID,
@@ -359,7 +292,6 @@ export default function WorkflowEditorFlow({
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
-      handleNodeChanges(changes, nodes);
       return setNodes((nds) => applyNodeChanges(changes, nds));
     },
     [setNodes],

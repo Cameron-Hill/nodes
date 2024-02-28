@@ -1,11 +1,21 @@
-import { Workflow } from "@/api/workflowAPI";
+import { Workflow } from "@/data/api/workflowAPI";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import WorkflowDetails from "./WorkflowDetails";
 
 export default function WorkflowEditor({
@@ -29,7 +39,9 @@ export default function WorkflowEditor({
             aria-expanded={open}
             className="w-[400px] justify-between overflow-clip"
           >
-            {value ? workflows.find((workflow) => workflow.ID === value)?.Name : "Select workflow..."}
+            {value
+              ? workflows.find((workflow) => workflow.ID === value)?.Name
+              : "Select workflow..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -50,7 +62,12 @@ export default function WorkflowEditor({
                     setOpen(false);
                   }}
                 >
-                  <Check className={cn("mr-2 h-4 w-4", value === workflow.ID ? "opacity-100" : "opacity-0")} />
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === workflow.ID ? "opacity-100" : "opacity-0",
+                    )}
+                  />
                   {workflow.Name}
                 </CommandItem>
               ))}

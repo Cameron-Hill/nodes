@@ -11,7 +11,7 @@ import {
 import { Label } from "../ui/label";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
-import { Workflow, deleteWorkflow } from "@/api/workflowAPI";
+import { Workflow, deleteWorkflow } from "@/data/api/workflowAPI";
 import {
   Select,
   SelectContent,

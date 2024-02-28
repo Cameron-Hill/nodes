@@ -7,7 +7,7 @@ import {
   TableCell,
   TableRow,
 } from "../ui/table";
-import { Node } from "@/api/nodeAPI";
+import { Node } from "@/data/api/nodeAPI";
 import { MoreVertical } from "lucide-react";
 
 export default function NodeTableSelector({

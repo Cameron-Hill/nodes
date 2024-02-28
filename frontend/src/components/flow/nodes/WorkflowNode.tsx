@@ -2,7 +2,7 @@ import { Handle, Position, NodeProps } from "reactflow";
 import {
   WorkflowNode as NodeData,
   deleteNodeFromWorkflow,
-} from "@/api/workflowAPI";
+} from "@/data/api/workflowAPI";
 import {
   Tooltip,
   TooltipContent,

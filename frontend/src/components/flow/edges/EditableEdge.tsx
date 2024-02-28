@@ -1,4 +1,4 @@
-import { Edge as EdgeData } from "@/api/workflowAPI";
+import { Edge as EdgeData } from "@/data/api/workflowAPI";
 import { Button } from "@/components/ui/button";
 import useLog from "@/hooks/useLog";
 import { Trash2 } from "lucide-react";
@@ -7,8 +7,8 @@ import {
   getBezierPath,
   EdgeProps as _EdgeProps,
   EdgeLabelRenderer,
-  useReactFlow,
 } from "reactflow";
+import { useDeleteEdgeMutation } from "@/data/mutations";
 
 export interface EdgeProps extends _EdgeProps {
   data: EdgeData;
@@ -16,14 +16,16 @@ export interface EdgeProps extends _EdgeProps {
 
 export const EditWidget = ({
   id,
+  workflowID,
   labelX,
   labelY,
 }: {
   id: string;
+  workflowID: string;
   labelX: number;
   labelY: number;
 }) => {
-  const { setEdges } = useReactFlow();
+  const deleteEdgeMutation = useDeleteEdgeMutation(workflowID);
   return (
     <EdgeLabelRenderer>
       <div
@@ -46,7 +48,7 @@ export const EditWidget = ({
           variant={"destructive"}
           className="m-0 h-max w-max rounded-none p-2"
           onClick={() => {
-            setEdges((es) => es.filter((e) => e.id !== id));
+            deleteEdgeMutation.mutate(id);
           }}
         >
           <Trash2 size={7} />
@@ -81,7 +83,14 @@ export default function EditableEdge({
   return (
     <>
       <BaseEdge id={id} path={edgePath} style={style} />
-      {selected && <EditWidget id={id} labelX={labelX} labelY={labelY} />}
+      {selected && (
+        <EditWidget
+          id={id}
+          workflowID={data.WorkflowID}
+          labelX={labelX}
+          labelY={labelY}
+        />
+      )}
     </>
   );
 }

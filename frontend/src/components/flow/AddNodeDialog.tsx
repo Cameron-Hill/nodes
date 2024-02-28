@@ -1,5 +1,5 @@
-import { getNodes } from "@/api/nodeAPI";
-import { Node } from "@/api/nodeAPI";
+import { getNodes } from "@/data/api/nodeAPI";
+import { Node } from "@/data/api/nodeAPI";
 import {
   Dialog,
   DialogContent,

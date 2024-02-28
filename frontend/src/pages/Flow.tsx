@@ -1,4 +1,4 @@
-import { getWorkflows } from "@/api/workflowAPI";
+import { getWorkflows } from "@/data/api/workflowAPI";
 import WorkflowEditorFlow from "@/components/flow/WorkflowEditorFlow";
 import WorkflowEditor from "@/components/workflow/WorkflowEditor";
 import { useQuery } from "@tanstack/react-query";
@@ -9,7 +9,7 @@ const WorkflowSelector = () => {
   const query = useQuery({ queryFn: getWorkflows, queryKey: ["workflows"] });
   const [selected, setSelected] = useState<string | null>(null);
   if (selected) {
-    return <Navigate to={`/flow/${selected}`}/>;
+    return <Navigate to={`/flow/${selected}`} />;
   }
   if (query.isLoading) {
     return <p>Loading...</p>;
@@ -39,7 +39,7 @@ export default function Flow() {
     return <WorkflowSelector />;
   }
   return (
-    <div className="w-full h-[600px] border">
+    <div className="h-[600px] w-full border">
       <WorkflowEditorFlow workflowID={workflowID} />
     </div>
   );

@@ -1,5 +1,4 @@
-import {URL} from "./constants";
-
+import { URL } from "../constants";
 
 interface PrimitiveJSONSchema {
   type: "string" | "number" | "boolean" | "null";
@@ -26,16 +25,20 @@ interface ArrayJSONSchema {
 }
 
 interface AnyOfJSONSchema {
-  anyOf: (JSONSchema)[];
-
+  anyOf: JSONSchema[];
 }
 
-type EmptyObject = Record<string, never>; 
-type JSONSchema = PrimitiveJSONSchema | ObjectJSONSchema | ArrayJSONSchema | AnyOfJSONSchema | EmptyObject;
+type EmptyObject = Record<string, never>;
+type JSONSchema =
+  | PrimitiveJSONSchema
+  | ObjectJSONSchema
+  | ArrayJSONSchema
+  | AnyOfJSONSchema
+  | EmptyObject;
 
 interface NodeDataItem {
   Type: "input" | "option" | "output";
-  Schema: JSONSchema  ;
+  Schema: JSONSchema;
   Value: null | unknown;
 }
 
@@ -52,7 +55,6 @@ export type Node = {
   Data: NodeData;
   Description: string;
 };
-
 
 export async function getNodes(): Promise<Node[]> {
   const response = await fetch(`${URL}/nodes`, {

@@ -88,6 +88,19 @@ def get_node_object(
     return node
 
 
+def get_edge_object(
+    edge_id: str,
+    workflow_id: str,
+    table: WorkflowTable
+) -> WorkflowTable.Edge:
+    edge = table.Edge.get(key=workflow_id, sort_key=edge_id)
+    if not edge:
+        raise HTTPException(
+            status_code=404, detail=f"edge not found: {workflow_id}  {edge_id}"
+        )
+    return edge
+
+
 def get_node_instance_by_id(
     node_id: str, workflow_id: str, table: WorkflowTable, registry: NodeRegistry
 ) -> Node:
@@ -366,6 +379,11 @@ def update_edges(
                 )
     return updated
 
+@router.delete("/{workflow_id}/edges/{edge_id}", responses={404:Error404, 500:Error500})
+def delete_edge_by_id(workflow_id:str, edge_id:str, table: WorkflowTable = Depends(get_workflow_table)) -> WorkflowTable.Edge:
+    edge = get_edge_object(edge_id=edge_id, workflow_id=workflow_id, table=table)
+    edge.delete()
+    return edge
 
 @router.post("/{workflow_id}/run", responses={404: Error404, 500: Error500})
 def run_workflow(

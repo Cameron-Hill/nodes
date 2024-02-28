@@ -1,4 +1,9 @@
-import { WorkflowNode, Edge, Workflow, getWorkflowDetails } from "@/api/workflowAPI";
+import {
+  WorkflowNode,
+  Edge,
+  Workflow,
+  getWorkflowDetails,
+} from "@/data/api/workflowAPI";
 import { useQuery } from "@tanstack/react-query";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "../ui/skeleton";
@@ -21,7 +26,7 @@ const WorkflowDetailPanel = ({ workflow }: { workflow: Workflow }) => {
   return (
     <div>
       <h2>Workflow</h2>
-      <div className="grid gap-4 my-5 ">
+      <div className="my-5 grid gap-4 ">
         <div className="grid grid-cols-4 items-center gap-4">
           <p>
             <b>Name:</b>
@@ -50,7 +55,7 @@ const NodesDetailPanel = ({ nodes }: { nodes: WorkflowNode[] }) => {
   return (
     <div>
       <h2>Nodes</h2>
-      <div className="grid gap-4 my-5">
+      <div className="my-5 grid gap-4">
         {nodes.map((node) => (
           <>
             <div key={node.ID} className="grid grid-cols-4 items-center gap-4">
@@ -101,7 +106,7 @@ const EdgesDetailPanel = ({ edges }: { edges: Edge[] }) => {
   return (
     <div>
       <h2>Edges</h2>
-      <div className="grid gap-4 my-5">
+      <div className="my-5 grid gap-4">
         {edges.map((edge) => (
           <>
             <div key={edge.ID} className="grid grid-cols-4 items-center gap-4">
