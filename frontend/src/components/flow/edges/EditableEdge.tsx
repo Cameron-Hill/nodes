@@ -11,7 +11,7 @@ import {
 import { useDeleteEdgeMutation } from "@/data/mutations";
 
 export interface EdgeProps extends _EdgeProps {
-  data: EdgeData;
+  data?: EdgeData;
 }
 
 export const EditWidget = ({
@@ -80,17 +80,19 @@ export default function EditableEdge({
   if (selected) {
     log();
   }
-  return (
-    <>
-      <BaseEdge id={id} path={edgePath} style={style} />
-      {selected && (
-        <EditWidget
-          id={id}
-          workflowID={data.WorkflowID}
-          labelX={labelX}
-          labelY={labelY}
-        />
-      )}
-    </>
-  );
+  if (data) {
+    return (
+      <>
+        <BaseEdge id={id} path={edgePath} style={style} />
+        {selected && (
+          <EditWidget
+            id={id}
+            workflowID={data.WorkflowID}
+            labelX={labelX}
+            labelY={labelY}
+          />
+        )}
+      </>
+    );
+  }
 }

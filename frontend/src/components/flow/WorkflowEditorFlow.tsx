@@ -1,6 +1,12 @@
 import Dagre, { Label } from "@dagrejs/dagre";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import ReactFlow, {
   NodeChange,
   EdgeChange,
@@ -46,6 +52,7 @@ import {
   useMutateSaveWorkflow,
   useWorkflowNodeMutation,
 } from "@/data/mutations";
+import { useSchedule } from "@/hooks";
 
 type SetEdgesType = (
   edge: Dispatch<SetStateAction<Edge<EdgeData>[]>> | Edge[],
@@ -280,6 +287,7 @@ export default function WorkflowEditorFlow({
   const [nodes, setNodes] = useNodesState([]);
   const [edges, setEdges] = useEdgesState([]);
   const [saving, setSaving] = useState(false);
+
   const query = useQuery({
     queryFn: () =>
       fetchAndSetWorkflowDetails(workflowID, setNodes, setEdges, () => {}),
@@ -289,6 +297,13 @@ export default function WorkflowEditorFlow({
 
   const saveWorkflowMutation = useMutateSaveWorkflow(workflowID, setSaving);
   const addEdgeMutation = useAddEdgeMutation(workflowID);
+
+  const save = useCallback(() => {
+    console.log("Saving");
+    saveWorkflowMutation.mutate({ nodes, edges });
+  }, []);
+
+  useSchedule(save, 2000, [edges, nodes]);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
