@@ -301,7 +301,7 @@ export default function WorkflowEditorFlow({
   const save = useCallback(() => {
     console.log("Saving");
     saveWorkflowMutation.mutate({ nodes, edges });
-  }, []);
+  }, [nodes, edges]);
 
   useSchedule(save, 2000, [edges, nodes]);
 
