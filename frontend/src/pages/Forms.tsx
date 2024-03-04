@@ -11,7 +11,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { JsonSchemaProperty } from "@/types";
+import { JSONSchemaProperty } from "@/types";
 
 const schema: RJSFSchema = {
   title: "Test form",
@@ -30,7 +30,10 @@ function getNumberUISchema() {
   };
 }
 
-function getUISchema(property: JsonSchemaProperty) {
+function getUISchema(property: JSONSchemaProperty) {
+  if (property.anyOf) {
+    return {};
+  }
   switch (property.type) {
     case "string":
       return getStringUISchema();
@@ -91,6 +94,7 @@ export default function Forms() {
                         className="my-2"
                         schema={content.Schema}
                         validator={validator}
+                        uiSchema={getUISchema(content.Schema)}
                       />
                       <CardFooter className="mt-10">
                         {JSON.stringify(content.Schema)}
