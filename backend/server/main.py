@@ -2,6 +2,8 @@ import time
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+
+from server.routers import forms
 from . import models
 from .database import engine
 from .routers import users, nodes, items, workflows
@@ -99,3 +101,4 @@ app.include_router(nodes.router)
 app.include_router(users.router)
 app.include_router(items.router)
 app.include_router(workflows.router)
+app.include_router(forms.router)

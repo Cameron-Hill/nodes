@@ -1,12 +1,6 @@
 import Dagre, { Label } from "@dagrejs/dagre";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useState } from "react";
 import ReactFlow, {
   NodeChange,
   EdgeChange,
@@ -54,10 +48,6 @@ import {
 } from "@/data/mutations";
 import { useSchedule } from "@/hooks";
 
-type SetEdgesType = (
-  edge: Dispatch<SetStateAction<Edge<EdgeData>[]>> | Edge[],
-) => void;
-
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 const WORKFLOW_NODE_TYPE = "workflow";
 
@@ -91,13 +81,17 @@ const getFlowNodes = (nodes: NodeData[]) => {
   });
 };
 
+interface TypedNode extends Node {
+  type: string;
+}
+
 const getLayoutedElements = (
   nodes: Node[],
   edges: Edge[],
   options: { direction: string },
-) => {
+): { nodes: TypedNode[]; edges: Edge[] } => {
   if (nodes.length === 0) {
-    return { nodes, edges };
+    return { nodes: [], edges: [] };
   }
   g.setGraph({ rankdir: options.direction, ranksep: 80 });
 
@@ -110,9 +104,18 @@ const getLayoutedElements = (
     nodes: nodes.map((node) => {
       const { x, y } = g.node(node.id);
 
-      return { ...node, position: { x, y } };
+      return {
+        ...node,
+        type: node.type ? node.type : WORKFLOW_NODE_TYPE,
+        position: { x, y },
+      };
     }),
-    edges,
+    edges: edges.map((edge) => {
+      return {
+        ...edge,
+        type: edge.type ? edge.type : "editableEdge",
+      };
+    }),
   };
 };
 
@@ -168,7 +171,6 @@ const WorkflowPanel = ({
   const [addingNode, setAddingNode] = useState(false);
   const { fitView } = useReactFlow();
   const addNodeMutation = useWorkflowNodeMutation(workflowId);
-
   const onLayout = useCallback(
     (direction: string) => {
       const layouted = getLayoutedElements(nodes, edges, { direction });
@@ -192,6 +194,7 @@ const WorkflowPanel = ({
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          // onSelectionChange={(elements) => setSelected(elements)}
           fitView
           fitViewOptions={{
             padding: 1,
@@ -253,7 +256,7 @@ const WorkflowPanel = ({
 const fetchAndSetWorkflowDetails = async (
   workflowID: string,
   setNodes: (nodes: Node[]) => void,
-  setEdges: SetEdgesType,
+  setEdges: (edges: Edge[]) => void,
   callback?: (data: WorkflowDetails) => void,
 ) => {
   const workflowDetails = await getWorkflowDetails(workflowID);
@@ -265,6 +268,8 @@ const fetchAndSetWorkflowDetails = async (
 
   if (workflowDetails.nodes.every((node) => !node.Display)) {
     console.log("layouting");
+
+    // @ts-expect-error  I don't know why this is happening
     elements = getLayoutedElements(elements.nodes, elements.edges, {
       direction: "TB",
     });

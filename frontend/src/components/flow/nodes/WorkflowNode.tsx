@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ReactNode, useCallback } from "react";
+import { ReactNode } from "react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -24,6 +24,7 @@ import {
 import { Trash2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useLog from "@/hooks/useLog";
+import { useStore } from "@/store";
 
 const NodeBody = ({ children }: { children: ReactNode }) => {
   return (
@@ -75,12 +76,21 @@ export default function WorkflowNode({
   id,
   data,
   selected,
+  xPos,
+  yPos,
 }: NodeProps<NodeData>) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
+  const addNodeToSelection = useStore((state) => state.addNodeToSelection);
+  const removeNodeFromSelection = useStore(
+    (state) => state.removeNodeFromSelection,
+  );
   const log = useLog("Node", id, data);
+
   if (selected) {
     log();
+    addNodeToSelection({ id, data, position: { x: xPos, y: yPos } });
+  } else {
+    removeNodeFromSelection({ id, data, position: { x: xPos, y: yPos } });
   }
 
   const queryClient = useQueryClient();
@@ -93,9 +103,9 @@ export default function WorkflowNode({
     },
   });
 
-  const onChange = useCallback((evt: { target: { value: string } }) => {
-    console.log("change", evt.target.value);
-  }, []);
+  // const onChange = useCallback((evt: { target: { value: string } }) => {
+  //   console.log("change", evt.target.value);
+  // }, []);
 
   const inputs = Object.entries(data.Data).filter(
     ([, value]) => value.Type === "input",

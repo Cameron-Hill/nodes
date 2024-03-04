@@ -254,3 +254,16 @@ export async function batchPutWorkflowEntities(
   }
   return { nodes: nodeResponse.json(), edges: edgeResponse.json() };
 }
+
+export async function getForms(): Promise<WorkflowNode[]> {
+  const response = await fetch(`${URL}/forms`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+}

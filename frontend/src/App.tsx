@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dev from "@/pages/Dev";
 import Edit from "./pages/Edit";
 import Run from "./pages/Run";
+import Forms from "./pages/Forms";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "run/:workflowID",
         element: <Run />,
+      },
+      {
+        path: "forms",
+        element: <Forms />,
       },
     ],
   },
