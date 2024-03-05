@@ -1,49 +1,17 @@
-import { useFormsQuery } from "@/data/queries";
-
-import { RJSFSchema } from "@rjsf/utils";
-import validator from "@rjsf/validator-ajv8";
-// import Form from "@rjsf/core";
-// import Form from "@rjsf/bootstrap-4";
-import Form from "@rjsf/mui";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { JSONSchemaProperty } from "@/types";
+import { useFormsQuery } from "@/data/queries";
+import { JsonForms } from "@jsonforms/react";
+import {
+  materialRenderers,
+  materialCells,
+} from "@jsonforms/material-renderers";
 
-const schema: RJSFSchema = {
-  title: "Test form",
-  type: "string",
-};
-
-function getStringUISchema() {
-  return {
-    "ui:widget": "textarea",
-  };
-}
-
-function getNumberUISchema() {
-  return {
-    "ui:widget": "updown",
-  };
-}
-
-function getUISchema(property: JSONSchemaProperty) {
-  switch (property.type) {
-    case "string":
-      return getStringUISchema();
-    case "number":
-      return getNumberUISchema();
-    case "boolean":
-      return {};
-    default:
-      return {};
-  }
-}
-
-export default function Forms() {
+export default function FormsTwo() {
   const query = useFormsQuery();
   if (query.isLoading) {
     return <div>Loading...</div>;
@@ -58,10 +26,6 @@ export default function Forms() {
   return (
     <div>
       <h1 className="text-2xl">Forms</h1>
-      <hr></hr>
-      <br />
-      <Form schema={schema} validator={validator} />
-      <br />
       <hr></hr>
       <br />
       {Object.entries(query.data).map(([key, data]) => {
@@ -87,11 +51,11 @@ export default function Forms() {
                       <p>
                         <b>Value:</b> {JSON.stringify(content.Value)}
                       </p>
-                      <Form
-                        className="my-2"
+                      <JsonForms
                         schema={content.Schema}
-                        validator={validator}
-                        uiSchema={getUISchema(content.Schema)}
+                        data={undefined}
+                        renderers={materialRenderers}
+                        cells={materialCells}
                       />
                       <CardFooter className="mt-10">
                         {JSON.stringify(content.Schema)}

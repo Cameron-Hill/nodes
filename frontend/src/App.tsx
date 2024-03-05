@@ -9,6 +9,7 @@ import Dev from "@/pages/Dev";
 import Edit from "./pages/Edit";
 import Run from "./pages/Run";
 import Forms from "./pages/Forms";
+import FormsTwo from "./pages/FormsTwo";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "forms",
         element: <Forms />,
+      },
+      {
+        path: "forms2",
+        element: <FormsTwo />,
       },
     ],
   },
