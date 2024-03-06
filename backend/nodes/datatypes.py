@@ -1,6 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import Annotated
 
-PrimitiveType = str | int | float | bool
+Str = Annotated[str, Field(..., title="String/Text")]
+Int = Annotated[int, Field(..., title="Integer")]
+Float = Annotated[float, Field(..., title="Number")]
+Bool = Annotated[bool, Field(..., title="True/False")]
+
+PrimitiveType = Str | Int | Float | Bool
 
 
 class UndefinedMap(BaseModel):
