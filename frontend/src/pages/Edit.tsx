@@ -8,6 +8,9 @@ export default function Edit() {
   const { workflowID } = useParams();
   const [selected, setSelected] = useState<string | null>(null);
 
+  if (workflowID && selected) {
+    setSelected(null);
+  }
   const selectedElements = useStore((state) => state.selected);
   if (selected) {
     return <Navigate to={`/edit/${selected}`} />;
@@ -21,7 +24,6 @@ export default function Edit() {
       />
     );
   }
-
   return (
     <>
       <div className="h-[600px] w-full border">

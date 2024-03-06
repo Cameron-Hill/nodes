@@ -57,6 +57,10 @@ export const useMutateSaveWorkflow = (
 
     onSettled: async () => {
       inProgress(false);
+    },
+
+    onError: async ({ message, name }) => {
+      console.log("SaveError", message, name);
       await queryClient.invalidateQueries({
         queryKey: ["workflow", workflowId],
       });
