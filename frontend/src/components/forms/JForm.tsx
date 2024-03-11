@@ -8,13 +8,20 @@ export type FormProps = {
   schema: RJSFSchema;
   formData: RJSFFormProps["formData"];
   onChange: RJSFFormProps["onChange"];
+  onSubmit: RJSFFormProps["onSubmit"];
 };
 
 const getUISchema = (schemaElement: RJSFSchema): UiSchema => {
   return {};
 };
 
-export const Form = ({ className, schema, formData, onChange }: FormProps) => {
+export const Form = ({
+  className,
+  schema,
+  formData,
+  onChange,
+  onSubmit,
+}: FormProps) => {
   return (
     <RJSFForm
       className={className}
@@ -23,6 +30,7 @@ export const Form = ({ className, schema, formData, onChange }: FormProps) => {
       formData={formData}
       onChange={onChange}
       uiSchema={getUISchema(schema)}
+      onSubmit={onSubmit}
     />
   );
 };

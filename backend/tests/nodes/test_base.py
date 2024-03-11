@@ -43,3 +43,7 @@ def test_get_option_params_from_initialized_object():
     assert "custom_option_label" in options
     assert options["custom_option_label"].annotation == TestNode.Options
     assert len(options) == 1
+
+
+def test_infer_data_type_of_set_option():
+    node = TestNode()

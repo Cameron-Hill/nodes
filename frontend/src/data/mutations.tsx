@@ -3,6 +3,7 @@ import {
   deleteEdgeFromWorkflow,
   addNodeToWorkflow,
   batchPutWorkflowEntities,
+  setDataOnNode,
 } from "./api/workflowAPI";
 
 import { Node, Edge } from "reactflow";
@@ -59,8 +60,8 @@ export const useMutateSaveWorkflow = (
       inProgress(false);
     },
 
-    onError: async ({ message, name }) => {
-      console.log("SaveError", message, name);
+    onError: async ({ message, name, stack }) => {
+      console.log("SaveError", message, name, stack);
       await queryClient.invalidateQueries({
         queryKey: ["workflow", workflowId],
       });
@@ -76,6 +77,27 @@ export const useDeleteEdgeMutation = (workflowId: string) => {
     mutationFn: (edgeId: string) => deleteEdgeFromWorkflow(workflowId, edgeId),
     onSettled: async () => {
       client.invalidateQueries({ queryKey: ["workflow", workflowId] });
+    },
+  });
+};
+
+export const useSetDataOnNodeMutation = (
+  workflowID: string,
+  nodeID: string,
+) => {
+  // set data on a node, then invalidate the workflow query
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: {
+      Key: string;
+      Type: "input" | "options" | "output";
+      Data: unknown;
+    }) => setDataOnNode(workflowID, nodeID, data),
+
+    onSettled: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["workflow", workflowID],
+      });
     },
   });
 };

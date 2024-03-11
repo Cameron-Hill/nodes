@@ -25,3 +25,7 @@ def test_producers(manager, node_id, input, options, expected_output):
     node = node()
     output = node.call(input=input, options=options)
     assert output == expected_output
+
+def test_map_producer(manager):
+    mapper_class = manager.get_node_by_id('nodes.builtins.producers.MapProducer')
+    instance = mapper_class()

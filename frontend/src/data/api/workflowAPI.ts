@@ -245,14 +245,8 @@ export async function batchPutWorkflowEntities(
   edges: Edge[],
 ) {
   const nodeResponse = await batchPutNodes(workflowId, nodes);
-  if (!nodeResponse.ok) {
-    throw new Error(nodeResponse.statusText);
-  }
   const edgeResponse = await batchPutEdges(workflowId, edges);
-  if (!edgeResponse.ok) {
-    throw new Error(edgeResponse.statusText);
-  }
-  return { nodes: nodeResponse.json(), edges: edgeResponse.json() };
+  return { nodes: nodeResponse, edges: edgeResponse };
 }
 
 export async function getForms(): Promise<WorkflowNode[]> {
@@ -262,6 +256,27 @@ export async function getForms(): Promise<WorkflowNode[]> {
       "Content-Type": "application/json",
     },
   });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+}
+
+export async function setDataOnNode(
+  workflowId: string,
+  nodeId: string,
+  data: { Key: string; Type: "input" | "options" | "output"; Data: unknown },
+) {
+  const response = await fetch(
+    `${URL}/workflows/${workflowId}/nodes/${nodeId}/data`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    },
+  );
   if (!response.ok) {
     throw new Error(response.statusText);
   }

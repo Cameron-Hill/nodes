@@ -1,44 +1,9 @@
 import { URL } from "../constants";
-
-interface PrimitiveJSONSchema {
-  type: "string" | "number" | "boolean" | "null";
-  title?: string;
-  description?: string;
-}
-
-interface ObjectJSONSchema {
-  type: "object";
-  properties?: {
-    [key: string]: JSONSchema;
-  };
-  additionalProperties?: {
-    [key: string]: JSONSchema;
-  };
-  required?: string[];
-  title?: string;
-  description?: string;
-}
-
-interface ArrayJSONSchema {
-  type: "array";
-  items: JSONSchema;
-}
-
-interface AnyOfJSONSchema {
-  anyOf: JSONSchema[];
-}
-
-type EmptyObject = Record<string, never>;
-type JSONSchema =
-  | PrimitiveJSONSchema
-  | ObjectJSONSchema
-  | ArrayJSONSchema
-  | AnyOfJSONSchema
-  | EmptyObject;
+import type { RJSFSchema } from "@rjsf/utils";
 
 interface NodeDataItem {
-  Type: "input" | "option" | "output";
-  Schema: JSONSchema;
+  Type: "input" | "options" | "output";
+  Schema: RJSFSchema;
   Value: null | unknown;
 }
 
