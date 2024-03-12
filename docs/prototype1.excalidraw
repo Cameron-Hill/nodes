@@ -5,8 +5,8 @@
   "elements": [
     {
       "type": "text",
-      "version": 215,
-      "versionNonce": 1452747601,
+      "version": 218,
+      "versionNonce": 84372836,
       "isDeleted": false,
       "id": "_qnSTJ5rLZSGwLLtzgACh",
       "fillStyle": "hachure",
@@ -26,7 +26,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674114,
+      "updated": 1710145817334,
       "link": null,
       "locked": false,
       "fontSize": 28,
@@ -36,13 +36,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Principles",
-      "lineHeight": 1.2,
-      "baseline": 26
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 383,
-      "versionNonce": 1648406079,
+      "version": 386,
+      "versionNonce": 1132169948,
       "isDeleted": false,
       "id": "9Noqr8U7JaXNaBNeNWJ47",
       "fillStyle": "hachure",
@@ -62,7 +61,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674114,
+      "updated": 1710145817336,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -72,13 +71,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "- Action\n- Monitor\n- DataProducer\n- Filter\n- reactflow\n- Error\n- Choice\n- Log\n- Authorizer\n- StatusBuffer",
-      "lineHeight": 1.2,
-      "baseline": 235
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 250,
-      "versionNonce": 1645713713,
+      "version": 253,
+      "versionNonce": 1811685604,
       "isDeleted": false,
       "id": "ycg28se3KvzRuT8F52mGV",
       "fillStyle": "hachure",
@@ -98,7 +96,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674114,
+      "updated": 1710145817337,
       "link": null,
       "locked": false,
       "fontSize": 28,
@@ -108,13 +106,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Functionality",
-      "lineHeight": 1.2,
-      "baseline": 26
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 247,
-      "versionNonce": 531533407,
+      "version": 250,
+      "versionNonce": 2046676828,
       "isDeleted": false,
       "id": "aVP_ROqSP2FfiiSEjdWCv",
       "fillStyle": "hachure",
@@ -134,7 +131,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674114,
+      "updated": 1710145817337,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -144,8 +141,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "- Import OpenAPI Schema as Actions\n- Tail Application Logs\n- ",
-      "lineHeight": 1.2,
-      "baseline": 67
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -239,8 +235,7 @@
       "verticalAlign": "middle",
       "containerId": "tVraHBFEhWa4DaWAeM98T",
       "originalText": "+\n-",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -271,8 +266,8 @@
     },
     {
       "type": "text",
-      "version": 198,
-      "versionNonce": 1661946641,
+      "version": 201,
+      "versionNonce": 151938148,
       "isDeleted": false,
       "id": "IwHoLcWs7zIPyEk6m2iEQ",
       "fillStyle": "solid",
@@ -292,7 +287,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674115,
+      "updated": 1710145817338,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -302,8 +297,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Actions",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -349,8 +343,8 @@
     },
     {
       "type": "text",
-      "version": 122,
-      "versionNonce": 279669375,
+      "version": 125,
+      "versionNonce": 549684188,
       "isDeleted": false,
       "id": "ETciaZ6Z_UJr2IlVH-Ict",
       "fillStyle": "solid",
@@ -370,7 +364,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674115,
+      "updated": 1710145817338,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -380,8 +374,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Flows",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -427,8 +420,8 @@
     },
     {
       "type": "text",
-      "version": 164,
-      "versionNonce": 838189297,
+      "version": 167,
+      "versionNonce": 1644967908,
       "isDeleted": false,
       "id": "IBxxJBusV6ccYQLV1e7X0",
       "fillStyle": "solid",
@@ -448,7 +441,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674115,
+      "updated": 1710145817340,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -458,13 +451,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "> requests\n  - GET\n  - POST\n  - PATCH",
-      "lineHeight": 1.2,
-      "baseline": 73
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 193,
-      "versionNonce": 1643627167,
+      "version": 196,
+      "versionNonce": 1038002268,
       "isDeleted": false,
       "id": "gPCc9zhC5Lu7o5aIm7n6T",
       "fillStyle": "solid",
@@ -484,7 +476,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674115,
+      "updated": 1710145817340,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -494,13 +486,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "> ui",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 302,
-      "versionNonce": 743602897,
+      "version": 305,
+      "versionNonce": 319003492,
       "isDeleted": false,
       "id": "G7S9CktjEP5OPegp0yXFk",
       "fillStyle": "solid",
@@ -520,7 +511,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674115,
+      "updated": 1710145817340,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -530,8 +521,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "> assertions",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -610,13 +600,12 @@
       "verticalAlign": "middle",
       "containerId": "q1Wy4Ijtx4r5cAVEXJhjV",
       "originalText": "GET",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 135,
-      "versionNonce": 1413748415,
+      "version": 138,
+      "versionNonce": 1159806172,
       "isDeleted": false,
       "id": "mD38XVrokl2cKcgC8ffws",
       "fillStyle": "solid",
@@ -636,7 +625,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674115,
+      "updated": 1710145817341,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -646,8 +635,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "- variable\n- choice\n",
-      "lineHeight": 1.2,
-      "baseline": 53
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -813,8 +801,7 @@
       "verticalAlign": "middle",
       "containerId": "sy-7muPpuiOk1gHegGr70",
       "originalText": "Assert",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -1056,8 +1043,8 @@
     },
     {
       "type": "text",
-      "version": 165,
-      "versionNonce": 314374321,
+      "version": 168,
+      "versionNonce": 105025252,
       "isDeleted": false,
       "id": "OPxoaNXlmnzV0kD2fsSIb",
       "fillStyle": "solid",
@@ -1077,7 +1064,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674115,
+      "updated": 1710145817341,
       "link": null,
       "locked": false,
       "fontSize": 28,
@@ -1087,13 +1074,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Prototype",
-      "lineHeight": 1.2,
-      "baseline": 26
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 293,
-      "versionNonce": 1043392223,
+      "version": 296,
+      "versionNonce": 1612530012,
       "isDeleted": false,
       "id": "KiPd8nBuu6AGsN3Mjr7NS",
       "fillStyle": "solid",
@@ -1115,7 +1101,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674116,
+      "updated": 1710145817341,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -1125,13 +1111,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Schemas vs Attributes\n-----------------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 1706,
-      "versionNonce": 651999889,
+      "version": 1709,
+      "versionNonce": 743903844,
       "isDeleted": false,
       "id": "-jHFeW9BDeSBLXbozU60O",
       "fillStyle": "solid",
@@ -1153,7 +1138,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674116,
+      "updated": 1710145817343,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -1163,8 +1148,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "There may be a few different ways to\ntransition data between actions.\nOne possible solution is the \nattribute-based approach, where an \naction defines individual attributes\nto be passed into an action. e.g.\n\n\n\n\n\n\nHere you define the attributes that are \nrequired by the action and the attributes\nthat are produced by the action. The\nadvantage to this approach is that you don't\nnecissarily have to define additional schemas\nto describe the data flowing in and out\nof the action. However, we would still\nneeds schemas to describe object types.\nA schema base approach simplifies the\nlogical model at the expense of requireing \ninput and output schemas for all actions.\n\n\n\n\n\n\nThis will most likely add complexity by\nrequiring additional data transform steps\nand after actions to coerce the data into\nthe correct schema format.\n",
-      "lineHeight": 1.2,
-      "baseline": 648
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -1234,8 +1218,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "- a:str\n- b:int\n- c:obj",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -1274,8 +1257,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "x:obj -",
-      "lineHeight": 1.2,
-      "baseline": 13
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -1360,8 +1342,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Example",
-      "lineHeight": 1.2,
-      "baseline": 13
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -2182,8 +2163,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Example",
-      "lineHeight": 1.2,
-      "baseline": 13
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -2801,8 +2781,8 @@
     },
     {
       "type": "text",
-      "version": 358,
-      "versionNonce": 1313780479,
+      "version": 361,
+      "versionNonce": 908375516,
       "isDeleted": false,
       "id": "kNxEgf7Cppv5qlIcZa8In",
       "fillStyle": "solid",
@@ -2822,7 +2802,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674117,
+      "updated": 1710145817346,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -2832,13 +2812,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Alternativly, we could make a distinction between\n'primitive' types and 'complex' types. Where\ncomplex types would require a schema and\nprimitive types are self describing.\n(*Look into json schema / openapi to see how\nthey define this stuff*)",
-      "lineHeight": 1.2,
-      "baseline": 111
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 211,
-      "versionNonce": 157892721,
+      "version": 214,
+      "versionNonce": 873407972,
       "isDeleted": false,
       "id": "bu2cjnpsLRh0mzPiicCPB",
       "fillStyle": "solid",
@@ -2861,7 +2840,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674117,
+      "updated": 1710145817346,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -2871,13 +2850,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Complex Data Transform\n------------------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 1266,
-      "versionNonce": 220068639,
+      "version": 1269,
+      "versionNonce": 877238876,
       "isDeleted": false,
       "id": "nOGjZwtfgnf29n4vsSVl8",
       "fillStyle": "solid",
@@ -2900,7 +2878,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674117,
+      "updated": 1710145817348,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -2910,8 +2888,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Some thoughts on how we might want\nto deal with transforming complex\ndata types. \nFilters, Joins, Maps:\nwe could define a few different \ntransform actions. that we could\nchain together to do just about\nanything. e.g.\nAssume we have an attribute 'attr' with\ncomplex type of 'object' and we need\nto transform the schema into the\nfollowing format.\n\n\n\n\n\n\n\nWe can do this with a series of\n'transform tasks' like so: \n\n\n\n\n\n\n\n\n\n\nAll Transform tasks take and produce dynamic\nschemas or primitives.\nTransform Tasks:\n  - Selector: pull out part of an object\n  - Join: Join together 2 objects\n  - Filter: return the subset of an object\n  - Rename: Rename keys in an object\n  - ToObject: Convert a primitive to an Object ",
-      "lineHeight": 1.2,
-      "baseline": 744
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -2949,8 +2926,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n  a: int,\n  b: str,\n  c: {\n   x: str\n   y: str \n  }\n}",
-      "lineHeight": 1.2,
-      "baseline": 109
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -2993,8 +2969,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n  input_a: int,\n  input_y: str\n}",
-      "lineHeight": 1.2,
-      "baseline": 53
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -3124,8 +3099,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "attr:obj -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -3212,8 +3186,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Action",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -3608,8 +3581,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Selector",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -3650,8 +3622,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -3980,8 +3951,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -4309,8 +4279,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "a\nb\nc",
-      "lineHeight": 1.2,
-      "baseline": 27
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -4730,8 +4699,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Join",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -4772,8 +4740,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -5102,8 +5069,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -5427,8 +5393,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -5903,8 +5868,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Filter",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -5945,8 +5909,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -6275,8 +6238,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -6604,8 +6566,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "a\nb\nc\nx\ny",
-      "lineHeight": 1.2,
-      "baseline": 46
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -7129,8 +7090,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Rename",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -7170,8 +7130,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -7487,8 +7446,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -7808,8 +7766,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "a:\ny:",
-      "lineHeight": 1.2,
-      "baseline": 17
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -7910,8 +7867,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "input_a",
-      "lineHeight": 1.2,
-      "baseline": 3
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -7950,8 +7906,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "input_y",
-      "lineHeight": 1.2,
-      "baseline": 3
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -8009,8 +7964,8 @@
     },
     {
       "type": "text",
-      "version": 249,
-      "versionNonce": 1479150161,
+      "version": 252,
+      "versionNonce": 1115212132,
       "isDeleted": false,
       "id": "SnrYNzaKcCX2rvzWdOUDd",
       "fillStyle": "solid",
@@ -8032,7 +7987,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674120,
+      "updated": 1710145817359,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -8042,13 +7997,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Will need to come up with definitions of \ntransform tasks, and how they apply to \ncomplex (Objects and Arrays) and primitive\ntypes.",
-      "lineHeight": 1.2,
-      "baseline": 73
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 999,
-      "versionNonce": 521092927,
+      "version": 1002,
+      "versionNonce": 1432219356,
       "isDeleted": false,
       "id": "x5EoeJyzp_7zgTAyxC3rz",
       "fillStyle": "solid",
@@ -8070,7 +8024,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674120,
+      "updated": 1710145817359,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -8080,13 +8034,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Proto-Plan\n---------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 241,
-      "versionNonce": 200710193,
+      "version": 244,
+      "versionNonce": 719453412,
       "isDeleted": false,
       "id": "2CWXY8PkworCitfvMuw8e",
       "fillStyle": "solid",
@@ -8108,7 +8061,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674120,
+      "updated": 1710145817359,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -8118,13 +8071,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "The proto type plan should focus on\ntransformation tasks. Develop a number\nof scenarios to test out the\nrobustness of the data model and see\nhow it behaves as we transform the data.\nThe object should be to have a clear\nunderstanding of complex/primitive types\nand their behaviour and static/dynamic \nschemas and their restrictions.\n\n1. Object based transforms and dynamic\n   schemas",
-      "lineHeight": 1.2,
-      "baseline": 226
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 1055,
-      "versionNonce": 1182990175,
+      "version": 1058,
+      "versionNonce": 1777578844,
       "isDeleted": false,
       "id": "enFRZhPhieIp_ceaTS3Ek",
       "fillStyle": "solid",
@@ -8147,7 +8099,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674120,
+      "updated": 1710145817360,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -8157,13 +8109,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "\"The Get Request\" (Unknown)\n-----------------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 2821,
-      "versionNonce": 381053457,
+      "version": 2824,
+      "versionNonce": 651739236,
       "isDeleted": false,
       "id": "jbuGCHJHoHa6SyrhQTYzI",
       "fillStyle": "solid",
@@ -8186,7 +8137,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674121,
+      "updated": 1710145817362,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -8196,13 +8147,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "We want to be able to support an action\nthat fires off a simple get request and \nand produces an object type created\nfrom the JSON response of the API.\nThis brings up the question of how to\ndeal with potentially unknown schemas.\nAn action may produce an unknown complex\nobject or an object that is composed of\nunknown complex objects. For example,\nthe get request action may produce an \noutput:\n\n\n\n\n\nHere, the body of the request is an\nunknown object because the output\ndepends on the URL that was provided as \nan input to the action. However, at\nruntime, we still need to know what the\noutput schema for this instance of the \naction is so we can manipulate the data.\nSimilarly, are there occasions where \nthere are unknown elements within a \ncomplex that we don't care about, and\ndon't need to define a schema for?\nFor this exploration, we'll break \nthese 2 questions down into sections.\n\n# How can we apply schemas \n# to unknown objects?\nLet's consider a few options:\n1. Do not allow unknown objects:\n   You cannot have a generic GET\n   request action. You must define an\n   explicit action with an explicit schema\n   for each endpoint you want to use.\n   e.g. the 'GetUsers Action' would have\n   an explicit schema based on the response\n   from the getUsers endpoint.\n2. Action Template:\n   An action template allows you to \n   create a new action from a template\n   by defining custom schemas for inputs,\n   options  and outputs over a constant\n   backend implementation.\n   This would allow a more \n   explicit definition of actions,\n   similar to approach 1, while allowing\n   users to get started without adding\n   custom extensions.\n3. Some sort of behaviour pattern for\n   unknown objects.\n\n",
-      "lineHeight": 1.2,
-      "baseline": 1070
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 254,
-      "versionNonce": 633977727,
+      "version": 257,
+      "versionNonce": 1616701404,
       "isDeleted": false,
       "id": "ynTTofa7KsqkkAYF2NMzd",
       "fillStyle": "solid",
@@ -8224,7 +8174,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674121,
+      "updated": 1710145817365,
       "link": null,
       "locked": false,
       "fontSize": 14.193104489596175,
@@ -8234,13 +8184,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n  \"statusCode\": int(100<=x<=600),\n  \"body\": object  // Unknown\n}",
-      "lineHeight": 1.2,
-      "baseline": 64
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 322,
-      "versionNonce": 1096876017,
+      "version": 325,
+      "versionNonce": 237704164,
       "isDeleted": false,
       "id": "yE2M9oc8Ks14AHHqy8-q6",
       "fillStyle": "solid",
@@ -8263,7 +8212,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674121,
+      "updated": 1710145817365,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -8273,13 +8222,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "(*Expand*)",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 183,
-      "versionNonce": 1092875167,
+      "version": 186,
+      "versionNonce": 212569180,
       "isDeleted": false,
       "id": "2DEP-1xlSvfbnKZmG60YI",
       "fillStyle": "solid",
@@ -8301,7 +8249,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674121,
+      "updated": 1710145817366,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -8311,13 +8259,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Proto-Plan #1\n------------------\nTransform Tasks & Dynamic Schemas",
-      "lineHeight": 1.2,
-      "baseline": 67
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 574,
-      "versionNonce": 1241373137,
+      "version": 577,
+      "versionNonce": 250017636,
       "isDeleted": false,
       "id": "rTiFj6q40GcbX83lAS4Aj",
       "fillStyle": "solid",
@@ -8339,7 +8286,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674122,
+      "updated": 1710145817366,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -8349,13 +8296,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Build a suite of transform tasks.\nConfiguration tasks should take an object, expose\noptions based on input schemas and produce a\nschema that can be passed to downstream Transform\nTasks.\n\nSchemas\n\nOptions\n\nTasks:\n\n - Selector\n - Join\n - Filter\n - Rename\n - ToObject\n - Timer\n - Counter\n\n  ",
-      "lineHeight": 1.2,
-      "baseline": 399
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 153,
-      "versionNonce": 1086465983,
+      "version": 156,
+      "versionNonce": 1890689244,
       "isDeleted": false,
       "id": "tDmQ0AQO-_2w-icz21QwM",
       "fillStyle": "cross-hatch",
@@ -8377,7 +8323,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674122,
+      "updated": 1710145817366,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -8387,13 +8333,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Tasks ",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 632,
-      "versionNonce": 1101297585,
+      "version": 635,
+      "versionNonce": 1700424420,
       "isDeleted": false,
       "id": "YMlSzBpIEHGmPXW9AG-yq",
       "fillStyle": "cross-hatch",
@@ -8415,7 +8360,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674122,
+      "updated": 1710145817367,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -8425,8 +8370,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Tasks are different from Actions because tasks\ncan have options. Options expose a series of\nactions that can be taken based on the schema\nthat is passed into the task.\ne.g. \n\n\n\n\n\n\n\n\nHere the selector task defines an options\nproducer based on an object schema. The\noptions producer will provide instructions\nfor which options to enable. In this case\nthe producer selects a ",
-      "lineHeight": 1.2,
-      "baseline": 341
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -8501,8 +8445,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "attr:obj -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -8587,8 +8530,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Action",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -8973,8 +8915,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Selector",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -9014,8 +8955,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -9331,8 +9271,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": " -",
-      "lineHeight": 1.2,
-      "baseline": 6
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -9652,8 +9591,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "a\nb\nc",
-      "lineHeight": 1.2,
-      "baseline": 27
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -9934,8 +9872,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n  a: int,\n  b: str,\n  c: {\n   x: str\n   y: str \n  }\n}",
-      "lineHeight": 1.2,
-      "baseline": 109
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -10215,8 +10152,8 @@
     },
     {
       "type": "text",
-      "version": 1033,
-      "versionNonce": 1925502943,
+      "version": 1036,
+      "versionNonce": 67183964,
       "isDeleted": false,
       "id": "lh2Ou5t2jLvOTfl6wDm9J",
       "fillStyle": "solid",
@@ -10238,7 +10175,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674123,
+      "updated": 1710145817368,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -10248,13 +10185,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Orchestration\n---------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 848,
-      "versionNonce": 712792465,
+      "version": 851,
+      "versionNonce": 336817764,
       "isDeleted": false,
       "id": "B8T7dDkY_4QNyZ4mZdORC",
       "fillStyle": "solid",
@@ -10276,7 +10212,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674123,
+      "updated": 1710145817369,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -10286,8 +10222,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Steps:\n 1. Create new workflow\n   - Create database entry\n   - Create manifest\n 2. Add an action\n   - update manifest\n 3. Add a task\n   - update manifest\n 4. Connect action to task\n   - update manifest\n   - resolve task options\n 5. hydrate task options\n   - update manifest\n 6. execute flow\n   - validate manifest\n   - execute flow\n\nAssumptions:\n - The manifest contains all\n   the information required to\n   execute the flow\n -   ",
-      "lineHeight": 1.2,
-      "baseline": 418
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -10643,8 +10578,8 @@
     },
     {
       "type": "text",
-      "version": 141,
-      "versionNonce": 222069759,
+      "version": 144,
+      "versionNonce": 2079070684,
       "isDeleted": false,
       "id": "WQh4Oxii0ozw8wwUa-Iqq",
       "fillStyle": "cross-hatch",
@@ -10664,7 +10599,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674123,
+      "updated": 1710145817369,
       "link": null,
       "locked": false,
       "fontSize": 28,
@@ -10674,13 +10609,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Data Access",
-      "lineHeight": 1.2,
-      "baseline": 26
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 173,
-      "versionNonce": 1438449521,
+      "version": 176,
+      "versionNonce": 467665380,
       "isDeleted": false,
       "id": "v5hZ6QD9SBvbd3xPoU-Mj",
       "fillStyle": "cross-hatch",
@@ -10700,7 +10634,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674123,
+      "updated": 1710145817369,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -10710,13 +10644,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Workflow\nNode\n\n\n\n\n\n\nUser\nTeam\n",
-      "lineHeight": 1.2,
-      "baseline": 259
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 1087,
-      "versionNonce": 808037407,
+      "version": 1090,
+      "versionNonce": 327450204,
       "isDeleted": false,
       "id": "eRmcF7ScA8PKAhVWhv02y",
       "fillStyle": "solid",
@@ -10738,7 +10671,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674124,
+      "updated": 1710145817370,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -10748,13 +10681,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Versions\n---------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 815,
-      "versionNonce": 28174673,
+      "version": 818,
+      "versionNonce": 869148004,
       "isDeleted": false,
       "id": "x3TwKkypq5I8aQYRz3bmD",
       "fillStyle": "solid",
@@ -10776,7 +10708,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674124,
+      "updated": 1710145817370,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -10786,13 +10718,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Actions should have a versioning\nsystem. Some attribute on the class\nthat allows you to specify a version\nso we can have several actions with\nthe same name. Actions should also be\nallowed to be deprecated. A deprecated\naction will display a warning and some \nmessage to the user, and optionally\nemail the author of a workflow\nthat contains a deprecated action.",
-      "lineHeight": 1.2,
-      "baseline": 188
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 726,
-      "versionNonce": 662491199,
+      "version": 729,
+      "versionNonce": 1402753756,
       "isDeleted": false,
       "id": "7vNv684WYE2_Mat4_WTZ1",
       "fillStyle": "cross-hatch",
@@ -10812,7 +10743,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674124,
+      "updated": 1710145817370,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -10822,8 +10753,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Create a new workflow\nDelete a workflow\nGet me all available nodes.\nCreate a new node as part of a workflow\nRemove a node from a workflow\nupdate a node within a workflow\nGet all nodes that belong to a workflow.\n\nCreate a new user\nCreate a new team\nAdd a user to a team\nRemove a user from a team\ndelete a team\nGet me all users in a Team\nGet me all teams that a user is a member of\nGet all workflows visible to a team\nGet me all workflows that belong to a user\n\n\n",
-      "lineHeight": 1.2,
-      "baseline": 474
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -10902,8 +10832,7 @@
       "verticalAlign": "middle",
       "containerId": "9f21BGhaFrTptaEvTn1cA",
       "originalText": "bob",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -10980,8 +10909,7 @@
       "verticalAlign": "middle",
       "containerId": "xFw3P3YZlbgBYdL7lBSd1",
       "originalText": "Team A",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -11058,13 +10986,12 @@
       "verticalAlign": "middle",
       "containerId": "GIXRkRICQlkK74lhLLgAr",
       "originalText": "Team B",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 327,
-      "versionNonce": 933664561,
+      "version": 330,
+      "versionNonce": 19650788,
       "isDeleted": false,
       "id": "IKZNNdxVAGVuGw_7u5eHs",
       "fillStyle": "cross-hatch",
@@ -11086,7 +11013,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674124,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -11096,8 +11023,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Member Of",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -11278,8 +11204,7 @@
       "verticalAlign": "middle",
       "containerId": "Jx2w9onDWo13j9ANgx6VR",
       "originalText": "bob",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "diamond",
@@ -11499,8 +11424,8 @@
     },
     {
       "type": "text",
-      "version": 209,
-      "versionNonce": 1830187103,
+      "version": 212,
+      "versionNonce": 1522898780,
       "isDeleted": false,
       "id": "e-Mp4BQ6hUIkYWhulQeuP",
       "fillStyle": "cross-hatch",
@@ -11528,7 +11453,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1709104674125,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -11538,8 +11463,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "workflow x",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -11595,8 +11519,8 @@
     },
     {
       "type": "text",
-      "version": 72,
-      "versionNonce": 1779337489,
+      "version": 75,
+      "versionNonce": 1334254692,
       "isDeleted": false,
       "id": "sGZ1vZDiQ1M0N-G-M9oU8",
       "fillStyle": "cross-hatch",
@@ -11618,7 +11542,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674125,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -11628,8 +11552,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "creates",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -11706,8 +11629,7 @@
       "verticalAlign": "middle",
       "containerId": "RQHSuqSJCrprESi2FixoC",
       "originalText": "bob",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "diamond",
@@ -11931,8 +11853,8 @@
     },
     {
       "type": "text",
-      "version": 471,
-      "versionNonce": 1791429759,
+      "version": 474,
+      "versionNonce": 626150364,
       "isDeleted": false,
       "id": "W2PgNZMfh9gy3FB9iOMLt",
       "fillStyle": "cross-hatch",
@@ -11960,7 +11882,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1709104674125,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -11970,13 +11892,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "workflow x",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 414,
-      "versionNonce": 1381842673,
+      "version": 417,
+      "versionNonce": 1219358692,
       "isDeleted": false,
       "id": "yHah2l8-z2Vwh9LHubAxA",
       "fillStyle": "cross-hatch",
@@ -12003,7 +11924,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1709104674125,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -12013,8 +11934,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "shares",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -12122,8 +12042,8 @@
     },
     {
       "type": "text",
-      "version": 433,
-      "versionNonce": 2085561503,
+      "version": 436,
+      "versionNonce": 1431597148,
       "isDeleted": false,
       "id": "YfPRjSOACKBfwbvrjjCLx",
       "fillStyle": "cross-hatch",
@@ -12145,7 +12065,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674125,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -12155,8 +12075,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "with",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -12235,8 +12154,7 @@
       "verticalAlign": "middle",
       "containerId": "85UiwOEwxuwW4qc-PvS9_",
       "originalText": "Team A",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -12313,8 +12231,7 @@
       "verticalAlign": "middle",
       "containerId": "SdDTk1PH5E3MlkpDyMhfD",
       "originalText": "bob",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "diamond",
@@ -12538,8 +12455,8 @@
     },
     {
       "type": "text",
-      "version": 749,
-      "versionNonce": 253376721,
+      "version": 752,
+      "versionNonce": 749622116,
       "isDeleted": false,
       "id": "s5rkvXsnVPBfh5GrPvoax",
       "fillStyle": "cross-hatch",
@@ -12567,7 +12484,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1709104674125,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -12577,8 +12494,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "workflow x",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -12665,8 +12581,7 @@
       "verticalAlign": "middle",
       "containerId": "OZ3gkK7GT6F6Kkd5SVOS3",
       "originalText": "Team A",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -12774,8 +12689,8 @@
     },
     {
       "type": "text",
-      "version": 806,
-      "versionNonce": 828324031,
+      "version": 809,
+      "versionNonce": 2057176284,
       "isDeleted": false,
       "id": "2WWpGQjnbiungHRJ6ubMF",
       "fillStyle": "cross-hatch",
@@ -12798,7 +12713,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674126,
+      "updated": 1710145817371,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -12808,8 +12723,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "is visible to",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -13025,13 +12939,12 @@
       "verticalAlign": "middle",
       "containerId": "jB_3b7mwUKznkwV_O6gC9",
       "originalText": "bob",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 154,
-      "versionNonce": 31258289,
+      "version": 157,
+      "versionNonce": 165037796,
       "isDeleted": false,
       "id": "cDYSqbfKU9bEKdySOid11",
       "fillStyle": "cross-hatch",
@@ -13058,7 +12971,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1709104674126,
+      "updated": 1710145817372,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -13068,13 +12981,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "alice",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 656,
-      "versionNonce": 1335347423,
+      "version": 659,
+      "versionNonce": 1522600284,
       "isDeleted": false,
       "id": "aL_LDAMyu5FBWX1ZdC6It",
       "fillStyle": "cross-hatch",
@@ -13109,7 +13021,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1709104674126,
+      "updated": 1710145817373,
       "link": null,
       "locked": false,
       "fontSize": 16.85416782857064,
@@ -13119,13 +13031,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Webservice",
-      "lineHeight": 1.2,
-      "baseline": 16
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 768,
-      "versionNonce": 1833760913,
+      "version": 771,
+      "versionNonce": 1957939812,
       "isDeleted": false,
       "id": "fGzRmnE1_1PKUvKUpWsES",
       "fillStyle": "cross-hatch",
@@ -13147,7 +13058,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674126,
+      "updated": 1710145817373,
       "link": null,
       "locked": false,
       "fontSize": 16.854167828570638,
@@ -13157,8 +13068,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Database",
-      "lineHeight": 1.2,
-      "baseline": 16
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -13248,8 +13158,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "get nodes\n[\n  {\n    'key' : 'str',\n    'version': 'int'\n  },{\n    'key' : 'str',\n    'version': 'int'\n  },\n]",
-      "lineHeight": 1.2,
-      "baseline": 141
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -13291,13 +13200,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "get workflows\n[\n  {\n    'id' : 'str',\n    'nodes': [\n      {'key': 'str', 'version': int'},\n      {'key': 'str', 'version': int'},\n\n    ]\n    }\n  }\n]",
-      "lineHeight": 1.2,
-      "baseline": 170
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 562,
-      "versionNonce": 344544511,
+      "version": 565,
+      "versionNonce": 957316572,
       "isDeleted": false,
       "id": "0ff5lkYzzmiQd-SMO7Y15",
       "fillStyle": "cross-hatch",
@@ -13319,7 +13227,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674126,
+      "updated": 1710145817376,
       "link": null,
       "locked": false,
       "fontSize": 16.85416782857064,
@@ -13329,8 +13237,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Application",
-      "lineHeight": 1.2,
-      "baseline": 16
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -13438,8 +13345,8 @@
     },
     {
       "type": "text",
-      "version": 324,
-      "versionNonce": 1394720369,
+      "version": 327,
+      "versionNonce": 1075109348,
       "isDeleted": false,
       "id": "kw5RTuRCPquVAM5asVCVj",
       "fillStyle": "cross-hatch",
@@ -13459,7 +13366,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674127,
+      "updated": 1710145817376,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -13469,13 +13376,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1. Server Collects Nodes\n2. Nodes produce schemas\n2. Client Requests Nodes\n3. Client creates workflow\n",
-      "lineHeight": 1.2,
-      "baseline": 115
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 1128,
-      "versionNonce": 934567199,
+      "version": 1131,
+      "versionNonce": 513499740,
       "isDeleted": false,
       "id": "DyvgX_5D9v9epHJVFk8P_",
       "fillStyle": "solid",
@@ -13497,7 +13403,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674127,
+      "updated": 1710145817377,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -13507,13 +13413,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Open Questions\n---------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 1078,
-      "versionNonce": 304269393,
+      "version": 1081,
+      "versionNonce": 889684324,
       "isDeleted": false,
       "id": "IwovVOBYcdl_Hu9J_19FD",
       "fillStyle": "solid",
@@ -13535,7 +13440,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674127,
+      "updated": 1710145817377,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -13545,8 +13450,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1. How to handle uniqueness\n   in Nodes.\n2. How to handle Node versions\n3. What is a node id? and how is\n   it calculated",
-      "lineHeight": 1.2,
-      "baseline": 92
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -13583,8 +13487,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "https://jsonplaceholder.typicode.com/todos/1",
-      "lineHeight": 1.2,
-      "baseline": 10
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -13659,8 +13562,7 @@
       "verticalAlign": "middle",
       "containerId": "uo6BAnb5mOq-foVYm-L_-",
       "originalText": "String\nProducer",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -13739,8 +13641,7 @@
       "verticalAlign": "middle",
       "containerId": "E8suKq_XyMFxh2JWgVWE_",
       "originalText": "Get\nRequest",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -13844,8 +13745,8 @@
     },
     {
       "type": "text",
-      "version": 53,
-      "versionNonce": 747200831,
+      "version": 56,
+      "versionNonce": 574011100,
       "isDeleted": false,
       "id": "fM_jq-Q1iggte97Q9NBge",
       "fillStyle": "cross-hatch",
@@ -13867,7 +13768,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674127,
+      "updated": 1710145817380,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -13877,8 +13778,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Step 1",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -13915,8 +13815,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "https://jsonplaceholder.typicode.com/todos/",
-      "lineHeight": 1.2,
-      "baseline": 10
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -13991,8 +13890,7 @@
       "verticalAlign": "middle",
       "containerId": "YeCGPL91ixULMQE7yTGF2",
       "originalText": "String\nProducer",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14063,13 +13961,12 @@
       "verticalAlign": "middle",
       "containerId": "NtvkEJYeDgzX5e78phVgc",
       "originalText": "Get\nRequest",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 106,
-      "versionNonce": 1143445041,
+      "version": 109,
+      "versionNonce": 1255781604,
       "isDeleted": false,
       "id": "cahRto4wWYvXGum42j_iW",
       "fillStyle": "cross-hatch",
@@ -14089,7 +13986,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674128,
+      "updated": 1710145817380,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -14099,8 +13996,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Step 2",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14175,8 +14071,7 @@
       "verticalAlign": "middle",
       "containerId": "5JS6SJy7A_P-EjHvn_rIN",
       "originalText": "Int\nProducer",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -14213,8 +14108,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1",
-      "lineHeight": 1.2,
-      "baseline": 10
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14293,8 +14187,7 @@
       "verticalAlign": "middle",
       "containerId": "IgyaAjPVtycnHohQRT5t5",
       "originalText": "String\nConcat",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -14431,8 +14324,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "https://jsonplaceholder.typicode.com/todos/1",
-      "lineHeight": 1.2,
-      "baseline": 10
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -14467,13 +14359,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n  \"url: \"...\",\n  \"queryParams\": {},\n  \"headers\": {}\n}",
-      "lineHeight": 1.2,
-      "baseline": 62
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 3405,
-      "versionNonce": 610853215,
+      "version": 3408,
+      "versionNonce": 812874588,
       "isDeleted": false,
       "id": "_rQB_S55T1TNkUVFab_F9",
       "fillStyle": "solid",
@@ -14493,7 +14384,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674129,
+      "updated": 1710145817385,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -14503,13 +14394,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "How do we construct and execute a worklow?\nWhat is a workflow?\n\nI need to know, right away, that nodes are not\ncompatible.\nDoes this calculation happen on the server side?\nOr the client side?\nOr Both?\n\nClient Side:\n - We should have all the json schema objects we\n   need to work this out.\n - It would create a snappier experience for the\n   user\n - It would be difficult to debug.\n\nServer Side:\n - If the server side also does the validation,\n   It could be used without the front end.\n - It needs to do some sort of construction for\n   the api.\n - If server side needs to do it anyway, should\n   we do it all on the server side?\n\nok we absolutly need to do it on the server side, \nwe maybe need to do it on the client side also.\nSo how do we do it on the server side?\n\nServer side requirements:\n  - Build the workflow, step by step.\n    \n    So I make a PUT call, add node to workflow,\n    as a child of this Node.\n    I basically say, Take this node, add it to my\n    workflow after that node. connect A to B.\n    The back end will validate that this is a\n    valid edge. If yay - perform db insert to \n    describe node / workflow. If Nay - kick back\n    big stinky error message.  \n\n    This is a very server-cetric way of thinking.\n    Can we come up with a local scripting solution\n    that could be compatable with with the server\n    approach? Could have a system that writes to \n    a json file each add request? Or memory?\n    Workflow.put(Node, parent=<what?>)\n    A node has to have an ID within the workflow\n    that can be reffered to. So...\n    Workflow.put(Node) -> WorkflowNode?\n    WorkflowNode is some subclass of node that has\n    a Node id?, when in stateless mode, this is just\n    some Id that is saved in the DB. In stateful mode\n    we return a WorkflowNode and you can use that \n    in the Workflow.\n    Workflow.put(Node, parent=WorkflowNode | NodeID)\n    In Stateless mode, you can hook up the workflow\n    class to data layer. You can then rebuild the\n    workflow object from the data layer whenever\n    a request is made.\n        \n## ASIDE ## Do all nodes have 1 input, 1 output?\n   Or do I need to figure out how to map specific\n   I/O to kids. Can I move forward with 1-1 and give\n   myself room to change it later?\n   Actualy, a node will need to have more than 1 inupt\n   no? because how do we do operations like joining\n   two object together or concatanating strings?\n   \n ",
-      "lineHeight": 1.2,
-      "baseline": 1650
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 86,
-      "versionNonce": 1545054225,
+      "version": 89,
+      "versionNonce": 1595504740,
       "isDeleted": false,
       "id": "m_DScSPV3PmsM5JiCoHvx",
       "fillStyle": "solid",
@@ -14529,7 +14419,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674129,
+      "updated": 1710145817386,
       "link": null,
       "locked": false,
       "fontSize": 28,
@@ -14539,13 +14429,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Workflows",
-      "lineHeight": 1.2,
-      "baseline": 26
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 42,
-      "versionNonce": 1352883583,
+      "version": 45,
+      "versionNonce": 1403236316,
       "isDeleted": false,
       "id": "BLrL8eXfjd9ghYsKD55iN",
       "fillStyle": "solid",
@@ -14565,7 +14454,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674129,
+      "updated": 1710145817386,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -14575,8 +14464,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "(ramble)",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -14622,8 +14510,8 @@
     },
     {
       "type": "text",
-      "version": 75,
-      "versionNonce": 65699313,
+      "version": 78,
+      "versionNonce": 1838468068,
       "isDeleted": false,
       "id": "imkgb7Zkf6-gRDJ22tabJ",
       "fillStyle": "solid",
@@ -14643,7 +14531,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674130,
+      "updated": 1710145817386,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -14653,8 +14541,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "(summary)",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14725,8 +14612,7 @@
       "verticalAlign": "middle",
       "containerId": "xYXZiYj2w_pWYQoUW9Vny",
       "originalText": "Workflow",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14793,8 +14679,7 @@
       "verticalAlign": "middle",
       "containerId": "PMpGLgKHRSHWI9ykw0V8Z",
       "originalText": "Node",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14861,8 +14746,7 @@
       "verticalAlign": "middle",
       "containerId": "R57AXj--gkhZlIeq8PWJE",
       "originalText": "Node",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14929,8 +14813,7 @@
       "verticalAlign": "middle",
       "containerId": "1mlZHZ2ASW27dvuvm0akd",
       "originalText": "Node",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -14997,8 +14880,7 @@
       "verticalAlign": "middle",
       "containerId": "gz51uQpmOhKZ3sYr2VkMp",
       "originalText": "Edge",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -15065,8 +14947,7 @@
       "verticalAlign": "middle",
       "containerId": "BKtgCfNyQhalLmJfWGvka",
       "originalText": "Edge",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -15439,8 +15320,7 @@
       "verticalAlign": "middle",
       "containerId": "XvtXsnNqPdBA2Pjurifmh",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -15507,8 +15387,7 @@
       "verticalAlign": "middle",
       "containerId": "He9x51MpXhN8fEkQMrsQD",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -15659,8 +15538,7 @@
       "verticalAlign": "middle",
       "containerId": "dkyx1fc1wskl94zcwHjUx",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -15727,8 +15605,7 @@
       "verticalAlign": "middle",
       "containerId": "o7G7DdW3PePUP9ZSNq3pi",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -15837,8 +15714,7 @@
       "verticalAlign": "middle",
       "containerId": "cAzgAs0yJhWqyT1d9VbLF",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -15947,8 +15823,7 @@
       "verticalAlign": "middle",
       "containerId": "k2mGCRQrKG0AOIYG8jlzm",
       "originalText": "Input",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -16015,8 +15890,7 @@
       "verticalAlign": "middle",
       "containerId": "fxTbcon1Dq0xdYUzIZ1gE",
       "originalText": "Output",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -16167,8 +16041,7 @@
       "verticalAlign": "middle",
       "containerId": "sgl3pAEiQeHN29WWkG5RS",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -16235,8 +16108,7 @@
       "verticalAlign": "middle",
       "containerId": "xROPUAAfS1IjIjM78gU30",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -16303,8 +16175,7 @@
       "verticalAlign": "middle",
       "containerId": "mT2ActqZpht6BwpwUJryo",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -16371,8 +16242,7 @@
       "verticalAlign": "middle",
       "containerId": "yU4h5VVqKtB_9X51L2XgE",
       "originalText": "NodeData",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -16615,8 +16485,7 @@
       "verticalAlign": "middle",
       "containerId": "uJZAjl_e_2ompP4qDk-Rp",
       "originalText": "Node",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -16728,8 +16597,8 @@
     },
     {
       "type": "text",
-      "version": 62,
-      "versionNonce": 1685673375,
+      "version": 65,
+      "versionNonce": 2077840476,
       "isDeleted": false,
       "id": "wW52Z_NMoaHrlnjfleuQP",
       "fillStyle": "solid",
@@ -16749,7 +16618,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674132,
+      "updated": 1710145817386,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -16759,13 +16628,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Maps Vs Arrays\n-------------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 548,
-      "versionNonce": 984061905,
+      "version": 551,
+      "versionNonce": 1213837156,
       "isDeleted": false,
       "id": "8wIVESbrDFMSEDH3BWQgo",
       "fillStyle": "solid",
@@ -16785,7 +16653,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674132,
+      "updated": 1710145817387,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -16795,8 +16663,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "\n[\n  {\"key\": \"\", \"value\": \"\",\n]\n\nIf we want to create maps from the UI,\nwe can do it like above.\nI don't know if we should support it\nby way of open-ended map type defs.\ne.g. dict ",
-      "lineHeight": 1.2,
-      "baseline": 188
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -16875,8 +16742,7 @@
       "verticalAlign": "middle",
       "containerId": "Ni99ilcU_PxxrFAyflvS7",
       "originalText": "Edge",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -16949,8 +16815,7 @@
       "verticalAlign": "middle",
       "containerId": "sCmeZilZPHQaFB4BHogSM",
       "originalText": "map producer",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "diamond",
@@ -17056,8 +16921,7 @@
       "verticalAlign": "middle",
       "containerId": "DkbGN3SAFKycrjcjtP-7v",
       "originalText": "HTTP Get",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "diamond",
@@ -17270,13 +17134,12 @@
       "verticalAlign": "middle",
       "containerId": "6mDEhrxxrXF6EoT0fV_s8",
       "originalText": "Node\nData",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 339,
-      "versionNonce": 1461406143,
+      "version": 342,
+      "versionNonce": 1189505244,
       "isDeleted": false,
       "id": "GR4jOJVuXhp3OiN7AaG8W",
       "fillStyle": "cross-hatch",
@@ -17299,7 +17162,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674132,
+      "updated": 1710145817388,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17309,13 +17172,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Recursion Depth",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 399,
-      "versionNonce": 845575601,
+      "version": 402,
+      "versionNonce": 1337336548,
       "isDeleted": false,
       "id": "nByFJOk7v8VBJZve7QL9P",
       "fillStyle": "cross-hatch",
@@ -17339,7 +17201,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674132,
+      "updated": 1710145817390,
       "link": null,
       "locked": false,
       "fontSize": 28.813455657492355,
@@ -17349,13 +17211,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Word Cloud",
-      "lineHeight": 1.2,
-      "baseline": 28
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 430,
-      "versionNonce": 1705621983,
+      "version": 433,
+      "versionNonce": 1214049628,
       "isDeleted": false,
       "id": "VeQJ_iQdSVhCBS1SFUnbP",
       "fillStyle": "cross-hatch",
@@ -17379,7 +17240,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674133,
+      "updated": 1710145817390,
       "link": null,
       "locked": false,
       "fontSize": 16.464831804281346,
@@ -17389,8 +17250,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Things to think about",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -17424,8 +17284,8 @@
     },
     {
       "type": "text",
-      "version": 369,
-      "versionNonce": 1850644369,
+      "version": 372,
+      "versionNonce": 708322916,
       "isDeleted": false,
       "id": "pVReAcaRXtlmq1dX8oB7U",
       "fillStyle": "cross-hatch",
@@ -17448,7 +17308,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674133,
+      "updated": 1710145817391,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17458,13 +17318,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Schema Subtype\nReport",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 468,
-      "versionNonce": 1429546495,
+      "version": 471,
+      "versionNonce": 1368318428,
       "isDeleted": false,
       "id": "DcpXjr-xbTPS3zNRFHcuC",
       "fillStyle": "cross-hatch",
@@ -17487,7 +17346,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674133,
+      "updated": 1710145817391,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17497,13 +17356,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Option Values\nare persisted",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 373,
-      "versionNonce": 546798961,
+      "version": 376,
+      "versionNonce": 2091760100,
       "isDeleted": false,
       "id": "Abm1eU4NZFtj4lXvoGnLL",
       "fillStyle": "cross-hatch",
@@ -17526,7 +17384,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674133,
+      "updated": 1710145817392,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17536,13 +17394,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "All Options must\nbe set to execute\na flow.",
-      "lineHeight": 1.2,
-      "baseline": 68
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 306,
-      "versionNonce": 1958612511,
+      "version": 309,
+      "versionNonce": 965625436,
       "isDeleted": false,
       "id": "ElB82yQOTKywDSZAubecZ",
       "fillStyle": "cross-hatch",
@@ -17565,7 +17422,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674133,
+      "updated": 1710145817392,
       "link": null,
       "locked": false,
       "fontSize": 20.581039755351682,
@@ -17575,13 +17432,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Options are set up front",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 163,
-      "versionNonce": 1216915281,
+      "version": 166,
+      "versionNonce": 572841316,
       "isDeleted": false,
       "id": "biPltqBVCMUiwEeJsUxjC",
       "fillStyle": "solid",
@@ -17604,7 +17460,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674133,
+      "updated": 1710145817392,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -17614,8 +17470,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Nodes need some kind\nof 'Node in Flow' ID",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -17663,8 +17518,8 @@
     },
     {
       "type": "text",
-      "version": 622,
-      "versionNonce": 1597305407,
+      "version": 625,
+      "versionNonce": 623712988,
       "isDeleted": false,
       "id": "r4TOTFMn_GD-tDV5MBE5s",
       "fillStyle": "solid",
@@ -17684,7 +17539,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674133,
+      "updated": 1710145817392,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -17694,13 +17549,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Access Pattern: Set an option value\n\n - Update Value on Node Data element: \n - Fetch NodeData from ddb\n - Initialize NodeData object \n - Query Node manager with parent address/id to load Node Implementation\n - Access NodeData model from implementation\n - Validate input\n - Set on object\n - write to ddb.",
-      "lineHeight": 1.2,
-      "baseline": 235
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 323,
-      "versionNonce": 276403505,
+      "version": 326,
+      "versionNonce": 1676382436,
       "isDeleted": false,
       "id": "56ijjCN_PiphzNPAmUFCm",
       "fillStyle": "solid",
@@ -17720,7 +17574,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674134,
+      "updated": 1710145817393,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -17730,13 +17584,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "When does the workflow object get initialized?\n - During execution\n - Validation?\n - No, Nodes should be be able to validate themselves.\n\nSo for workflow execution, assume that options are set via some put command previously.\nWhen we initi",
-      "lineHeight": 1.2,
-      "baseline": 163
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 146,
-      "versionNonce": 2105168479,
+      "version": 149,
+      "versionNonce": 1325227868,
       "isDeleted": false,
       "id": "G8HD4xRqEDFBWEsohG7uE",
       "fillStyle": "solid",
@@ -17759,7 +17612,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674134,
+      "updated": 1710145817393,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -17769,8 +17622,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "You do not 'pass'\ndata into a workflow\nYou set the nodeData and\nexecute when ready",
-      "lineHeight": 1.2,
-      "baseline": 91
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -17849,8 +17701,7 @@
       "verticalAlign": "middle",
       "containerId": "771yTPBoTPLThZ2LW5Wsc",
       "originalText": "ToString",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -17887,8 +17738,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1",
-      "lineHeight": 1.2,
-      "baseline": 10
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -18025,8 +17875,8 @@
     },
     {
       "type": "text",
-      "version": 268,
-      "versionNonce": 1808910097,
+      "version": 271,
+      "versionNonce": 831509604,
       "isDeleted": false,
       "id": "9bsqDk8WGBnhiyuZcdOp4",
       "fillStyle": "hachure",
@@ -18048,7 +17898,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674134,
+      "updated": 1710145817393,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -18058,8 +17908,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Action",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -18132,13 +17981,12 @@
       "verticalAlign": "middle",
       "containerId": "1M4ECEXpjNuF1uOjZDaaH",
       "originalText": "Body",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 320,
-      "versionNonce": 1214164607,
+      "version": 323,
+      "versionNonce": 1330713564,
       "isDeleted": false,
       "id": "uFluuT-NhjOGBtsmEhDKD",
       "fillStyle": "hachure",
@@ -18160,7 +18008,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674134,
+      "updated": 1710145817393,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -18170,8 +18018,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Output\nSchema",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -18212,8 +18059,8 @@
     },
     {
       "type": "text",
-      "version": 409,
-      "versionNonce": 1963506929,
+      "version": 412,
+      "versionNonce": 1491052516,
       "isDeleted": false,
       "id": "HNCQ-hYNR4XIW0KkvaMDS",
       "fillStyle": "hachure",
@@ -18236,7 +18083,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674134,
+      "updated": 1710145817394,
       "link": null,
       "locked": false,
       "fontSize": 14.624202521665786,
@@ -18246,8 +18093,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Data",
-      "lineHeight": 1.2,
-      "baseline": 14
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -18332,8 +18178,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "schema",
-      "lineHeight": 1.2,
-      "baseline": 10
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -18371,8 +18216,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "values",
-      "lineHeight": 1.2,
-      "baseline": 10
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -18410,8 +18254,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n a:1\n b:true\n}",
-      "lineHeight": 1.2,
-      "baseline": 48
+      "lineHeight": 1.2
     },
     {
       "type": "text",
@@ -18449,8 +18292,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n a:int\n b:bool\n}",
-      "lineHeight": 1.2,
-      "baseline": 48
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -18521,13 +18363,12 @@
       "verticalAlign": "middle",
       "containerId": "pbsmeZ4iwAvF6T1p9us1x",
       "originalText": "<key:\nstr>",
-      "lineHeight": 1.2,
-      "baseline": 34
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 269,
-      "versionNonce": 1252165279,
+      "version": 272,
+      "versionNonce": 1681537116,
       "isDeleted": false,
       "id": "nZXGzJYzlDDguCH9Pkn7h",
       "fillStyle": "hachure",
@@ -18549,7 +18390,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674135,
+      "updated": 1710145817396,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -18559,8 +18400,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Input\nSchema",
-      "lineHeight": 1.2,
-      "baseline": 34
+      "lineHeight": 1.2
     },
     {
       "type": "diamond",
@@ -18637,8 +18477,7 @@
       "verticalAlign": "middle",
       "containerId": "KnlGiiG5LcEr83p4QCVxz",
       "originalText": "Filter",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "arrow",
@@ -18694,8 +18533,8 @@
     },
     {
       "type": "text",
-      "version": 315,
-      "versionNonce": 195426001,
+      "version": 318,
+      "versionNonce": 1038682980,
       "isDeleted": false,
       "id": "d6AxVmSi3n3F2qlyzVAiK",
       "fillStyle": "hachure",
@@ -18717,7 +18556,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674135,
+      "updated": 1710145817397,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -18727,13 +18566,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n  \"a\": int,\n  \"b\": bool,\n}",
-      "lineHeight": 1.2,
-      "baseline": 73
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 342,
-      "versionNonce": 1660312255,
+      "version": 345,
+      "versionNonce": 965397724,
       "isDeleted": false,
       "id": "JXoL6lbhjqKuckWDmpPvZ",
       "fillStyle": "hachure",
@@ -18755,7 +18593,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674135,
+      "updated": 1710145817397,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -18765,8 +18603,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "{\n  \"key\": str,\n}",
-      "lineHeight": 1.2,
-      "baseline": 53
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -18837,8 +18674,7 @@
       "verticalAlign": "middle",
       "containerId": "r3eIO1SoF5TFZgdBJCB_Q",
       "originalText": "StatusBuffer",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -18909,13 +18745,12 @@
       "verticalAlign": "middle",
       "containerId": "FMc1tAjRlcP5AYf0eUK_2",
       "originalText": "<key:\nstr>",
-      "lineHeight": 1.2,
-      "baseline": 34
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 440,
-      "versionNonce": 843117745,
+      "version": 443,
+      "versionNonce": 318373604,
       "isDeleted": false,
       "id": "uSgVYFheF5aK7k32vhM04",
       "fillStyle": "hachure",
@@ -18937,7 +18772,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674136,
+      "updated": 1710145817397,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -18947,8 +18782,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Output\nSchema",
-      "lineHeight": 1.2,
-      "baseline": 34
+      "lineHeight": 1.2
     },
     {
       "type": "rectangle",
@@ -19019,8 +18853,7 @@
       "verticalAlign": "middle",
       "containerId": "6i4oOdm--K53fzqF1jQAt",
       "originalText": "Error",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -19055,8 +18888,8 @@
     },
     {
       "type": "text",
-      "version": 272,
-      "versionNonce": 1174055647,
+      "version": 275,
+      "versionNonce": 819253596,
       "isDeleted": false,
       "id": "Uf9cEnn3GD8sHwvhh3eZo",
       "fillStyle": "solid",
@@ -19078,7 +18911,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674136,
+      "updated": 1710145817401,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -19088,8 +18921,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Initial Draft\n",
-      "lineHeight": 1.25,
-      "baseline": 43
+      "lineHeight": 1.25
     },
     {
       "type": "line",
@@ -19135,8 +18967,8 @@
     },
     {
       "type": "text",
-      "version": 197,
-      "versionNonce": 746665617,
+      "version": 200,
+      "versionNonce": 278954596,
       "isDeleted": false,
       "id": "M8BzBog15lp80qOHx_LWt",
       "fillStyle": "solid",
@@ -19156,7 +18988,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674136,
+      "updated": 1710145817401,
       "link": null,
       "locked": false,
       "fontSize": 28,
@@ -19166,13 +18998,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "API",
-      "lineHeight": 1.2,
-      "baseline": 26
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 263,
-      "versionNonce": 1077933823,
+      "version": 266,
+      "versionNonce": 694830556,
       "isDeleted": false,
       "id": "4ELaiykKspM04GJFllEpP",
       "fillStyle": "solid",
@@ -19194,7 +19025,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674136,
+      "updated": 1710145817401,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -19204,13 +19035,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Objects\n---------------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 205,
-      "versionNonce": 1562262641,
+      "version": 208,
+      "versionNonce": 766154212,
       "isDeleted": false,
       "id": "FjTMeQ11a2VsvAwIRuxQM",
       "fillStyle": "solid",
@@ -19232,7 +19062,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674136,
+      "updated": 1710145817401,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -19242,13 +19072,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "- Workflow\n- Node\n- Edge\n- NodeData\n- Run",
-      "lineHeight": 1.2,
-      "baseline": 92
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 281,
-      "versionNonce": 944160543,
+      "version": 284,
+      "versionNonce": 1214065244,
       "isDeleted": false,
       "id": "Gq_3Wi4IZUQazwLX53h2Q",
       "fillStyle": "solid",
@@ -19270,7 +19099,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674136,
+      "updated": 1710145817402,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -19280,13 +19109,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Access Patterns\n---------------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 783,
-      "versionNonce": 1675593297,
+      "version": 786,
+      "versionNonce": 1462122852,
       "isDeleted": false,
       "id": "pwYYrB_wHB4CN4qJtCt3V",
       "fillStyle": "solid",
@@ -19308,7 +19136,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674137,
+      "updated": 1710145817402,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -19318,13 +19146,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "UI Based Workflow Editing\n- Add a node to a workflow\n- Create an edge between nodes\n- Edit data on a NodeData object\n- Delete a Node from a workflow\n- Purge Invalid edges\n- Copy a node within a workflow?\n- Save a workflow\n\nWorkflow Mangement\n- Create a workflow\n- Get a workflow\n  Get all nodes within a workflow\n- Rename a workflow\n- Delete a workflow\n\nRun a Workflow\n- Submit a run\n- Get run details\n- Cancel a run\n- Rerun\n\n\n",
-      "lineHeight": 1.2,
-      "baseline": 456
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 216,
-      "versionNonce": 1887404863,
+      "version": 219,
+      "versionNonce": 1082097372,
       "isDeleted": false,
       "id": "xI6GLhH7PGhkU3oAF4xZM",
       "fillStyle": "solid",
@@ -19346,7 +19173,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674137,
+      "updated": 1710145817402,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -19356,13 +19183,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Objective 1\n---------------------",
-      "lineHeight": 1.2,
-      "baseline": 43
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 487,
-      "versionNonce": 2073859121,
+      "version": 490,
+      "versionNonce": 677473508,
       "isDeleted": false,
       "id": "10U8LxbcO2ZmJPWj1DJNj",
       "fillStyle": "solid",
@@ -19384,7 +19210,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674137,
+      "updated": 1710145817403,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -19394,8 +19220,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Build and Execute a simple workflow from the API\n- Create new workflow\n- Fetch avaialable Nodes\n- Add nodes to workflow\n- Add edges to workflow\n- get workflow status\n- Update Options\n- Execute\n",
-      "lineHeight": 1.2,
-      "baseline": 168
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -19462,8 +19287,7 @@
       "verticalAlign": "middle",
       "containerId": "ZZ_6PX8PdR7Ytcf2iH8vl",
       "originalText": "option",
-      "lineHeight": 1.2,
-      "baseline": 19
+      "lineHeight": 1.2
     },
     {
       "type": "line",
@@ -19509,8 +19333,8 @@
     },
     {
       "type": "text",
-      "version": 272,
-      "versionNonce": 155894623,
+      "version": 275,
+      "versionNonce": 442712924,
       "isDeleted": false,
       "id": "Ism8f6zMSRx2zYTpxia8w",
       "fillStyle": "solid",
@@ -19530,7 +19354,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104674137,
+      "updated": 1710145817403,
       "link": null,
       "locked": false,
       "fontSize": 28,
@@ -19540,13 +19364,12 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Rewrite considerations",
-      "lineHeight": 1.2,
-      "baseline": 26
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 1012,
-      "versionNonce": 1602023121,
+      "version": 1505,
+      "versionNonce": 585773156,
       "isDeleted": false,
       "id": "jhCm5ND-4fYHjk-aITgxx",
       "fillStyle": "cross-hatch",
@@ -19560,29 +19383,28 @@
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 1054.6875,
-      "height": 384,
+      "height": 504,
       "seed": 1278196772,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709104723361,
+      "updated": 1710145817404,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 3,
-      "text": "- Separate Data schemas\n- and database implementation.\n- We should be able to swap out the database implementation\n- and keep the data schemas.\n- Don't use uppercase anywhere. It's just annoying\n- Seriously rethink the data model approach. I kind of like the greedy fetch and filtering\n- Clearly draw out error paths.\n- Think about how to organize your UI code.\n- Evaluate the need for Zustand. Do a write up of why it is required/not required.\n- Implement concurreny at the database adapter.\n- test the sub schema assumptino about ordering\n- schema mismatch details\n- cache subset calculation\n- local history\n- visual edges\n- users / teams",
+      "text": "- Separate Data schemas\n- and database implementation.\n- We should be able to swap out the database implementation\n- and keep the data schemas.\n- Don't use uppercase anywhere. It's just annoying\n- Seriously rethink the data model approach. I kind of like the greedy fetch and filtering\n- Clearly draw out error paths.\n- Think about how to organize your UI code.\n- Evaluate the need for Zustand. Do a write up of why it is required/not required.\n- Implement concurreny at the database adapter.\n- test the sub schema assumptino about ordering\n- schema mismatch details\n- cache subset calculation\n- local history\n- visual edges\n- users / teams\n- The autosave rerenders the whole screen and screws up selections an tooltips, etc.\n- Can we have Zustand drive the app state? and react query drive nodes and edges?\n  Would that give us more control over what state changes on rerender\n- Adapters / Assertions -> Enforce schemas\n- Map Producers -> Generics / Inferred Types",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "- Separate Data schemas\n- and database implementation.\n- We should be able to swap out the database implementation\n- and keep the data schemas.\n- Don't use uppercase anywhere. It's just annoying\n- Seriously rethink the data model approach. I kind of like the greedy fetch and filtering\n- Clearly draw out error paths.\n- Think about how to organize your UI code.\n- Evaluate the need for Zustand. Do a write up of why it is required/not required.\n- Implement concurreny at the database adapter.\n- test the sub schema assumptino about ordering\n- schema mismatch details\n- cache subset calculation\n- local history\n- visual edges\n- users / teams",
-      "lineHeight": 1.2,
-      "baseline": 379
+      "originalText": "- Separate Data schemas\n- and database implementation.\n- We should be able to swap out the database implementation\n- and keep the data schemas.\n- Don't use uppercase anywhere. It's just annoying\n- Seriously rethink the data model approach. I kind of like the greedy fetch and filtering\n- Clearly draw out error paths.\n- Think about how to organize your UI code.\n- Evaluate the need for Zustand. Do a write up of why it is required/not required.\n- Implement concurreny at the database adapter.\n- test the sub schema assumptino about ordering\n- schema mismatch details\n- cache subset calculation\n- local history\n- visual edges\n- users / teams\n- The autosave rerenders the whole screen and screws up selections an tooltips, etc.\n- Can we have Zustand drive the app state? and react query drive nodes and edges?\n  Would that give us more control over what state changes on rerender\n- Adapters / Assertions -> Enforce schemas\n- Map Producers -> Generics / Inferred Types",
+      "lineHeight": 1.2
     },
     {
       "type": "text",
-      "version": 63,
-      "versionNonce": 1908172190,
+      "version": 66,
+      "versionNonce": 2086303708,
       "isDeleted": false,
       "id": "pa3KzYceb639w9vopSCjc",
       "fillStyle": "solid",
@@ -19602,7 +19424,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709020979590,
+      "updated": 1710145817404,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -19612,8 +19434,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "is_sub_schema",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -19646,8 +19467,8 @@
     },
     {
       "type": "text",
-      "version": 174,
-      "versionNonce": 1365714178,
+      "version": 177,
+      "versionNonce": 1720615908,
       "isDeleted": false,
       "id": "_qTrOOE_xVJCLZ2mE-tjg",
       "fillStyle": "solid",
@@ -19667,7 +19488,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709021012006,
+      "updated": 1710145817404,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -19677,8 +19498,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Target",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     },
     {
       "type": "ellipse",
@@ -19711,8 +19531,8 @@
     },
     {
       "type": "text",
-      "version": 23,
-      "versionNonce": 1615902302,
+      "version": 26,
+      "versionNonce": 1920408668,
       "isDeleted": false,
       "id": "YacXw03Ht3-qmbD_PRRDQ",
       "fillStyle": "solid",
@@ -19732,7 +19552,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1709021017424,
+      "updated": 1710145817404,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -19742,8 +19562,7 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Source",
-      "lineHeight": 1.2,
-      "baseline": 15
+      "lineHeight": 1.2
     }
   ],
   "appState": {
